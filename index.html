@@ -14,7 +14,7 @@
 <script>
 (function(){var l='en';try{l=localStorage.getItem('tsa-lang')||'en'}catch(e){}
 if(location.hash==='#ar')l='ar';if(location.hash==='#en')l='en';
-var h=location.hash.slice(1);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
+var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
 var r=document.documentElement;r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
 </script>
 <style>
@@ -670,6 +670,161 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
   .gallery{grid-template-columns:minmax(0,1fr)}
   .gallery .frame img{height:100%}
 }
+
+/* =====================================================================
+   YouTube-style layout: top bar with search, side guide (bottom bar on
+   phones), channel header with tabs, thumbnail grid, watch pages.
+   ===================================================================== */
+:root{--side:232px;--bar-h:64px}
+html{scroll-padding-top:128px}
+.bar .wrap{max-width:none;min-height:var(--bar-h);padding-inline:16px 20px;gap:14px}
+.mark .sig-head{height:48px}
+.nav{flex:1;gap:10px;margin-inline-start:12px}
+.search{position:relative;flex:1;max-width:600px;margin-inline:auto;display:flex;align-items:center}
+.search input{width:100%;height:42px;border:1px solid var(--rule-2);border-radius:999px;background:var(--surface);color:var(--ink);font:15px var(--sans);padding-inline:44px 16px;outline:none}
+html[data-lang="ar"] .search input{font-family:var(--arabic)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.s-ico{position:absolute;inset-inline-start:15px;display:inline-flex;color:var(--muted);pointer-events:none}
+.s-ico svg,.s-open svg,.s-close svg{width:19px;height:19px}
+.s-open,.s-close{display:none;appearance:none;border:0;background:transparent;color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;align-items:center;justify-content:center}
+.s-open:hover,.s-close:hover{background:var(--sunken)}
+
+/* side guide */
+.side{position:fixed;z-index:25;top:calc(var(--bar-h) + 1px + env(safe-area-inset-top,0px));bottom:0;inset-inline-start:0;width:var(--side);padding:12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;background:var(--paper)}
+.side-i{display:flex;align-items:center;gap:20px;padding:10px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:14.5px;line-height:1.2}
+.side-i svg{width:22px;height:22px;flex:none}
+.side-i:hover{background:var(--sunken)}
+.side-i.on{background:var(--sunken);font-weight:650}
+.side hr{border:0;border-top:1px solid var(--rule);margin:10px 4px}
+.side-foot{margin:auto 0 0;padding:12px 14px;font-size:12px;color:var(--muted)}
+main,footer{margin-inline-start:var(--side)}
+
+/* channel header */
+.channel{padding-top:16px}
+.channel .wrap,.feed .wrap,.about-tab .wrap{max-width:1560px}
+.banner{height:clamp(96px,15vw,190px);border-radius:16px;overflow:hidden;background:linear-gradient(120deg,#0B1013,#131B2B)}
+.banner svg{display:block;width:100%;height:100%}
+.b-grid{stroke:rgba(160,190,230,.10);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}
+.b-trace{stroke:#F4CB4A;stroke-width:2.2;fill:none;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(244,203,74,.55))}
+.ch-head{display:flex;gap:clamp(16px,2.6vw,28px);align-items:center;padding-block:22px 12px}
+.ch-head .avatar{width:clamp(84px,11vw,156px);height:clamp(84px,11vw,156px);border:0;box-shadow:none}
+.ch-info{display:grid;gap:6px;min-width:0}
+.ch-info h1{font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.15;margin:0}
+.ch-handle{color:var(--muted);font-size:14.5px}
+.ch-about{color:var(--ink-2);font-size:15px;max-width:62em}
+.channel .cta{margin-top:8px;gap:10px}
+.channel .btn{border-radius:999px;padding:9px 18px;font-size:14.5px}
+.channel .btn svg{width:17px;height:17px}
+.tabs{position:sticky;top:calc(var(--bar-h) + 1px + env(safe-area-inset-top,0px));z-index:15;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;background:var(--paper);border-bottom:1px solid var(--rule);margin-top:6px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:13px 14px 11px;color:var(--muted);font-weight:650;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+html:not([data-tab]) .tab[data-tab="all"],html:not([data-tab]) .side-i[data-tab="all"]{color:var(--ink)}
+html:not([data-tab]) .tab[data-tab="all"]{border-bottom-color:var(--ink)}
+html:not([data-tab]) .side-i[data-tab="all"]{background:var(--sunken);font-weight:650}
+
+/* thumbnail grid */
+.feed{padding-bottom:56px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:34px 18px;padding-top:24px}
+.vcard,.mcard{display:grid;gap:12px;text-decoration:none;color:inherit;align-content:start}
+.thumb{position:relative;display:block;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--bg,var(--sunken))}
+.thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.thumb.contain img{object-fit:contain;padding:5% 9%}
+.vcard:hover .thumb img,.mcard:hover .thumb img{transform:scale(1.035)}
+.badge-t{position:absolute;inset-inline-end:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font:600 12px/1 var(--sans);padding:4px 7px;border-radius:5px}
+html[data-lang="ar"] .badge-t{font-family:var(--arabic)}
+.badge-t.gold{background:#F4CB4A;color:#1A1A1A}
+.tile{background:linear-gradient(135deg,#2B5DD1,#6A3FD1)}
+.tile-in{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:6px;color:#fff;text-align:center;padding:12px}
+.tile-in svg{width:34px;height:34px;opacity:.9}
+.tile-in b{font-size:clamp(1.1rem,2vw,1.4rem)}
+.tile-in small{font-size:12.5px;opacity:.85}
+.tile.big .tile-in svg{width:56px;height:56px}
+.tile.big .tile-in b{font-size:clamp(1.6rem,3.4vw,2.4rem)}
+.tile.big .tile-in small{font-size:15px}
+.v-info{display:flex;gap:12px;align-items:flex-start}
+.av-mini{width:36px;height:36px;border-radius:50%;flex:none;background:var(--sunken) url("assets/img/talal.webp") center/cover}
+.v-text{display:grid;gap:3px;min-width:0}
+.v-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:650;font-size:16px;line-height:1.38;color:var(--ink);margin-bottom:2px}
+.v-meta{display:block;color:var(--muted);font-size:13.5px;line-height:1.4}
+.noresult{padding:40px 0;color:var(--muted);font-size:15px}
+html[data-tab="projects"] .vcard:not([data-cat="project"]),html[data-tab="awards"] .vcard:not([data-cat="award"]),html[data-tab="activities"] .vcard:not([data-cat="activity"]){display:none}
+html[data-tab="about"] #feed{display:none}
+html:not([data-tab="about"]) #about-tab{display:none}
+.about-tab .sec:first-child{padding-top:28px}
+
+/* watch pages */
+.watchpage{padding-block:20px 60px}
+.watchpage .wrap.watch{max-width:1720px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:24px;align-items:start}
+.player{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--bg,#0F1113)}
+.player .frame{display:block;width:100%;height:100%;border:0;border-radius:0;background:transparent}
+.player .frame img{width:100%;height:100%;object-fit:cover}
+.player.contain .frame img{object-fit:contain;padding:4% 8%}
+.player .thumb{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
+.player.scope-player{aspect-ratio:auto;overflow:visible;background:transparent}
+.player.scope-player .scope-cap{margin-top:10px}
+.w-main h3.p-title{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.3;margin:16px 0 12px}
+html[data-lang="ar"] .w-main h3.p-title{font-size:clamp(1.25rem,2.2vw,1.6rem)}
+.w-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
+.w-chan{display:flex;align-items:center;gap:12px}
+.w-chan b{display:block;font-size:15px;font-weight:650}
+.w-chan small{display:block;color:var(--muted);font-size:12.5px}
+.w-row .p-meta{margin:0;font-size:13.5px}
+.desc{margin-top:16px;background:var(--sunken);border-radius:14px;padding:clamp(16px,2.2vw,24px)}
+.desc .p-sub{color:var(--ink);font-weight:500}
+.desc .p-body{max-width:none;margin-top:20px}
+.desc .spec caption{border-bottom-color:var(--rule-2)}
+.desc .gallery{margin-top:28px}
+.w-side h4{margin:0 0 12px;font-size:16px;font-weight:650}
+.upnext{display:grid;gap:10px}
+.mcard{grid-template-columns:168px minmax(0,1fr);gap:10px}
+.mcard .thumb{border-radius:9px}
+.mcard .badge-t{font-size:10.5px;bottom:5px;inset-inline-end:5px;padding:3px 5px}
+.mcard .av-mini{display:none}
+.mcard .v-info{display:block}
+.mcard .v-title{font-size:14px}
+.mcard .v-meta{font-size:12.5px}
+.mcard .tile-in small{display:none}
+.mcard .tile-in b{font-size:.95rem}
+.mcard .tile-in svg{width:22px;height:22px}
+
+/* medium: mini guide */
+@media (max-width: 1180px){
+  :root{--side:78px}
+  .side{padding:6px 4px}
+  .side-i{flex-direction:column;gap:6px;padding:14px 2px;font-size:10.5px;text-align:center}
+  .side hr,.side-x,.side-foot{display:none}
+  .watchpage .wrap.watch{grid-template-columns:minmax(0,1fr)}
+  .upnext{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+}
+/* phones: bottom bar */
+@media (max-width: 760px){
+  :root{--side:0px}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .side{top:auto;bottom:0;inset-inline:0;width:auto;height:calc(58px + env(safe-area-inset-bottom,0px));flex-direction:row;justify-content:space-around;padding:2px 4px env(safe-area-inset-bottom,0px);border-top:1px solid var(--rule);overflow:visible}
+  .side-i{flex:1;padding:8px 0 6px;font-size:10.5px;gap:4px;border-radius:8px}
+  .side-i.on{background:transparent;color:var(--accent)}
+  html:not([data-tab]) .side-i[data-tab="all"]{background:transparent;color:var(--accent)}
+  .homebtn{display:none}
+  .search{display:none}
+  .s-open{display:inline-flex}
+  .bar.searching .search{display:flex;position:absolute;inset:0;z-index:5;background:var(--paper);max-width:none;padding-inline:8px 12px;gap:6px}
+  .bar.searching .s-close{display:inline-flex}
+  .bar.searching .s-ico{inset-inline-start:62px}
+  .mark .sig-head{height:42px}
+  .ch-head{align-items:flex-start}
+  .channel .cta .btn{padding:8px 14px}
+  .vgrid{grid-template-columns:minmax(0,1fr);gap:26px}
+  .upnext{grid-template-columns:minmax(0,1fr)}
+  .mcard{grid-template-columns:150px minmax(0,1fr)}
+  .watchpage{padding-top:0}
+  .watchpage .wrap.watch{padding-inline:0}
+  .player{border-radius:0}
+  .player.scope-player{padding-inline:12px}
+  .w-main > :not(.player){margin-inline:16px}
+  .w-side{padding-inline:16px}
+}
 </style>
 </head>
 <body>
@@ -681,14 +836,12 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <a class="mark sigmark" href="#top" aria-label="Talal Aljohani, home"><svg class="sig-head" viewBox="0 0 1756.2 978.8" role="img" aria-label="Talal Aljohani"><use href="#sig"/></svg></a>
     <a class="homebtn" href="#top" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></svg></a>
     <nav class="nav" aria-label="Main">
-      <ul>
-        <li><a href="#projects"><span class="en">Projects</span><span class="ar">المشاريع</span></a></li>
-        <li><a href="#awards"><span class="en">Awards</span><span class="ar">الجوائز</span></a></li>
-        <li><a href="#activities"><span class="en">Activities</span><span class="ar">الأنشطة</span></a></li>
-        <li><a href="#skills"><span class="en">Skills</span><span class="ar">المهارات</span></a></li>
-        <li><a href="#about"><span class="en">About</span><span class="ar">نبذة</span></a></li>
-        <li><a href="#contact"><span class="en">Contact</span><span class="ar">تواصل</span></a></li>
-      </ul>
+      <form class="search" id="searchForm" role="search" onsubmit="return false">
+        <button class="s-close" id="sClose" type="button" aria-label="Close search"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <span class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+        <input id="q" type="search" autocomplete="off" placeholder="Search" aria-label="Search">
+      </form>
+      <button class="s-open" id="sOpen" type="button" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
       <button class="lang" id="langBtn" type="button" aria-label="Switch language / تغيير اللغة">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
         <span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span>
@@ -696,180 +849,119 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     </nav>
   </div>
 </header>
+<nav class="side" aria-label="Main">
+  <a class="side-i" data-tab="all" href="#top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></svg><span><span class="en">Home</span><span class="ar">الرئيسية</span></span></a>
+  <a class="side-i" data-tab="projects" href="#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span><span class="en">Projects</span><span class="ar">المشاريع</span></span></a>
+  <a class="side-i" data-tab="awards" href="#awards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span><span class="en">Awards</span><span class="ar">الجوائز</span></span></a>
+  <a class="side-i" data-tab="activities" href="#activities"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg><span><span class="en">Activities</span><span class="ar">الأنشطة</span></span></a>
+  <a class="side-i" data-tab="about" href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span><span class="en">About</span><span class="ar">نبذة</span></span></a>
+  <hr>
+  <a class="side-i side-x" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg><span>LinkedIn</span></a>
+  <p class="side-foot"><span class="en">© 2026 Talal Sultan Aljohani</span><span class="ar">© 2026 طلال سلطان الجهني</span></p>
+</nav>
 
 <main id="main">
-<!-- ================= HERO ================= -->
-<section class="hero home-part" id="top">
+<!-- ================= CHANNEL HOME ================= -->
+<section class="channel home-part" id="top">
   <div class="wrap">
-    <div>
-      <div class="me">
-        <img class="avatar" src="assets/img/talal.webp" width="440" height="440" alt="Portrait of Talal Aljohani" data-alt-ar="صورة طلال الجهني">
-        <div class="me-t">
-          <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
-          <p class="role"><span class="en">Electrical Engineering student · Islamic University of Madinah</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة</span></p>
+    <div class="banner" aria-hidden="true">
+      <svg viewBox="0 0 1000 600" preserveAspectRatio="none"><path class="b-grid" d="M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600"/><path class="b-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></svg>
+    </div>
+    <div class="ch-head">
+      <img class="avatar" src="assets/img/talal.webp" width="440" height="440" alt="Portrait of Talal Aljohani" data-alt-ar="صورة طلال الجهني">
+      <div class="ch-info">
+        <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
+        <p class="ch-handle"><span class="en">Electrical Engineering student · Islamic University of Madinah · Class of 2028</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة · دفعة 2028</span></p>
+        <p class="ch-about"><span class="en">I design and build hardware: telemetry boards, motor drives, logic circuits and robots, and I teach PCB design to fellow students.</span><span class="ar">أصمّم وأبني أنظمة العتاد: لوحات التيليمتري، ومشغّلات المحرّكات، والدوائر المنطقية، والروبوتات، وأدرّس تصميم اللوحات المطبوعة لزملائي.</span></p>
+        <div class="cta">
+          <a class="btn primary" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
+          <a class="btn ghost" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span class="en">Contact</span><span class="ar">تواصل</span></a>
         </div>
       </div>
-      <p class="lead en">Electrical engineering student at the Islamic University of Madinah. I design and build hardware that works: a custom ESP32 telemetry board for STEM Racing, a brushless motor commutated entirely by logic ICs, a PWM generator with no microcontroller, and a line-following robot.</p>
-      <p class="lead ar">طالب هندسة كهربائية في الجامعة الإسلامية بالمدينة المنورة. أصمّم وأبني أنظمة عتاد تعمل فعلياً: لوحة تيليمتري مخصّصة بمعالج ESP32 لمسابقة STEM Racing، ومحرّكاً عديم الفرش يُبدَّل بالكامل بدوائر منطقية، ومولّد PWM بدون متحكّم دقيق، وروبوتاً يتتبّع الخط.</p>
-      <div class="cta">
-        <a class="btn primary" href="#projects"><span class="en">See the projects</span><span class="ar">استعرض المشاريع</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
-      </div>
-      <ul class="facts-line">
-        <li><span class="en">Madinah, Saudi Arabia</span><span class="ar">المدينة المنورة، السعودية</span></li>
-        <li><span class="en">Class of 2028</span><span class="ar">دفعة 2028</span></li>
-        <li><span class="en">Embedded systems and motor control</span><span class="ar">الأنظمة المدمجة والتحكّم بالمحرّكات</span></li>
-      </ul>
     </div>
-
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <a class="tab" role="tab" data-tab="all" href="#top"><span class="en">All</span><span class="ar">الكل</span></a>
+      <a class="tab" role="tab" data-tab="projects" href="#projects"><span class="en">Projects</span><span class="ar">المشاريع</span></a>
+      <a class="tab" role="tab" data-tab="awards" href="#awards"><span class="en">Awards</span><span class="ar">الجوائز</span></a>
+      <a class="tab" role="tab" data-tab="activities" href="#activities"><span class="en">Activities</span><span class="ar">الأنشطة</span></a>
+      <a class="tab" role="tab" data-tab="about" href="#about"><span class="en">About</span><span class="ar">نبذة</span></a>
+    </nav>
   </div>
 </section>
 
-<!-- ================= PROJECTS (cards) ================= -->
-<section class="sec home-part" id="projects">
+<section class="feed home-part" id="feed" aria-label="Work">
   <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="en">Projects</span><span class="ar">المشاريع</span></h2>
-      <p><span class="en">Five projects, newest first. Open one to see the full details.</span><span class="ar">خمسة مشاريع، الأحدث أولاً. افتح أي مشروع لتشاهد تفاصيله كاملة.</span></p>
-    </div>
-    <div class="cards">
-      <a class="card feature k5" href="#kicad">
-        <span class="card-img"><img src="assets/img/pcb-render.webp" width="1260" height="800" alt="" loading="lazy"></span>
-        <span class="card-body">
-          <span class="card-meta"><span class="chip"><i></i>CH1</span><span class="badge"><span class="en">Workshop</span><span class="ar">ورشة عمل</span></span><span><span class="en">IEEE IUM Student Branch · 2026</span><span class="ar">فرع IEEE الطلابي · 2026</span></span></span>
-          <span class="card-t"><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></span>
-          <span class="card-d"><span class="en">A two-day hands-on workshop I prepared and present. Participants design a real Arduino-compatible board, from the schematic to factory files.</span><span class="ar">ورشة عملية لمدة يومين أعددتها وأقدّمها، يصمّم فيها المشاركون لوحة حقيقية متوافقة مع Arduino من المخطّط حتى ملفات التصنيع.</span></span>
-          <span class="more"><span class="en">View project</span><span class="ar">تفاصيل المشروع</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+    <div class="vgrid">
+      <a class="vcard" href="#kicad" data-cat="project">
+        <span class="thumb contain" style="--bg:#FFFFFF"><img src="assets/img/pcb-render.webp" width="1260" height="800" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Workshop</span><span class="ar">ورشة</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">IEEE IUM Student Branch · 2026</span><span class="ar">فرع IEEE الطلابي · 2026</span></span></span></span>
       </a>
-      <a class="card k1" href="#anaq">
-        <span class="card-img"><img src="assets/img/anaq-board.webp" width="690" height="653" alt="" loading="lazy"></span>
-        <span class="card-body">
-          <span class="card-meta"><span class="chip"><i></i>CH2</span><span><span class="en">With Team ANAQ · 2026</span><span class="ar">بالتعاون مع فريق عنق · 2026</span></span></span>
-          <span class="card-t"><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></span>
-          <span class="card-d"><span class="en">A black box that records STEM Racing launches at 1 kHz and replays them in 3D.</span><span class="ar">صندوق أسود يسجّل انطلاقات سيارات STEM Racing بمعدل 1000 قراءة في الثانية ويعيد تشغيلها ثلاثياً.</span></span>
-          <span class="more"><span class="en">View project</span><span class="ar">تفاصيل المشروع</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#ihour" data-cat="activity">
+        <span class="thumb tile"><span class="tile-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><b><span class="en">Innovation Hour</span><span class="ar">ساعة ابتكار</span></b><small><span class="en">AI and digital fabrication</span><span class="ar">الذكاء الاصطناعي والتصنيع الرقمي</span></small></span><span class="badge-t"><span class="en">Program</span><span class="ar">برنامج</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">Innovation Hour</span><span class="ar">برنامج ساعة ابتكار</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Organizer and presenter · Aug – Nov 2026</span><span class="ar">منظّم ومقدّم ورش · أغسطس – نوفمبر 2026</span></span></span></span>
       </a>
-      <a class="card k2" href="#bldc">
-        <span class="card-img"><img src="assets/img/bldc-outer-rotor.webp" width="442" height="348" alt="" loading="lazy"></span>
-        <span class="card-body">
-          <span class="card-meta"><span class="chip"><i></i>CH3</span><span><span class="en">EE4381 · Apr 2026</span><span class="ar">EE4381 · أبريل 2026</span></span><span class="prize"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">2nd place, 100+ projects</span><span class="ar">المركز الثاني من 100+ مشروع</span></span></span>
-          <span class="card-t"><span class="en">Brushless DC Motor</span><span class="ar">محرّك تيار مستمر عديم الفرش</span></span>
-          <span class="card-d"><span class="en">A 3D-printed brushless motor, commutated by hardware logic instead of a microcontroller.</span><span class="ar">محرّك عديم الفرش مطبوع ثلاثياً، يُبدَّل بدوائر منطقية بدلاً من متحكّم دقيق.</span></span>
-          <span class="more"><span class="en">View project</span><span class="ar">تفاصيل المشروع</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#ieee" data-cat="activity">
+        <span class="thumb cover" style="--bg:#0F1B33"><img src="assets/img/act-ieee-en.webp" width="891" height="1100" alt="" loading="lazy" style="object-position:50% 90%"><span class="badge-t"><span class="en">Member</span><span class="ar">عضو</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Member · Current</span><span class="ar">عضو · حالياً</span></span></span></span>
       </a>
-      <a class="card k3" href="#pwm">
-        <span class="card-img"><img src="assets/img/pwm-box.webp" width="623" height="539" alt="" loading="lazy"></span>
-        <span class="card-body">
-          <span class="card-meta"><span class="chip"><i></i>CH4</span><span><span class="en">EE3361 · Dec 2025</span><span class="ar">EE3361 · ديسمبر 2025</span></span></span>
-          <span class="card-t"><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></span>
-          <span class="card-d"><span class="en">Variable-duty PWM for motor speed control, built only from logic ICs.</span><span class="ar">إشارة PWM متغيّرة للتحكّم بسرعة المحرّك، مبنية من دوائر منطقية فقط.</span></span>
-          <span class="more"><span class="en">View project</span><span class="ar">تفاصيل المشروع</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#anaq" data-cat="project">
+        <span class="thumb contain" style="--bg:#151A1D"><img src="assets/img/anaq-board.webp" width="690" height="653" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">With Team ANAQ · 2026</span><span class="ar">بالتعاون مع فريق عنق · 2026</span></span></span></span>
       </a>
-      <a class="card k4" href="#lfr">
-        <span class="card-img"><img src="assets/img/lfr-robot.webp" width="747" height="660" alt="" loading="lazy"></span>
-        <span class="card-body">
-          <span class="card-meta"><span class="chip"><i></i>CH5</span><span><span class="en">ENGR3020 · 2025</span><span class="ar">ENGR3020 · 2025</span></span></span>
-          <span class="card-t"><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></span>
-          <span class="card-d"><span class="en">An Arduino robot that follows a track at speed and reacts to obstacles.</span><span class="ar">روبوت Arduino يتتبّع المسار بسرعة ويتفاعل مع العوائق.</span></span>
-          <span class="more"><span class="en">View project</span><span class="ar">تفاصيل المشروع</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#twinsat" data-cat="award">
+        <span class="thumb cover" style="--bg:#05080C"><img src="assets/img/sari-cover.webp" width="1400" height="788" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t gold"><span class="en">Top 50</span><span class="ar">أفضل 50</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">TwinSat, Sari Initiative</span><span class="ar">TwinSat، مبادرة ساري</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Saudi Space Agency · 2026</span><span class="ar">وكالة الفضاء السعودية · 2026</span></span></span></span>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= AWARDS ================= -->
-<section class="sec home-part" id="awards">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="en">Competitions &amp; Awards</span><span class="ar">المسابقات والجوائز</span></h2>
-    </div>
-    <div class="cards cards-3">
-      <a class="card awcard k5" href="#hydronet">
-        <span class="card-img photo"><img src="assets/img/award-energython.webp" width="1600" height="828" alt="" loading="lazy" style="object-position:50% 40%"></span>
-        <span class="card-body">
-          <span class="place"><span class="en">1st place</span><span class="ar">المركز الأول</span></span>
-          <span class="card-t"><span class="en">EnergyThon 2.0, Western Region</span><span class="ar">هاكاثون EnergyThon 2.0، المنطقة الغربية</span></span>
-          <span class="card-meta"><span class="en">KSA Energy Week · Feb 2026</span><span class="ar">أسبوع الطاقة السعودي · فبراير 2026</span></span>
-          <span class="card-d"><span class="en">HydroNet, our hydrogen-storage idea, won the region and reached the national final.</span><span class="ar">فازت فكرتنا HydroNet لتخزين الهيدروجين بالمنطقة، ووصلت إلى النهائي.</span></span>
-          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#engclub" data-cat="activity">
+        <span class="thumb cover" style="--bg:#1E2E5C"><img src="assets/img/act-eng-album.webp" width="891" height="1100" alt="" loading="lazy" style="object-position:50% 55%"><span class="badge-t"><span class="en">Club</span><span class="ar">نادٍ</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Design lead, media team · 2025–2026</span><span class="ar">مسؤول التصميم · 2025–2026</span></span></span></span>
       </a>
-      <a class="card awcard k2" href="#expo">
-        <span class="card-img photo"><img src="assets/img/award-ceremony.webp" width="1400" height="942" alt="" loading="lazy" style="object-position:50% 45%"></span>
-        <span class="card-body">
-          <span class="place"><span class="en">2nd place</span><span class="ar">المركز الثاني</span></span>
-          <span class="card-t"><span class="en">Faculty of Engineering Projects Exhibition</span><span class="ar">معرض مشاريع كلية الهندسة</span></span>
-          <span class="card-meta"><span class="en">Islamic University of Madinah · 2026</span><span class="ar">الجامعة الإسلامية · 2026</span></span>
-          <span class="card-d"><span class="en">Second of 100+ projects with the brushless DC motor and its PWM controller.</span><span class="ar">المركز الثاني من بين أكثر من 100 مشروع بالمحرّك عديم الفرش ومتحكّمه.</span></span>
-          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#expo" data-cat="award">
+        <span class="thumb cover" style="--bg:#123"><img src="assets/img/award-ceremony.webp" width="1400" height="942" alt="" loading="lazy" style="object-position:50% 40%"><span class="badge-t gold"><span class="en">2nd place</span><span class="ar">المركز الثاني</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">Faculty of Engineering Projects Exhibition</span><span class="ar">معرض مشاريع كلية الهندسة</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">2nd of 100+ projects · 2026</span><span class="ar">الثاني من 100+ مشروع · 2026</span></span></span></span>
       </a>
-      <a class="card awcard k4" href="#twinsat">
-        <span class="card-img photo"><img src="assets/img/sari-cover.webp" width="1400" height="788" alt="" loading="lazy" style="object-position:50% 50%"></span>
-        <span class="card-body">
-          <span class="place"><span class="en">Top 50 of 600+</span><span class="ar">أفضل 50 من 600+</span></span>
-          <span class="card-t"><span class="en">Sari Initiative, 2nd edition</span><span class="ar">مبادرة ساري، النسخة الثانية</span></span>
-          <span class="card-meta"><span class="en">Saudi Space Agency · 2026</span><span class="ar">وكالة الفضاء السعودية · 2026</span></span>
-          <span class="card-d"><span class="en">I led team Mustabaq; our satellite proposal TwinSat made the shortlist.</span><span class="ar">قدت فريق «مُستبِق»، وتأهّل مقترحنا للقمر الصناعي TwinSat.</span></span>
-          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </span>
+      <a class="vcard" href="#bldc" data-cat="project">
+        <span class="thumb contain" style="--bg:#E9ECEF"><img src="assets/img/bldc-outer-rotor.webp" width="442" height="348" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">Brushless DC Motor with PWM Controller</span><span class="ar">محرّك عديم الفرش مع متحكّم PWM</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">EE4381 · Apr 2026</span><span class="ar">EE4381 · أبريل 2026</span></span></span></span>
+      </a>
+      <a class="vcard" href="#hydronet" data-cat="award">
+        <span class="thumb cover" style="--bg:#DDD"><img src="assets/img/award-energython.webp" width="1600" height="828" alt="" loading="lazy" style="object-position:50% 45%"><span class="badge-t gold"><span class="en">1st place</span><span class="ar">المركز الأول</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">HydroNet, EnergyThon 2.0</span><span class="ar">HydroNet، هاكاثون EnergyThon 2.0</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Western Region · Feb 2026</span><span class="ar">المنطقة الغربية · فبراير 2026</span></span></span></span>
+      </a>
+      <a class="vcard" href="#pwm" data-cat="project">
+        <span class="thumb contain" style="--bg:#15181B"><img src="assets/img/pwm-box.webp" width="623" height="539" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">EE3361 · Dec 2025</span><span class="ar">EE3361 · ديسمبر 2025</span></span></span></span>
+      </a>
+      <a class="vcard" href="#inno" data-cat="activity">
+        <span class="thumb cover" style="--bg:#1E2E8C"><img src="assets/img/act-inno-formula.webp" width="778" height="1100" alt="" loading="lazy" style="object-position:50% 72%"><span class="badge-t"><span class="en">Club</span><span class="ar">نادٍ</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">Vice president · Fall 2025</span><span class="ar">نائب الرئيس · الفصل الأول 2025</span></span></span></span>
+      </a>
+      <a class="vcard" href="#lfr" data-cat="project">
+        <span class="thumb cover" style="--bg:#777"><img src="assets/img/lfr-final.webp" width="800" height="570" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="v-info"><span class="av-mini" aria-hidden="true"></span><span class="v-text"><span class="v-title"><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></span><span class="v-meta"><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></span><span class="v-meta"><span class="en">ENGR3020 · 2025</span><span class="ar">ENGR3020 · 2025</span></span></span></span>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- ================= ACTIVITIES ================= -->
-<section class="sec home-part" id="activities">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="en">Activities</span><span class="ar">الأنشطة والمشاركات الطلابية</span></h2>
-      <p><span class="en">Programs and student organizations I have served in. Open one to see what we did.</span><span class="ar">البرامج والأندية الطلابية التي شاركت فيها. افتح أياً منها لتشاهد ما قدّمناه.</span></p>
-    </div>
-    <ol class="acts">
-      <li><a class="act k5" href="#ihour">
-        <span class="act-when"><span class="en">Aug – Nov 2026</span><span class="ar">أغسطس – نوفمبر 2026</span></span>
-        <span class="act-main"><span class="rolepill"><span class="en">Organizer, Workshop Presenter</span><span class="ar">منظّم ومقدّم ورش</span></span><span class="act-org"><span class="en">Innovation Hour</span><span class="ar">برنامج ساعة ابتكار</span></span><span class="act-d"><span class="en">Weekly hands-on workshops in AI and digital fabrication at the university's Innovation Center.</span><span class="ar">ورش عملية أسبوعية في الذكاء الاصطناعي والتصنيع الرقمي بمركز الابتكار في الجامعة.</span></span></span>
-        <span class="act-go"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li><a class="act k4" href="#ieee">
-        <span class="act-when"><span class="en">Current</span><span class="ar">حالياً</span></span>
-        <span class="act-main"><span class="rolepill"><span class="en">Member</span><span class="ar">عضو</span></span><span class="act-org"><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></span><span class="act-d"><span class="en">Member of the branch, and presenter of its KiCad PCB design workshop.</span><span class="ar">عضو في الفرع، ومقدّم ورشة تصميم اللوحات المطبوعة على KiCad.</span></span></span>
-        <span class="act-go"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li><a class="act k1" href="#engclub">
-        <span class="act-when"><span class="en">2025–2026</span><span class="ar">2025–2026</span></span>
-        <span class="act-main"><span class="rolepill"><span class="en">Design Lead, Media Team</span><span class="ar">مسؤول التصميم، قسم الميديا</span></span><span class="act-org"><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></span><span class="act-d"><span class="en">Design lead in the media team for a year of 24 scientific events.</span><span class="ar">مسؤول التصميم في قسم الميديا خلال عام شهد 24 فعالية علمية.</span></span></span>
-        <span class="act-go"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-      <li><a class="act k2" href="#inno">
-        <span class="act-when"><span class="en">2025</span><span class="ar">2025</span></span>
-        <span class="act-main"><span class="rolepill"><span class="en">Vice President</span><span class="ar">نائب الرئيس</span></span><span class="act-org"><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></span><span class="act-d"><span class="en">Organized workshops, a math competition and visits for students of every college.</span><span class="ar">نظّمنا ورشاً ومسابقة رياضيات وزيارات لطلاب جميع الكليات.</span></span></span>
-        <span class="act-go"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a></li>
-    </ol>
+    <p class="noresult" id="noResult" hidden><span class="en">Nothing matches your search.</span><span class="ar">لا توجد نتائج مطابقة لبحثك.</span></p>
   </div>
 </section>
 
 <!-- ================= AWARD PAGES ================= -->
-<article class="project activity k5" id="p-hydronet" aria-labelledby="t-hydronet">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Award navigation">
-      <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
-      <span class="pos">1 / 3</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k5" id="p-hydronet" aria-labelledby="t-hydronet">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#DDD"><a class="frame" href="assets/img/award-energython.webp"><img src="assets/img/award-energython.webp" width="1600" height="828" alt="" style="object-position:50% 45%"></a></div>
+
+      <h3 class="p-title" id="t-hydronet">HydroNet</h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Western Region · Feb 2026</span><span class="ar">المنطقة الغربية · فبراير 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">1st place, Western Region</span><span class="ar">المركز الأول، المنطقة الغربية</span></span>
       <span><span class="en">EnergyThon 2.0 · KSA Energy Week</span><span class="ar">EnergyThon 2.0 · أسبوع الطاقة السعودي</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">February 2026</span><span class="ar">فبراير 2026</span></span>
     </div>
-    <h3 class="p-title" id="t-hydronet">HydroNet</h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Safer hydrogen storage at 100 bar instead of 700, using metal-organic frameworks. Our entry in the Hydrogen and Clean Fuels track won the Western Region round and reached the national final.</span><span class="ar">تخزين أكثر أماناً للهيدروجين عند 100 بار بدلاً من 700 باستخدام الأطر الفلزية العضوية (MOFs). فازت مشاركتنا في مسار الهيدروجين والوقود النظيف بالمركز الأول في تصفيات المنطقة الغربية، ووصلت إلى النهائي على مستوى المملكة.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -911,24 +1003,28 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
       <figure class="fig s6"><a class="frame white" href="assets/img/hydro-tank.webp"><img src="assets/img/hydro-tank.webp" width="1400" height="788" loading="lazy" alt="Slide: a compressed gas tank at 350 to 700 bar compared with a MOF tank at 50 to 100 bar" data-alt-ar="شريحة: مقارنة بين خزان غاز مضغوط عند 350–700 بار وخزان MOF عند 50–100 بار"></a><figcaption><span class="en">Compressed tank versus MOF tank.</span><span class="ar">الخزان المضغوط مقابل خزان MOF.</span></figcaption></figure>
       <figure class="fig s6"><a class="frame white" href="assets/img/hydro-solution.webp"><img src="assets/img/hydro-solution.webp" width="1400" height="788" loading="lazy" alt="Slide: comparison of MOF-5, MIL-101 and UiO-66, and traditional storage versus the MOF hybrid solution" data-alt-ar="شريحة: مقارنة بين MOF-5 وMIL-101 وUiO-66، وبين التخزين التقليدي وحل MOF الهجين"></a><figcaption><span class="en">The three frameworks and the hybrid design.</span><span class="ar">الأطر الثلاثة والتصميم الهجين.</span></figcaption></figure>
     </div>
-    <nav class="pn" aria-label="More awards">
-      <a class="next k2" href="#expo"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Projects Exhibition</span><span class="ar">معرض مشاريع الكلية</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="hydronet"></div></aside>
   </div>
 </article>
-<article class="project activity k2" id="p-expo" aria-labelledby="t-expo">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Award navigation">
-      <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
-      <span class="pos">2 / 3</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k2" id="p-expo" aria-labelledby="t-expo">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#123"><a class="frame" href="assets/img/award-ceremony.webp"><img src="assets/img/award-ceremony.webp" width="1400" height="942" alt="" style="object-position:50% 40%"></a></div>
+
+      <h3 class="p-title" id="t-expo"><span class="en">Faculty of Engineering Annual Projects Exhibition</span><span class="ar">المعرض السنوي لمشاريع طلاب كلية الهندسة</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">2nd of 100+ projects · 2026</span><span class="ar">الثاني من 100+ مشروع · 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">2nd place of 100+ projects</span><span class="ar">المركز الثاني من 100+ مشروع</span></span>
       <span><span class="en">Islamic University of Madinah</span><span class="ar">الجامعة الإسلامية بالمدينة المنورة</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span>2026</span>
     </div>
-    <h3 class="p-title" id="t-expo"><span class="en">Faculty of Engineering Annual Projects Exhibition</span><span class="ar">المعرض السنوي لمشاريع طلاب كلية الهندسة</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Second place among more than 100 competing projects, with the Brushless DC Motor with PWM Controller.</span><span class="ar">المركز الثاني من بين أكثر من 100 مشروع متنافس، بمشروع المحرّك عديم الفرش مع متحكّم PWM.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -952,25 +1048,28 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
       <figure class="fig"><a class="frame cover" href="assets/img/award-trophy.webp"><img src="assets/img/award-trophy.webp" width="1400" height="1055" loading="lazy" style="object-position:50% 78%" alt="Talal holding the second-place trophy and the BLDC motor project in front of the Islamic University of Madinah sign" data-alt-ar="طلال يحمل درع المركز الثاني ومشروع المحرّك أمام شعار الجامعة الإسلامية بالمدينة المنورة"></a>
         <figcaption><span class="en">The trophy and the project.</span><span class="ar">الدرع والمشروع.</span></figcaption></figure>
     </div>
-    <nav class="pn" aria-label="More awards">
-      <a class="prev k5" href="#hydronet"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b>HydroNet</b></a>
-      <a class="next k4" href="#twinsat"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b>TwinSat</b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="expo"></div></aside>
   </div>
 </article>
-<article class="project activity k4" id="p-twinsat" aria-labelledby="t-twinsat">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Award navigation">
-      <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
-      <span class="pos">3 / 3</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k4" id="p-twinsat" aria-labelledby="t-twinsat">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#05080C"><a class="frame" href="assets/img/sari-cover.webp"><img src="assets/img/sari-cover.webp" width="1400" height="788" alt="" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-twinsat">TwinSat</h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Saudi Space Agency · 2026</span><span class="ar">وكالة الفضاء السعودية · 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">Top 50 of 600+ teams</span><span class="ar">أفضل 50 من 600+ فريق</span></span>
       <span><span class="en">Sari Initiative, 2nd edition · Saudi Space Agency</span><span class="ar">مبادرة ساري، النسخة الثانية · وكالة الفضاء السعودية</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span>2026</span>
     </div>
-    <h3 class="p-title" id="t-twinsat">TwinSat</h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">A 6U CubeSat mission that feeds data from remote oil and gas assets into Aramco's Digital Twin. I led team Mustabaq, and our proposal was shortlisted among the top 50 of more than 600 teams.</span><span class="ar">مهمة قمر صناعي مكعّب بحجم 6U تنقل بيانات الأصول النفطية والغازية النائية إلى التوأم الرقمي لأرامكو. قدت فريق «مُستبِق»، وتأهّل مقترحنا ضمن أفضل 50 فريقاً من بين أكثر من 600 فريق.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -1013,25 +1112,29 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
         <figcaption class="legend"><span><i class="lg"></i><span class="en">600+ teams registered</span><span class="ar">أكثر من 600 فريق مسجّل</span></span><span><i class="lg on"></i><span class="en">50 shortlisted</span><span class="ar">50 فريقاً متأهّلاً</span></span><span><i class="lg us"></i><span class="en">Mustabaq</span><span class="ar">مُستبِق</span></span></figcaption>
       </figure>
     </div>
-    <nav class="pn" aria-label="More awards">
-      <a class="prev k2" href="#expo"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Projects Exhibition</span><span class="ar">معرض مشاريع الكلية</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="twinsat"></div></aside>
   </div>
 </article>
 <!-- ================= ACTIVITY PAGES ================= -->
-<article class="project activity k5" id="p-ihour" aria-labelledby="t-ihour">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Activity navigation">
-      <a class="back" href="#activities"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All activities</span><span class="ar">كل الأنشطة</span></a>
-      <span class="pos">1 / 4</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k5" id="p-ihour" aria-labelledby="t-ihour">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player"><span class="thumb tile big"><span class="tile-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><b><span class="en">Innovation Hour</span><span class="ar">ساعة ابتكار</span></b><small><span class="en">AI and digital fabrication</span><span class="ar">الذكاء الاصطناعي والتصنيع الرقمي</span></small></span></span></div>
+
+      <h3 class="p-title" id="t-ihour"><span class="en">Innovation Hour</span><span class="ar">برنامج ساعة ابتكار</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Organizer and presenter · Aug – Nov 2026</span><span class="ar">منظّم ومقدّم ورش · أغسطس – نوفمبر 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">Organizer, Workshop Presenter</span><span class="ar">منظّم ومقدّم ورش</span></span>
       <span><span class="en">University program</span><span class="ar">برنامج جامعي</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">Aug – Nov 2026</span><span class="ar">أغسطس – نوفمبر 2026</span></span>
     </div>
-    <h3 class="p-title" id="t-ihour"><span class="en">Innovation Hour</span><span class="ar">برنامج ساعة ابتكار</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">I help organize and present hands-on workshops in Innovation Hour, a program of the university's Innovation and Entrepreneurship Center for students and the Madinah community.</span><span class="ar">أشارك في تنظيم الورش العملية وتقديمها ضمن برنامج «ساعة ابتكار» الذي يقدّمه مركز الابتكار وريادة الأعمال بالجامعة لطلابها ولمجتمع المدينة المنورة.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -1061,24 +1164,28 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
         </table>
       </aside>
     </div>
-    <nav class="pn" aria-label="More activities">
-      <a class="next k4" href="#ieee"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="ihour"></div></aside>
   </div>
 </article>
-<article class="project activity k4" id="p-ieee" aria-labelledby="t-ieee">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Activity navigation">
-      <a class="back" href="#activities"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All activities</span><span class="ar">كل الأنشطة</span></a>
-      <span class="pos">2 / 4</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k4" id="p-ieee" aria-labelledby="t-ieee">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#0F1B33"><a class="frame" href="assets/img/act-ieee-en.webp"><img src="assets/img/act-ieee-en.webp" width="891" height="1100" alt="" style="object-position:50% 90%"></a></div>
+
+      <h3 class="p-title" id="t-ieee"><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Member · Current</span><span class="ar">عضو · حالياً</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">Member</span><span class="ar">عضو</span></span>
       <span><span class="en">Student organization</span><span class="ar">منظمة طلابية</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">Current</span><span class="ar">حالياً</span></span>
     </div>
-    <h3 class="p-title" id="t-ieee"><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Member of the IEEE student branch at the Islamic University of Madinah, where I also run the branch's PCB design workshop.</span><span class="ar">عضو في فرع IEEE الطلابي بالجامعة الإسلامية بالمدينة المنورة، وأقدّم فيه ورشة تصميم اللوحات المطبوعة.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -1108,25 +1215,28 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
         <figure class="fig side-fig ar"><a class="frame" href="assets/img/act-ieee-ar.webp"><img src="assets/img/act-ieee-ar.webp" width="891" height="1100" loading="lazy" alt="Post: IEEE Student Branch reopening highlights, with a group photo of the branch members and faculty" data-alt-ar="منشور أبرز محطات حفل إعادة افتتاح فرع IEEE الطلابي مع صورة جماعية للأعضاء وأعضاء هيئة التدريس"></a><figcaption><span class="en">Highlights from the branch reopening ceremony.</span><span class="ar">أبرز محطات حفل إعادة افتتاح الفرع.</span></figcaption></figure>
       </aside>
     </div>
-    <nav class="pn" aria-label="More activities">
-      <a class="prev k5" href="#ihour"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Innovation Hour</span><span class="ar">برنامج ساعة ابتكار</span></b></a>
-      <a class="next k1" href="#engclub"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="ieee"></div></aside>
   </div>
 </article>
-<article class="project activity k2" id="p-inno" aria-labelledby="t-inno">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Activity navigation">
-      <a class="back" href="#activities"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All activities</span><span class="ar">كل الأنشطة</span></a>
-      <span class="pos">4 / 4</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k2" id="p-inno" aria-labelledby="t-inno">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#1E2E8C"><a class="frame" href="assets/img/act-inno-formula.webp"><img src="assets/img/act-inno-formula.webp" width="778" height="1100" alt="" style="object-position:50% 72%"></a></div>
+
+      <h3 class="p-title" id="t-inno"><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Vice president · Fall 2025</span><span class="ar">نائب الرئيس · الفصل الأول 2025</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">Vice President</span><span class="ar">نائب الرئيس</span></span>
       <span><span class="en">Student club</span><span class="ar">نادٍ طلابي</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">2025</span><span class="ar">2025</span></span>
     </div>
-    <h3 class="p-title" id="t-inno"><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Vice president of a university-wide science club. We organized workshops, a math competition and visits for students of every college.</span><span class="ar">نائب رئيس نادٍ علمي على مستوى الجامعة، نظّمنا فيه ورشاً ومسابقة رياضيات وزيارات لطلاب جميع الكليات.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -1160,24 +1270,28 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
       <figure class="fig"><a class="frame" href="assets/img/act-inno-math.webp"><img src="assets/img/act-inno-math.webp" width="778" height="895" loading="lazy" alt="Event poster: Competition math workshop" data-alt-ar="إعلان فعالية: ورشة مسائل المسابقات"></a><figcaption><span class="en">Competition math workshop</span><span class="ar">ورشة مسائل المسابقات</span></figcaption></figure>
       <figure class="fig"><a class="frame" href="assets/img/act-inno-icmc.webp"><img src="assets/img/act-inno-icmc.webp" width="778" height="1100" loading="lazy" alt="Event poster: ICMC announcement" data-alt-ar="إعلان فعالية: إعلان مسابقة ICMC"></a><figcaption><span class="en">ICMC announcement</span><span class="ar">إعلان مسابقة ICMC</span></figcaption></figure>
     </div>
-    <nav class="pn" aria-label="More activities">
-      <a class="prev k1" href="#engclub"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="inno"></div></aside>
   </div>
 </article>
-<article class="project activity k1" id="p-engclub" aria-labelledby="t-engclub">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Activity navigation">
-      <a class="back" href="#activities"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All activities</span><span class="ar">كل الأنشطة</span></a>
-      <span class="pos">3 / 4</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage activity k1" id="p-engclub" aria-labelledby="t-engclub">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#1E2E5C"><a class="frame" href="assets/img/act-eng-album.webp"><img src="assets/img/act-eng-album.webp" width="891" height="1100" alt="" style="object-position:50% 55%"></a></div>
+
+      <h3 class="p-title" id="t-engclub"><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">Design lead, media team · 2025–2026</span><span class="ar">مسؤول التصميم · 2025–2026</span></small></span></div>
+  <div class="p-meta">
       <span class="rolepill"><span class="en">Design Lead, Media Team</span><span class="ar">مسؤول التصميم، قسم الميديا</span></span>
       <span><span class="en">Student club</span><span class="ar">نادٍ طلابي</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">2025–2026</span><span class="ar">2025–2026</span></span>
     </div>
-    <h3 class="p-title" id="t-engclub"><span class="en">IU Engineering Club</span><span class="ar">النادي الهندسي بالجامعة الإسلامية</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Design lead in the media team of the Faculty of Engineering's student club for the 2025–2026 academic year.</span><span class="ar">مسؤول التصميم في قسم الميديا بالنادي الهندسي لكلية الهندسة للعام الجامعي 2025–2026.</span></p>
     <div class="p-body">
       <div class="p-text">
@@ -1216,26 +1330,29 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
       <figure class="fig"><a class="frame" href="assets/img/act-eng-programs.webp"><img src="assets/img/act-eng-programs.webp" width="891" height="1100" loading="lazy" alt="Engineering Club 2025–2026 report page: New programs" data-alt-ar="صفحة من تقرير النادي الهندسي 2025–2026: البرامج المستحدثة"></a><figcaption><span class="en">New programs</span><span class="ar">البرامج المستحدثة</span></figcaption></figure>
       <figure class="fig"><a class="frame" href="assets/img/act-eng-album.webp"><img src="assets/img/act-eng-album.webp" width="891" height="1100" loading="lazy" alt="Engineering Club 2025–2026 report page: Photo album" data-alt-ar="صفحة من تقرير النادي الهندسي 2025–2026: ألبوم الصور"></a><figcaption><span class="en">Photo album</span><span class="ar">ألبوم الصور</span></figcaption></figure>
     </div>
-    <nav class="pn" aria-label="More activities">
-      <a class="prev k4" href="#ieee"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></b></a>
-      <a class="next k2" href="#inno"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="engclub"></div></aside>
   </div>
 </article>
 <!-- ================= KICAD WORKSHOP ================= -->
-<article class="project k5" id="p-kicad" aria-labelledby="t-kicad">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Project navigation">
-      <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">1 / 5</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage k5" id="p-kicad" aria-labelledby="t-kicad">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player contain" style="--bg:#FFFFFF"><a class="frame" href="assets/img/pcb-render.webp"><img src="assets/img/pcb-render.webp" width="1260" height="800" alt="" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-kicad"><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">IEEE IUM Student Branch · 2026</span><span class="ar">فرع IEEE الطلابي · 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="chip"><i></i>CH1</span>
       <span><span class="en">Workshop · IEEE IUM Student Branch</span><span class="ar">ورشة عمل · فرع IEEE الطلابي بالجامعة الإسلامية</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span>2026</span>
     </div>
-    <h3 class="p-title" id="t-kicad"><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">A two-day hands-on workshop I prepared and present for the IEEE IUM Student Branch. Participants design a real Arduino-compatible board, from the schematic to the files a factory can manufacture.</span><span class="ar">ورشة عملية لمدة يومين أعددتها وأقدّمها لفرع IEEE الطلابي بالجامعة الإسلامية، يصمّم فيها المشاركون لوحة حقيقية متوافقة مع Arduino، من المخطّط حتى الملفات التي يصنّعها المصنع.</span></p>
 
     <div class="p-body">
@@ -1301,26 +1418,69 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <ul class="tags" aria-label="Tools">
       <li>KiCad 10</li><li>ATmega328P</li><li>CH340C</li><li>USB-C</li><li>PCB layout</li><li>ERC / DRC</li><li>Gerber</li><li>Teaching</li>
     </ul>
-    <nav class="pn" aria-label="More projects">
-      <a class="next k1" href="#anaq"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="kicad"></div></aside>
   </div>
 </article>
 
 <!-- ================= CH2 ANAQ ================= -->
-<article class="project k1" id="p-anaq" aria-labelledby="t-anaq">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Project navigation">
-      <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">2 / 5</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage k1" id="p-anaq" aria-labelledby="t-anaq">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player scope-player"><figure class="scope-fig">
+      <div class="scope" dir="ltr">
+        <div class="scope-head"><span><b>ANAQ</b> black box</span><span>race_3.csv</span><span class="run">acq 1 kHz</span></div>
+        <div class="scope-screen">
+          <svg viewBox="0 0 1000 600" role="img" aria-labelledby="scopeTitle">
+            <title id="scopeTitle">Forward acceleration during a real STEM Racing launch: a peak of +8.0 g at 50 ms after the trigger and a −11.9 g spike at 1.16 s.</title>
+            <defs>
+              <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#F4CB4A" stop-opacity="0"/>
+                <stop offset="1" stop-color="#F4CB4A" stop-opacity=".16"/>
+              </linearGradient>
+              <filter id="glow" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="3.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path class="s-grid" d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000"/>
+            <path class="s-ticks" d="M20 294V306M40 294V306M60 294V306M80 294V306M120 294V306M140 294V306M160 294V306M180 294V306M220 294V306M240 294V306M260 294V306M280 294V306M320 294V306M340 294V306M360 294V306M380 294V306M420 294V306M440 294V306M460 294V306M480 294V306M520 294V306M540 294V306M560 294V306M580 294V306M620 294V306M640 294V306M660 294V306M680 294V306M720 294V306M740 294V306M760 294V306M780 294V306M820 294V306M840 294V306M860 294V306M880 294V306M920 294V306M940 294V306M960 294V306M980 294V306M494 20H506M494 40H506M494 60H506M494 80H506M494 120H506M494 140H506M494 160H506M494 180H506M494 220H506M494 240H506M494 260H506M494 280H506M494 320H506M494 340H506M494 360H506M494 380H506M494 420H506M494 440H506M494 460H506M494 480H506M494 520H506M494 540H506M494 560H506M494 580H506"/>
+            <path class="s-trig" d="M250 0V600"/>
+            <rect class="beam" x="-60" y="0" width="60" height="600" fill="url(#beamG)"/>
+            <g filter="url(#glow)"><path class="s-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></g>
+            <path class="s-mark" d="M241 0h18l-9 13z"/>
+            <path class="s-mark" d="M0 291l13 9-13 9z"/>
+            <text class="s-lbl hi" x="20" y="288">2</text>
+            <circle class="s-dot" cx="275" cy="100" r="8"/>
+            <text class="s-lbl hi" x="294" y="96">+8.0 g</text>
+            <text class="s-lbl" x="294" y="126">t = 50 ms</text>
+            <circle class="s-dot" cx="828" cy="592" r="8"/>
+            <text class="s-lbl hi" x="842" y="530">−11.9 g</text>
+            <text class="s-lbl" x="842" y="560">t = 1.16 s</text>
+            <text class="s-lbl" x="260" y="584">t = 0</text>
+          </svg>
+        </div>
+        <div class="scope-foot"><span><span class="c1">2</span><b>4.00 g</b>/div</span><span><b>200 ms</b>/div</span><span>trig <b>↑ 1.50 g</b></span><span><b>2000</b> pts</span></div>
+      </div>
+      <figcaption class="scope-cap">
+        <span class="en">Forward acceleration from a real launch, recorded at 1000 samples per second by the black box I designed for Team ANAQ. The trigger sits at t = 0; the board also kept the half second before it.</span>
+        <span class="ar">تسارع أمامي من انطلاقة حقيقية، سجّله الصندوق الأسود الذي صمّمته لفريق عنق بمعدل 1000 قراءة في الثانية. لحظة الإطلاق عند t = 0، واحتفظت اللوحة أيضاً بنصف الثانية التي سبقتها.</span>
+      </figcaption>
+    </figure></div>
+
+      <h3 class="p-title" id="t-anaq"><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">With Team ANAQ · 2026</span><span class="ar">بالتعاون مع فريق عنق · 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="chip"><i></i>CH2</span>
       <span><span class="en">Collaboration with Team ANAQ · STEM Racing</span><span class="ar">بالتعاون مع فريق عنق · STEM Racing</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span>2026</span>
     </div>
-    <h3 class="p-title" id="t-anaq"><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">A black box for STEM Racing cars that records every launch at 1 kHz and replays it in 3D.</span><span class="ar">صندوق أسود لسيارات STEM Racing يسجّل كل انطلاقة بمعدل 1000 قراءة في الثانية ويعيد تشغيلها بشكل ثلاثي الأبعاد.</span></p>
 
     <div class="p-body">
@@ -1377,50 +1537,6 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     </div>
 
     <div class="panel">
-      <h4 class="eyebrow"><span class="en">A real launch, recorded by the board</span><span class="ar">انطلاقة حقيقية سجّلتها اللوحة</span></h4>
-      <figure class="scope-fig">
-      <div class="scope" dir="ltr">
-        <div class="scope-head"><span><b>ANAQ</b> black box</span><span>race_3.csv</span><span class="run">acq 1 kHz</span></div>
-        <div class="scope-screen">
-          <svg viewBox="0 0 1000 600" role="img" aria-labelledby="scopeTitle">
-            <title id="scopeTitle">Forward acceleration during a real STEM Racing launch: a peak of +8.0 g at 50 ms after the trigger and a −11.9 g spike at 1.16 s.</title>
-            <defs>
-              <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0" stop-color="#F4CB4A" stop-opacity="0"/>
-                <stop offset="1" stop-color="#F4CB4A" stop-opacity=".16"/>
-              </linearGradient>
-              <filter id="glow" x="-5%" y="-5%" width="110%" height="110%">
-                <feGaussianBlur stdDeviation="3.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <path class="s-grid" d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000"/>
-            <path class="s-ticks" d="M20 294V306M40 294V306M60 294V306M80 294V306M120 294V306M140 294V306M160 294V306M180 294V306M220 294V306M240 294V306M260 294V306M280 294V306M320 294V306M340 294V306M360 294V306M380 294V306M420 294V306M440 294V306M460 294V306M480 294V306M520 294V306M540 294V306M560 294V306M580 294V306M620 294V306M640 294V306M660 294V306M680 294V306M720 294V306M740 294V306M760 294V306M780 294V306M820 294V306M840 294V306M860 294V306M880 294V306M920 294V306M940 294V306M960 294V306M980 294V306M494 20H506M494 40H506M494 60H506M494 80H506M494 120H506M494 140H506M494 160H506M494 180H506M494 220H506M494 240H506M494 260H506M494 280H506M494 320H506M494 340H506M494 360H506M494 380H506M494 420H506M494 440H506M494 460H506M494 480H506M494 520H506M494 540H506M494 560H506M494 580H506"/>
-            <path class="s-trig" d="M250 0V600"/>
-            <rect class="beam" x="-60" y="0" width="60" height="600" fill="url(#beamG)"/>
-            <g filter="url(#glow)"><path class="s-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></g>
-            <path class="s-mark" d="M241 0h18l-9 13z"/>
-            <path class="s-mark" d="M0 291l13 9-13 9z"/>
-            <text class="s-lbl hi" x="20" y="288">2</text>
-            <circle class="s-dot" cx="275" cy="100" r="8"/>
-            <text class="s-lbl hi" x="294" y="96">+8.0 g</text>
-            <text class="s-lbl" x="294" y="126">t = 50 ms</text>
-            <circle class="s-dot" cx="828" cy="592" r="8"/>
-            <text class="s-lbl hi" x="842" y="530">−11.9 g</text>
-            <text class="s-lbl" x="842" y="560">t = 1.16 s</text>
-            <text class="s-lbl" x="260" y="584">t = 0</text>
-          </svg>
-        </div>
-        <div class="scope-foot"><span><span class="c1">2</span><b>4.00 g</b>/div</span><span><b>200 ms</b>/div</span><span>trig <b>↑ 1.50 g</b></span><span><b>2000</b> pts</span></div>
-      </div>
-      <figcaption class="scope-cap">
-        <span class="en">Forward acceleration from a real launch, recorded at 1000 samples per second by the black box I designed for Team ANAQ. The trigger sits at t = 0; the board also kept the half second before it.</span>
-        <span class="ar">تسارع أمامي من انطلاقة حقيقية، سجّله الصندوق الأسود الذي صمّمته لفريق عنق بمعدل 1000 قراءة في الثانية. لحظة الإطلاق عند t = 0، واحتفظت اللوحة أيضاً بنصف الثانية التي سبقتها.</span>
-      </figcaption>
-    </figure>
-    </div>
-
-    <div class="panel">
       <h4 class="eyebrow"><span class="en">Signal chain, on the board</span><span class="ar">سلسلة معالجة الإشارة على اللوحة</span></h4>
       <ol class="chain">
         <li><b>ICM-20602</b><span><span class="en">raw counts</span><span class="ar">قراءات خام</span></span></li>
@@ -1464,28 +1580,31 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <ul class="tags" aria-label="Tools">
       <li>ESP32-C3</li><li>C++ / Arduino</li><li>FreeRTOS</li><li>SPI</li><li>IIR filters</li><li>PCB design</li><li>LittleFS</li><li>Three.js</li><li>Plotly</li>
     </ul>
-    <nav class="pn" aria-label="More projects">
-      <a class="prev k5" href="#kicad"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></b></a>
-      <a class="next k2" href="#bldc"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Brushless DC Motor</span><span class="ar">محرّك تيار مستمر عديم الفرش</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="anaq"></div></aside>
   </div>
 </article>
 
 <!-- ================= CH3 BLDC ================= -->
-<article class="project k2" id="p-bldc" aria-labelledby="t-bldc">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Project navigation">
-      <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">3 / 5</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage k2" id="p-bldc" aria-labelledby="t-bldc">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player contain" style="--bg:#E9ECEF"><a class="frame" href="assets/img/bldc-outer-rotor.webp"><img src="assets/img/bldc-outer-rotor.webp" width="442" height="348" alt="" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-bldc"><span class="en">Brushless DC Motor with PWM Controller</span><span class="ar">محرّك تيار مستمر عديم الفرش مع متحكّم PWM</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">EE4381 · Apr 2026</span><span class="ar">EE4381 · أبريل 2026</span></small></span></div>
+  <div class="p-meta">
       <span class="chip"><i></i>CH3</span>
       <span><span class="en">EE4381 Electromagnetic Field Theory</span><span class="ar">EE4381 نظرية المجالات الكهرومغناطيسية</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">April 2026</span><span class="ar">أبريل 2026</span></span>
       <a class="prize" href="#awards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">2nd place · Engineering Projects Exhibition 2026</span><span class="ar">المركز الثاني · معرض مشاريع كلية الهندسة 2026</span></a>
     </div>
-    <h3 class="p-title" id="t-bldc"><span class="en">Brushless DC Motor with PWM Controller</span><span class="ar">محرّك تيار مستمر عديم الفرش مع متحكّم PWM</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">A 3D-printed BLDC motor driven by a rotating magnetic field, with commutation done in hardware logic instead of a microcontroller.</span><span class="ar">محرّك BLDC مطبوع ثلاثي الأبعاد يدور بمجال مغناطيسي دوّار، ويتم فيه التبديل الإلكتروني بدوائر منطقية بدلاً من متحكّم دقيق.</span></p>
 
     <div class="p-body">
@@ -1545,27 +1664,30 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <ul class="tags" aria-label="Tools">
       <li>Electromagnetics</li><li>3-phase commutation</li><li>IR2101</li><li>Power MOSFETs</li><li>CMOS logic</li><li>3D printing</li><li>NI Multisim</li>
     </ul>
-    <nav class="pn" aria-label="More projects">
-      <a class="prev k1" href="#anaq"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></b></a>
-      <a class="next k3" href="#pwm"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="bldc"></div></aside>
   </div>
 </article>
 
 <!-- ================= CH4 PWM ================= -->
-<article class="project k3" id="p-pwm" aria-labelledby="t-pwm">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Project navigation">
-      <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">4 / 5</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage k3" id="p-pwm" aria-labelledby="t-pwm">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player contain" style="--bg:#15181B"><a class="frame" href="assets/img/pwm-box.webp"><img src="assets/img/pwm-box.webp" width="623" height="539" alt="" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-pwm"><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">EE3361 · Dec 2025</span><span class="ar">EE3361 · ديسمبر 2025</span></small></span></div>
+  <div class="p-meta">
       <span class="chip"><i></i>CH4</span>
       <span><span class="en">EE3361 Digital Logic Design</span><span class="ar">EE3361 تصميم الدوائر المنطقية الرقمية</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">December 2025</span><span class="ar">ديسمبر 2025</span></span>
     </div>
-    <h3 class="p-title" id="t-pwm"><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">Variable-duty PWM for DC motor speed control, built from logic ICs with no microcontroller.</span><span class="ar">إشارة PWM بنسبة تشغيل متغيّرة للتحكّم بسرعة محرّك تيار مستمر، مبنية من دوائر منطقية بدون أي متحكّم دقيق.</span></p>
 
     <div class="p-body">
@@ -1648,27 +1770,30 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <ul class="tags" aria-label="Tools">
       <li>555 timer</li><li>74HC4040</li><li>74HC85</li><li>Sequential logic</li><li>MOSFET switching</li><li>NI Multisim</li>
     </ul>
-    <nav class="pn" aria-label="More projects">
-      <a class="prev k2" href="#bldc"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Brushless DC Motor</span><span class="ar">محرّك تيار مستمر عديم الفرش</span></b></a>
-      <a class="next k4" href="#lfr"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="pwm"></div></aside>
   </div>
 </article>
 
 <!-- ================= CH5 LFR ================= -->
-<article class="project k4" id="p-lfr" aria-labelledby="t-lfr">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Project navigation">
-      <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">5 / 5</span>
-    </nav>
-    <div class="p-meta">
+<article class="project watchpage k4" id="p-lfr" aria-labelledby="t-lfr">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player cover" style="--bg:#777"><a class="frame" href="assets/img/lfr-final.webp"><img src="assets/img/lfr-final.webp" width="800" height="570" alt="" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-lfr"><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></h3>
+      <div class="w-row">
+        <div class="w-chan"><span class="av-mini" aria-hidden="true"></span><span><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><small><span class="en">ENGR3020 · 2025</span><span class="ar">ENGR3020 · 2025</span></small></span></div>
+  <div class="p-meta">
       <span class="chip"><i></i>CH5</span>
       <span><span class="en">ENGR3020 Creativity in Engineering Design</span><span class="ar">ENGR3020 الإبداع في التصميم الهندسي</span></span>
       <span class="sep" aria-hidden="true"></span>
       <span><span class="en">Second year, spring 2025</span><span class="ar">السنة الثانية، الفصل الثاني 2025</span></span>
     </div>
-    <h3 class="p-title" id="t-lfr"><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></h3>
+      </div>
+      <div class="desc">
     <p class="p-sub"><span class="en">An Arduino robot that follows a track at speed and reacts to obstacles in its path.</span><span class="ar">روبوت بمتحكّم Arduino يتتبّع المسار بسرعة ويتفاعل مع العوائق التي تعترضه.</span></p>
 
     <div class="p-body">
@@ -1724,13 +1849,15 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     <ul class="tags" aria-label="Tools">
       <li>Arduino Nano</li><li>C++</li><li>IR sensors</li><li>HC-SR04</li><li>L298N</li><li>Tinkercad</li><li>3D printing</li><li>Laser cutting</li>
     </ul>
-    <nav class="pn" aria-label="More projects">
-      <a class="prev k3" href="#pwm"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></b></a>
-    </nav>
+
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="lfr"></div></aside>
   </div>
 </article>
 
 <!-- ================= SKILLS ================= -->
+<div class="about-tab home-part" id="about-tab">
 <section class="sec home-part" id="skills">
   <div class="wrap">
     <div class="sec-head">
@@ -1822,6 +1949,7 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     </div>
   </div>
 </section>
+</div>
 </main>
 
 <footer>
@@ -1846,18 +1974,56 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     document.title=(v&&VIEWS[v])?VIEWS[v][ar?1:0]+' · '+base:base;
   }
   function jump(fn){ var st=root.style; st.scrollBehavior='auto'; fn(); requestAnimationFrame(function(){ st.scrollBehavior=''; }); }
+  var TABMAP={'':'all',top:'all',projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};
+  var CAT2TAB={project:'projects',award:'awards',activity:'activities'};
+  function setTab(t){
+    root.setAttribute('data-tab',t);
+    var els=document.querySelectorAll('.tab[data-tab],.side-i[data-tab]');
+    for(var i=0;i<els.length;i++){ var on=els[i].getAttribute('data-tab')===t; els[i].classList.toggle('on',on); if(els[i].classList.contains('tab')) els[i].setAttribute('aria-selected',on?'true':'false'); }
+  }
+  function tabsTop(){ var tb=document.querySelector('.tabs'), bar=document.querySelector('.bar'); return tb?tb.getBoundingClientRect().top+window.scrollY-(bar?bar.offsetHeight:0):0; }
   function route(hash,fromClick){
     var h=(hash||'').replace(/^#/,'');
     if(VIEWS[h]){
-      root.setAttribute('data-view',h); jump(function(){window.scrollTo(0,0);});
+      root.setAttribute('data-view',h);
+      var c=document.querySelector('.vcard[href="#'+h+'"]'); setTab(c?CAT2TAB[c.getAttribute('data-cat')]:'all');
+      jump(function(){window.scrollTo(0,0);});
       var t=document.getElementById('t-'+h); if(t&&fromClick){t.setAttribute('tabindex','-1');t.focus({preventScroll:true});}
     }else{
       var was=root.hasAttribute('data-view'); root.removeAttribute('data-view');
-      var el=h&&h!=='top'&&h!=='ar'&&h!=='en'&&document.getElementById(h);
-      if(el){ if(was) jump(function(){el.scrollIntoView();}); else el.scrollIntoView({behavior:'smooth'}); } else if(fromClick||was) jump(function(){window.scrollTo(0,0);});
+      if(Object.prototype.hasOwnProperty.call(TABMAP,h)){
+        var tab=TABMAP[h]; setTab(tab);
+        if(tab==='all'){ if(fromClick||was) jump(function(){window.scrollTo(0,0);}); }
+        else if(tab==='about'&&h!=='about'){ var el=document.getElementById(h); if(el) jump(function(){el.scrollIntoView();}); }
+        else if(fromClick||was){ var y=tabsTop(); if(was||window.scrollY>y) jump(function(){window.scrollTo(0,Math.max(0,y));}); }
+      }else{
+        var el2=h&&h!=='ar'&&h!=='en'&&document.getElementById(h);
+        if(el2) jump(function(){el2.scrollIntoView();});
+      }
     }
     setTitle();
   }
+
+  /* ---- up next: every other item, continuing from this one ---- */
+  var vcards=[].slice.call(document.querySelectorAll('.vcard'));
+  var order=vcards.map(function(c){return c.getAttribute('href').slice(1);});
+  [].forEach.call(document.querySelectorAll('.upnext'),function(box){
+    var i=order.indexOf(box.getAttribute('data-self'));
+    for(var k=1;k<order.length;k++){ var m=vcards[(i+k)%order.length].cloneNode(true); m.className='mcard'; box.appendChild(m); }
+  });
+
+  /* ---- search ---- */
+  var q=document.getElementById('q'), noRes=document.getElementById('noResult'), bar=document.querySelector('.bar');
+  function runSearch(){
+    var v=q.value.trim().toLowerCase(), any=false;
+    if(v&&(root.hasAttribute('data-view')||root.getAttribute('data-tab')!=='all')){ try{history.pushState(null,'','#top');}catch(e){} route('#top',true); }
+    vcards.forEach(function(c){ var hit=!v||c.textContent.toLowerCase().indexOf(v)>=0; c.hidden=!hit; if(hit&&getComputedStyle(c).display!=='none') any=true; });
+    noRes.hidden=!v||any;
+  }
+  q.addEventListener('input',runSearch);
+  document.getElementById('sOpen').addEventListener('click',function(){ bar.classList.add('searching'); q.focus(); });
+  document.getElementById('sClose').addEventListener('click',function(){ bar.classList.remove('searching'); q.value=''; runSearch(); });
+  q.addEventListener('keydown',function(e){ if(e.key==='Escape'){ q.value=''; runSearch(); bar.classList.remove('searching'); q.blur(); } });
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
     var h=a.getAttribute('href'); if(h.length<2) return;
@@ -1874,6 +2040,7 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
     setTitle();
     var imgs=document.querySelectorAll('img[data-alt-ar]');
     for(var i=0;i<imgs.length;i++){var im=imgs[i]; if(!im.hasAttribute('data-alt-en')) im.setAttribute('data-alt-en',im.alt); im.alt=(l==='ar')?im.getAttribute('data-alt-ar'):im.getAttribute('data-alt-en');}
+    var qi=document.getElementById('q'); if(qi) qi.placeholder=(l==='ar')?'ابحث في الأعمال':'Search my work';
     var ex=document.querySelectorAll('a.ext');for(var j=0;j<ex.length;j++){var sp=ex[j].querySelector('[data-href-ar]');if(!ex[j].hasAttribute('data-href-en'))ex[j].setAttribute('data-href-en',ex[j].href);ex[j].href=(l==='ar'&&sp)?sp.getAttribute('data-href-ar'):ex[j].getAttribute('data-href-en');}
     try{localStorage.setItem('tsa-lang',l)}catch(e){}
   }
