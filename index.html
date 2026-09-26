@@ -1749,7 +1749,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   document.addEventListener('click',function(e){
     var a=e.target.closest && e.target.closest('a.frame'); if(!a||!dlg.showModal) return;
     e.preventDefault();
-    var im=a.querySelector('img'); lbImg.src=a.getAttribute('href'); lbImg.alt=im?im.alt:'';
+    var im=a.querySelector('img'); lbImg.src=im?(im.currentSrc||im.src):a.getAttribute('href'); lbImg.alt=im?im.alt:'';
     var cap=a.parentNode.querySelector('figcaption'); lbCap.textContent=cap?cap.innerText:'';
     dlg.showModal();
   });
