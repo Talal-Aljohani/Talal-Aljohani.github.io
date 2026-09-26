@@ -145,6 +145,11 @@ html[dir="rtl"] .btn svg.flip{transform:scaleX(-1)}
 .me{display:flex;align-items:center;gap:20px}
 .avatar{width:124px;height:124px;border-radius:50%;object-fit:cover;flex:none;background:var(--sunken);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--rule-2),var(--shadow)}
 .links .v a{text-decoration:none;border-bottom:1px solid var(--rule-2)}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.copy{font:600 12.5px/1 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--rule-2);border-radius:999px;padding:6px 12px;cursor:pointer}
+html[data-lang="ar"] .copy{font-family:var(--arabic)}
+.copy:hover{border-color:var(--ink)}
+.copied{font-size:13px;color:var(--ch5)}
 .links .v a:hover{border-color:var(--ink)}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:36px 0 0;border-top:1px solid var(--rule)}
 .facts div{padding-block:14px;padding-inline-end:14px}
@@ -1651,7 +1656,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
     </div>
     <div class="contact">
       <ul class="links">
-        <li><span class="k"><span class="en">Email</span><span class="ar">البريد</span></span><span class="v"><span class="todo"><span class="en">to be added</span><span class="ar">سيُضاف لاحقاً</span></span></span></li>
+        <li><span class="k"><span class="en">Email</span><span class="ar">البريد</span></span><span class="v mailrow"><a class="mail" id="mailLink" href="#contact" data-u="08inahojlalalat" data-d="moc.liamg">talalaljohani80 [at] gmail [dot] com</a><button class="copy" id="mailCopy" type="button"><span class="en">Copy</span><span class="ar">نسخ</span></button><span class="copied" id="mailCopied" hidden><span class="en">Copied</span><span class="ar">تم النسخ</span></span></span></li>
         <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener">linkedin.com/in/talal-aljohani</a></span></li>
         <li><span class="k"><span class="en">Location</span><span class="ar">الموقع</span></span><span class="v" style="font-family:inherit"><span class="en">Madinah, Saudi Arabia</span><span class="ar">المدينة المنورة، المملكة العربية السعودية</span></span></li>
       </ul>
@@ -1743,6 +1748,20 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   }
   dips.forEach(function(d){ d.addEventListener('click',function(){ d.setAttribute('aria-pressed',d.getAttribute('aria-pressed')==='true'?'false':'true'); drawPWM(); }); });
   drawPWM();
+
+  /* ---- email: assembled here so the address is not plain text in the page source ---- */
+  var ml=document.getElementById('mailLink');
+  if(ml){
+    var rv=function(t){return t.split('').reverse().join('');};
+    var addr=rv(ml.getAttribute('data-u'))+'@'+rv(ml.getAttribute('data-d'));
+    ml.textContent=addr; ml.href='mailto:'+addr; ml.dir='ltr';
+    var cb=document.getElementById('mailCopy'), ok=document.getElementById('mailCopied');
+    cb.addEventListener('click',function(){
+      var done=function(){ ok.hidden=false; setTimeout(function(){ok.hidden=true;},1800); };
+      var sel=function(){ var r=document.createRange(); r.selectNodeContents(ml); var w=getSelection(); w.removeAllRanges(); w.addRange(r); };
+      try{ navigator.clipboard.writeText(addr).then(done,sel); }catch(e){ sel(); }
+    });
+  }
 
   /* ---- lightbox ---- */
   var dlg=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
