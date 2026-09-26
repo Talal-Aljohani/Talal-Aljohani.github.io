@@ -10,11 +10,11 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101416'/%3E%3Cpath d='M5 22V10h6v12h5V10h6v12h5' fill='none' stroke='%23F4CB4A' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <script>
 (function(){var l='en';try{l=localStorage.getItem('tsa-lang')||'en'}catch(e){}
 if(location.hash==='#ar')l='ar';if(location.hash==='#en')l='en';
-var h=location.hash.slice(1);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','hydronet','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
+var h=location.hash.slice(1);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
 var r=document.documentElement;r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
 </script>
 <style>
@@ -207,7 +207,7 @@ html[data-lang="ar"] .ix-y{font-family:var(--arabic);font-size:14px}
 
 /* ---------- views ---------- */
 .project{display:none}
-html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
+html[data-view="expo"] #p-expo,html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
 html[data-view] .home-part{display:none}
 html[dir="rtl"] svg.flip{transform:scaleX(-1)}
 
@@ -547,6 +547,129 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   .run::before,.led.slow,.led.fast{animation:none}
   .frame img,.btn,.card,.card-img img,.more svg{transition:none}
 }
+
+/* =====================================================================
+   Simple theme: calmer type, one accent, fewer lines and badges.
+   Loaded last so it overrides the rules above.
+   ===================================================================== */
+:root{
+  --paper:#F7F7F5; --surface:#FFFFFF; --sunken:#EFF0EE; --ink:#15181B; --ink-2:#3B4148; --muted:#646C74;
+  --rule:#E3E5E6; --rule-2:#C9CDD1; --accent:#2B5DD1; --accent-soft:#EAF0FC; --on-accent:#FFFFFF;
+  --display:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101315; --surface:#171B1E; --sunken:#1D2226; --ink:#ECEFF1; --ink-2:#C6CDD3; --muted:#98A1A9;
+    --rule:#252B30; --rule-2:#39424A; --accent:#8FB0FF; --accent-soft:#1B2436; --on-accent:#0D1420;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101315; --surface:#171B1E; --sunken:#1D2226; --ink:#ECEFF1; --ink-2:#C6CDD3; --muted:#98A1A9;
+  --rule:#252B30; --rule-2:#39424A; --accent:#8FB0FF; --accent-soft:#1B2436; --on-accent:#0D1420;
+}
+.k1,.k2,.k3,.k4,.k5{--ch:var(--accent)}
+
+/* type: sentence case everywhere, one family */
+h1,h2,h3,.p-title,.card-t,.act-org,.aw-n,.stat b{font-family:var(--sans);font-stretch:normal;text-transform:none;letter-spacing:-.012em}
+html[data-lang="ar"] h1,html[data-lang="ar"] h2,html[data-lang="ar"] h3,html[data-lang="ar"] .p-title,html[data-lang="ar"] .card-t,html[data-lang="ar"] .act-org{font-family:var(--arabic)}
+.eyebrow{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.chip:not(.ext),.fn,.skill .ev,.sig{display:none}
+.chip.ext{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-soft)}
+.spec td,.links .v{font-family:var(--sans)}
+.pos{font-family:var(--sans)}
+
+/* header */
+.bar{background:color-mix(in srgb,var(--paper) 92%,transparent)}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(24px,4vw,40px)}
+.hero .wrap{display:block}
+.hero .wrap > div{max-width:780px}
+.me{gap:clamp(18px,3vw,28px);align-items:center}
+.avatar{width:132px;height:132px;border-width:4px;box-shadow:0 0 0 1px var(--rule-2)}
+.me-t{display:grid;gap:6px}
+h1{font-weight:700;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.1;margin:0}
+html[data-lang="ar"] h1{font-size:clamp(1.9rem,4.4vw,2.8rem);line-height:1.3}
+.role{color:var(--muted);font-size:clamp(1rem,1.6vw,1.1rem)}
+.lead{margin-top:26px;font-size:clamp(1.05rem,1.5vw,1.16rem);line-height:1.7;max-width:44em}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--rule-2)}
+.facts-line{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:14.5px}
+.facts-line li{display:inline-flex;align-items:center;gap:8px}
+.facts-line li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* sections */
+.sec{padding-block:clamp(48px,7vw,84px)}
+.home-part.sec{border-top:0}
+.sec-head{border-bottom:0;padding-bottom:0;margin-bottom:6px;align-items:baseline}
+h2{font-weight:700;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.2}
+html[data-lang="ar"] h2{font-size:clamp(1.6rem,3.2vw,2.1rem)}
+
+/* cards (projects + awards) */
+.cards{gap:20px}
+.cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{border-radius:14px;border-color:var(--rule);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card:hover{transform:translateY(-2px);border-color:var(--rule-2);box-shadow:0 10px 30px -18px rgba(0,0,0,.35)}
+.card-img{background:var(--sunken)}
+.card-img.photo{padding:0;height:clamp(170px,17vw,200px)}
+.card-img.photo img{object-fit:cover}
+.card-t{font-weight:650;font-size:clamp(1.15rem,1.7vw,1.3rem);line-height:1.3;margin-top:2px}
+html[data-lang="ar"] .card-t{font-size:1.15rem;line-height:1.5}
+.card.feature .card-t{font-size:clamp(1.35rem,2.2vw,1.65rem)}
+.card-meta{font-size:13.5px}
+.card-d{font-size:14.5px}
+.more{color:var(--accent);font-size:14px}
+.place{justify-self:start;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 10px}
+.prize{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-soft)}
+
+/* activities list */
+.acts{border-top:1px solid var(--rule)}
+.act{padding-block:18px}
+.act-org{font-weight:650;font-size:clamp(1.12rem,1.8vw,1.3rem);line-height:1.3}
+.rolepill{color:var(--accent);background:var(--accent-soft);border-color:transparent}
+
+/* skills */
+.skills{border-top:0;gap:14px}
+.skill{border:1px solid var(--rule);border-radius:12px;background:var(--surface);padding:18px 20px}
+.skill h3{font-size:1.02rem}
+
+/* about + contact */
+.edu{border-top:1px solid var(--rule)}
+.links{border-top:1px solid var(--rule)}
+
+/* detail pages: one comfortable reading column */
+.project .wrap{max-width:1000px}
+h3.p-title{font-family:var(--sans);font-stretch:normal;text-transform:none;font-weight:700;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin:14px 0 12px;max-width:none}
+.badge{font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:12.5px}
+.aw-l,.m-n{font-family:var(--sans);text-transform:none;letter-spacing:0}
+html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
+.p-sub{font-size:clamp(1.05rem,1.5vw,1.15rem);max-width:46em}
+.p-body{grid-template-columns:minmax(0,1fr);gap:34px;max-width:780px}
+.p-text{max-width:none}
+.spec caption{border-bottom:1px solid var(--rule-2)}
+.spec th{width:34%}
+.note{background:var(--accent-soft);border-color:transparent}
+.live{border-color:var(--rule)}
+.panel{max-width:1000px}
+.project .scope-fig{max-width:780px}
+.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.gallery .fig{grid-column:auto}
+.gallery .frame,.gallery .frame.tall{height:auto;aspect-ratio:4/3;max-height:none}
+.gallery .frame img{height:100%;max-height:none}
+.gallery .field-fig{grid-column:auto}
+.tags li{font-family:var(--sans);border-color:var(--rule)}
+.chain li,.modes,.stat,.pwm{border-color:var(--rule)}
+.pn a{border-color:var(--rule)}
+
+@media (max-width: 900px){
+  .cards-3{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 720px){
+  .avatar{width:96px;height:96px}
+  .me{align-items:center}
+  .gallery{grid-template-columns:minmax(0,1fr)}
+  .gallery .frame img{height:100%}
+}
 </style>
 </head>
 <body>
@@ -581,9 +704,11 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
     <div>
       <div class="me">
         <img class="avatar" src="assets/img/talal.webp" width="440" height="440" alt="Portrait of Talal Aljohani" data-alt-ar="صورة طلال الجهني">
-        <p class="eyebrow"><span class="en">Electrical Engineering · Islamic University of Madinah</span><span class="ar">الهندسة الكهربائية · الجامعة الإسلامية بالمدينة المنورة</span></p>
+        <div class="me-t">
+          <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
+          <p class="role"><span class="en">Electrical Engineering student · Islamic University of Madinah</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة</span></p>
+        </div>
       </div>
-      <h1><span class="en">Talal Sultan <span class="l2">Aljohani</span></span><span class="ar">طلال سلطان الجهني</span></h1>
       <p class="lead en">Electrical engineering student at the Islamic University of Madinah. I design and build hardware that works: a custom ESP32 telemetry board for STEM Racing, a brushless motor commutated entirely by logic ICs, a PWM generator with no microcontroller, and a line-following robot.</p>
       <p class="lead ar">طالب هندسة كهربائية في الجامعة الإسلامية بالمدينة المنورة. أصمّم وأبني أنظمة عتاد تعمل فعلياً: لوحة تيليمتري مخصّصة بمعالج ESP32 لمسابقة STEM Racing، ومحرّكاً عديم الفرش يُبدَّل بالكامل بدوائر منطقية، ومولّد PWM بدون متحكّم دقيق، وروبوتاً يتتبّع الخط.</p>
       <div class="cta">
@@ -591,53 +716,13 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         <a class="btn ghost" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
       </div>
-      <dl class="facts">
-        <div><dt class="eyebrow"><span class="en">Based in</span><span class="ar">الموقع</span></dt><dd><span class="en">Madinah, Saudi Arabia</span><span class="ar">المدينة المنورة، السعودية</span></dd></div>
-        <div><dt class="eyebrow"><span class="en">Studying</span><span class="ar">الدراسة</span></dt><dd><span class="en">B.Sc. Electrical Engineering, class of 2028</span><span class="ar">بكالوريوس الهندسة الكهربائية، دفعة 2028</span></dd></div>
-        <div><dt class="eyebrow"><span class="en">Focus</span><span class="ar">الاهتمام</span></dt><dd><span class="en">Embedded systems, motor control</span><span class="ar">الأنظمة المدمجة والتحكّم بالمحرّكات</span></dd></div>
-      </dl>
+      <ul class="facts-line">
+        <li><span class="en">Madinah, Saudi Arabia</span><span class="ar">المدينة المنورة، السعودية</span></li>
+        <li><span class="en">Class of 2028</span><span class="ar">دفعة 2028</span></li>
+        <li><span class="en">Embedded systems and motor control</span><span class="ar">الأنظمة المدمجة والتحكّم بالمحرّكات</span></li>
+      </ul>
     </div>
 
-    <figure class="scope-fig">
-      <div class="scope" dir="ltr">
-        <div class="scope-head"><span><b>ANAQ</b> black box</span><span>race_3.csv</span><span class="run">acq 1 kHz</span></div>
-        <div class="scope-screen">
-          <svg viewBox="0 0 1000 600" role="img" aria-labelledby="scopeTitle">
-            <title id="scopeTitle">Forward acceleration during a real STEM Racing launch: a peak of +8.0 g at 50 ms after the trigger and a −11.9 g spike at 1.16 s.</title>
-            <defs>
-              <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0" stop-color="#F4CB4A" stop-opacity="0"/>
-                <stop offset="1" stop-color="#F4CB4A" stop-opacity=".16"/>
-              </linearGradient>
-              <filter id="glow" x="-5%" y="-5%" width="110%" height="110%">
-                <feGaussianBlur stdDeviation="3.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <path class="s-grid" d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000"/>
-            <path class="s-ticks" d="M20 294V306M40 294V306M60 294V306M80 294V306M120 294V306M140 294V306M160 294V306M180 294V306M220 294V306M240 294V306M260 294V306M280 294V306M320 294V306M340 294V306M360 294V306M380 294V306M420 294V306M440 294V306M460 294V306M480 294V306M520 294V306M540 294V306M560 294V306M580 294V306M620 294V306M640 294V306M660 294V306M680 294V306M720 294V306M740 294V306M760 294V306M780 294V306M820 294V306M840 294V306M860 294V306M880 294V306M920 294V306M940 294V306M960 294V306M980 294V306M494 20H506M494 40H506M494 60H506M494 80H506M494 120H506M494 140H506M494 160H506M494 180H506M494 220H506M494 240H506M494 260H506M494 280H506M494 320H506M494 340H506M494 360H506M494 380H506M494 420H506M494 440H506M494 460H506M494 480H506M494 520H506M494 540H506M494 560H506M494 580H506"/>
-            <path class="s-trig" d="M250 0V600"/>
-            <rect class="beam" x="-60" y="0" width="60" height="600" fill="url(#beamG)"/>
-            <g filter="url(#glow)"><path class="s-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></g>
-            <path class="s-mark" d="M241 0h18l-9 13z"/>
-            <path class="s-mark" d="M0 291l13 9-13 9z"/>
-            <text class="s-lbl hi" x="20" y="288">2</text>
-            <circle class="s-dot" cx="275" cy="100" r="8"/>
-            <text class="s-lbl hi" x="294" y="96">+8.0 g</text>
-            <text class="s-lbl" x="294" y="126">t = 50 ms</text>
-            <circle class="s-dot" cx="828" cy="592" r="8"/>
-            <text class="s-lbl hi" x="842" y="530">−11.9 g</text>
-            <text class="s-lbl" x="842" y="560">t = 1.16 s</text>
-            <text class="s-lbl" x="260" y="584">t = 0</text>
-          </svg>
-        </div>
-        <div class="scope-foot"><span><span class="c1">2</span><b>4.00 g</b>/div</span><span><b>200 ms</b>/div</span><span>trig <b>↑ 1.50 g</b></span><span><b>2000</b> pts</span></div>
-      </div>
-      <figcaption class="scope-cap">
-        <span class="en">Forward acceleration from a real launch, recorded at 1000 samples per second by the black box I designed for Team ANAQ. The trigger sits at t = 0; the board also kept the half second before it.</span>
-        <span class="ar">تسارع أمامي من انطلاقة حقيقية، سجّله الصندوق الأسود الذي صمّمته لفريق عنق بمعدل 1000 قراءة في الثانية. لحظة الإطلاق عند t = 0، واحتفظت اللوحة أيضاً بنصف الثانية التي سبقتها.</span>
-      </figcaption>
-    </figure>
   </div>
 </section>
 
@@ -704,51 +789,38 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
     <div class="sec-head">
       <h2><span class="en">Competitions &amp; Awards</span><span class="ar">المسابقات والجوائز</span></h2>
     </div>
-    <article class="award split k5">
-      <div class="aw-head">
-        <div class="aw-place" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="aw-n">1<sup class="en">st</sup></span><span class="aw-l"><span class="en">place</span><span class="ar">المركز الأول</span></span></div>
-        <div class="aw-txt">
-          <p class="eyebrow"><span class="en">KSA Energy Week · KFUPM · February 2026</span><span class="ar">أسبوع الطاقة السعودي · جامعة الملك فهد للبترول والمعادن · فبراير 2026</span></p>
-          <h3><span class="en">EnergyThon 2.0, Western Region</span><span class="ar">هاكاثون الطاقة EnergyThon 2.0، المنطقة الغربية</span></h3>
-          <p><span class="en">First place in the Western Region round with HydroNet, our idea for safer hydrogen storage, which qualified the team for the national final.</span><span class="ar">المركز الأول في تصفيات المنطقة الغربية بفكرتنا HydroNet لتخزين الهيدروجين بأمان أكبر، وتأهّل الفريق إلى النهائيات على مستوى المملكة.</span></p>
-          <a class="chip" href="#hydronet"><i></i><span class="en">View the project</span><span class="ar">شاهد المشروع</span></a>
-        </div>
-      </div>
-      <figure class="fig"><a class="frame cover tall" href="assets/img/award-energython.webp"><img src="assets/img/award-energython.webp" width="1600" height="828" loading="lazy" alt="The team holding the boarding pass to the EnergyThon final, with the judges, under the slide Announcing the team's advancement to the final" data-alt-ar="الفريق يحمل بطاقة الصعود إلى نهائي EnergyThon مع لجنة التحكيم، وخلفهم شريحة إعلان تأهّل الفريق للنهائي"></a>
-        <figcaption><span class="en">Announcing our advancement to the final.</span><span class="ar">لحظة إعلان تأهّلنا إلى النهائي.</span></figcaption></figure>
-    </article>
-    <article class="award k2">
-      <div class="aw-head">
-        <div class="aw-place" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="aw-n">2<sup class="en">nd</sup></span><span class="aw-l"><span class="en">place</span><span class="ar">المركز الثاني</span></span></div>
-        <div class="aw-txt">
-          <p class="eyebrow"><span class="en">Islamic University of Madinah · 2026</span><span class="ar">الجامعة الإسلامية بالمدينة المنورة · 2026</span></p>
-          <h3><span class="en">Faculty of Engineering Annual Projects Exhibition</span><span class="ar">المعرض السنوي لمشاريع طلاب كلية الهندسة</span></h3>
-          <p><span class="en">Second place among more than 100 competing projects, with the Brushless DC Motor with PWM Controller. A journey full of challenges and learning.</span><span class="ar">المركز الثاني من بين أكثر من 100 مشروع متنافس، بمشروع المحرّك عديم الفرش مع متحكّم PWM. رحلة مليئة بالتحدّيات والتعلّم.</span></p>
-          <a class="chip" href="#bldc"><i></i><span class="en">CH3 · View the project</span><span class="ar">CH3 · شاهد المشروع</span></a>
-        </div>
-      </div>
-      <div class="gallery">
-        <figure class="fig s7"><a class="frame cover tall" href="assets/img/award-ceremony.webp"><img src="assets/img/award-ceremony.webp" width="1400" height="942" loading="lazy" alt="Talal Aljohani receiving the second-place award on stage at the Faculty of Engineering projects exhibition" data-alt-ar="طلال الجهني يتسلّم جائزة المركز الثاني على المسرح في معرض مشاريع كلية الهندسة"></a>
-          <figcaption><span class="en">Receiving the award at the exhibition ceremony.</span><span class="ar">تسلّم الجائزة في حفل المعرض.</span></figcaption></figure>
-        <figure class="fig s5"><a class="frame cover tall" href="assets/img/award-trophy.webp"><img src="assets/img/award-trophy.webp" width="1400" height="1055" loading="lazy" style="object-position:50% 78%" alt="Talal holding the second-place trophy and the BLDC motor project in front of the Islamic University of Madinah sign" data-alt-ar="طلال يحمل درع المركز الثاني ومشروع المحرّك أمام شعار الجامعة الإسلامية بالمدينة المنورة"></a>
-          <figcaption><span class="en">The trophy and the project.</span><span class="ar">الدرع والمشروع.</span></figcaption></figure>
-      </div>
-    </article>
-    <article class="award split k4">
-      <div class="aw-head">
-        <div class="aw-place" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-28 12 12)"/><circle cx="12" cy="12" r="3.2"/><circle cx="19.3" cy="7.6" r="1.4" fill="currentColor" stroke="none"/></svg><span class="aw-n">50</span><span class="aw-l"><span class="en">top of 600+</span><span class="ar">من 600+ فريق</span></span></div>
-        <div class="aw-txt">
-          <p class="eyebrow"><span class="en">Saudi Space Agency · Space Academy · 2026</span><span class="ar">وكالة الفضاء السعودية · أكاديمية الفضاء · 2026</span></p>
-          <h3><span class="en">Sari Initiative, second edition</span><span class="ar">مبادرة ساري، النسخة الثانية</span></h3>
-          <p><span class="en">I led team Mustabaq, whose satellite proposal, TwinSat, was shortlisted among the top 50 of more than 600 teams from 52 Saudi universities, in a national program where students design and build small satellites.</span><span class="ar">قدت فريق «مُستبِق» الذي تأهّل مقترحه للقمر الصناعي TwinSat ضمن أفضل 50 فريقاً من بين أكثر من 600 فريق من 52 جامعة سعودية، في مبادرة وطنية يصمّم فيها الطلاب أقماراً صناعية صغيرة ويبنونها.</span></p>
-          <span class="chip-row"><a class="chip" href="#twinsat"><i></i><span class="en">View the proposal</span><span class="ar">شاهد المقترح</span></a><a class="chip ext" href="https://ssa.gov.sa/Sari2-en/" target="_blank" rel="noopener"><span class="en">About the initiative</span><span class="ar" data-href-ar="https://ssa.gov.sa/Sari2-ar/">عن المبادرة</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></span>
-        </div>
-      </div>
-      <figure class="fig field-fig">
-        <svg class="field" viewBox="0 0 604 404" role="img" aria-labelledby="fieldT"><title id="fieldT">600 dots for the registered teams; 50 highlighted for the shortlist, one of them ringed for team Mustabaq.</title><circle class="d" cx="12" cy="12" r="3.2"/><circle class="d" cx="32" cy="12" r="3.2"/><circle class="d" cx="52" cy="12" r="3.2"/><circle class="d" cx="72" cy="12" r="3.2"/><circle class="d" cx="92" cy="12" r="3.2"/><circle class="d" cx="112" cy="12" r="3.2"/><circle class="d" cx="132" cy="12" r="3.2"/><circle class="d" cx="152" cy="12" r="3.2"/><circle class="d" cx="172" cy="12" r="3.2"/><circle class="d" cx="192" cy="12" r="3.2"/><circle class="d" cx="212" cy="12" r="3.2"/><circle class="d" cx="232" cy="12" r="3.2"/><circle class="d" cx="252" cy="12" r="3.2"/><circle class="d" cx="272" cy="12" r="3.2"/><circle class="d" cx="292" cy="12" r="3.2"/><circle class="d" cx="312" cy="12" r="3.2"/><circle class="d" cx="332" cy="12" r="3.2"/><circle class="d" cx="352" cy="12" r="3.2"/><circle class="d" cx="372" cy="12" r="3.2"/><circle class="d" cx="392" cy="12" r="3.2"/><circle class="d" cx="412" cy="12" r="3.2"/><circle class="d" cx="432" cy="12" r="3.2"/><circle class="d" cx="452" cy="12" r="3.2"/><circle class="d" cx="472" cy="12" r="3.2"/><circle class="d" cx="492" cy="12" r="3.2"/><circle class="d" cx="512" cy="12" r="3.2"/><circle class="d" cx="532" cy="12" r="3.2"/><circle class="d" cx="552" cy="12" r="3.2"/><circle class="d" cx="572" cy="12" r="3.2"/><circle class="d" cx="592" cy="12" r="3.2"/><circle class="d" cx="12" cy="32" r="3.2"/><circle class="d" cx="32" cy="32" r="3.2"/><circle class="d" cx="52" cy="32" r="3.2"/><circle class="d" cx="72" cy="32" r="3.2"/><circle class="d" cx="92" cy="32" r="3.2"/><circle class="d" cx="112" cy="32" r="3.2"/><circle class="d" cx="132" cy="32" r="3.2"/><circle class="d" cx="152" cy="32" r="3.2"/><circle class="d on" cx="172" cy="32" r="4.2"/><circle class="d" cx="192" cy="32" r="3.2"/><circle class="d" cx="212" cy="32" r="3.2"/><circle class="d" cx="232" cy="32" r="3.2"/><circle class="d" cx="252" cy="32" r="3.2"/><circle class="d" cx="272" cy="32" r="3.2"/><circle class="d" cx="292" cy="32" r="3.2"/><circle class="d" cx="312" cy="32" r="3.2"/><circle class="d" cx="332" cy="32" r="3.2"/><circle class="d on" cx="352" cy="32" r="4.2"/><circle class="d" cx="372" cy="32" r="3.2"/><circle class="d on" cx="392" cy="32" r="4.2"/><circle class="d on" cx="412" cy="32" r="4.2"/><circle class="d" cx="432" cy="32" r="3.2"/><circle class="d" cx="452" cy="32" r="3.2"/><circle class="d" cx="472" cy="32" r="3.2"/><circle class="d" cx="492" cy="32" r="3.2"/><circle class="d" cx="512" cy="32" r="3.2"/><circle class="d" cx="532" cy="32" r="3.2"/><circle class="d" cx="552" cy="32" r="3.2"/><circle class="d" cx="572" cy="32" r="3.2"/><circle class="d on" cx="592" cy="32" r="4.2"/><circle class="d on" cx="12" cy="52" r="4.2"/><circle class="d" cx="32" cy="52" r="3.2"/><circle class="d" cx="52" cy="52" r="3.2"/><circle class="d on" cx="72" cy="52" r="4.2"/><circle class="d on" cx="92" cy="52" r="4.2"/><circle class="d" cx="112" cy="52" r="3.2"/><circle class="d" cx="132" cy="52" r="3.2"/><circle class="d" cx="152" cy="52" r="3.2"/><circle class="d" cx="172" cy="52" r="3.2"/><circle class="d" cx="192" cy="52" r="3.2"/><circle class="d" cx="212" cy="52" r="3.2"/><circle class="d on" cx="232" cy="52" r="4.2"/><circle class="d" cx="252" cy="52" r="3.2"/><circle class="d" cx="272" cy="52" r="3.2"/><circle class="d on" cx="292" cy="52" r="4.2"/><circle class="d" cx="312" cy="52" r="3.2"/><circle class="d" cx="332" cy="52" r="3.2"/><circle class="d" cx="352" cy="52" r="3.2"/><circle class="d" cx="372" cy="52" r="3.2"/><circle class="d" cx="392" cy="52" r="3.2"/><circle class="d" cx="412" cy="52" r="3.2"/><circle class="d" cx="432" cy="52" r="3.2"/><circle class="d" cx="452" cy="52" r="3.2"/><circle class="d" cx="472" cy="52" r="3.2"/><circle class="d" cx="492" cy="52" r="3.2"/><circle class="d" cx="512" cy="52" r="3.2"/><circle class="d" cx="532" cy="52" r="3.2"/><circle class="d" cx="552" cy="52" r="3.2"/><circle class="d on" cx="572" cy="52" r="4.2"/><circle class="d" cx="592" cy="52" r="3.2"/><circle class="d" cx="12" cy="72" r="3.2"/><circle class="d" cx="32" cy="72" r="3.2"/><circle class="d on" cx="52" cy="72" r="4.2"/><circle class="d" cx="72" cy="72" r="3.2"/><circle class="d" cx="92" cy="72" r="3.2"/><circle class="d" cx="112" cy="72" r="3.2"/><circle class="d on" cx="132" cy="72" r="4.2"/><circle class="d" cx="152" cy="72" r="3.2"/><circle class="d" cx="172" cy="72" r="3.2"/><circle class="d on" cx="192" cy="72" r="4.2"/><circle class="d" cx="212" cy="72" r="3.2"/><circle class="d" cx="232" cy="72" r="3.2"/><circle class="d" cx="252" cy="72" r="3.2"/><circle class="d" cx="272" cy="72" r="3.2"/><circle class="d" cx="292" cy="72" r="3.2"/><circle class="d on" cx="312" cy="72" r="4.2"/><circle class="d" cx="332" cy="72" r="3.2"/><circle class="d" cx="352" cy="72" r="3.2"/><circle class="d" cx="372" cy="72" r="3.2"/><circle class="d" cx="392" cy="72" r="3.2"/><circle class="d" cx="412" cy="72" r="3.2"/><circle class="d" cx="432" cy="72" r="3.2"/><circle class="d" cx="452" cy="72" r="3.2"/><circle class="d" cx="472" cy="72" r="3.2"/><circle class="d" cx="492" cy="72" r="3.2"/><circle class="d" cx="512" cy="72" r="3.2"/><circle class="d" cx="532" cy="72" r="3.2"/><circle class="d" cx="552" cy="72" r="3.2"/><circle class="d" cx="572" cy="72" r="3.2"/><circle class="d" cx="592" cy="72" r="3.2"/><circle class="d on" cx="12" cy="92" r="4.2"/><circle class="d" cx="32" cy="92" r="3.2"/><circle class="d" cx="52" cy="92" r="3.2"/><circle class="d" cx="72" cy="92" r="3.2"/><circle class="d" cx="92" cy="92" r="3.2"/><circle class="d" cx="112" cy="92" r="3.2"/><circle class="d on" cx="132" cy="92" r="4.2"/><circle class="d" cx="152" cy="92" r="3.2"/><circle class="d" cx="172" cy="92" r="3.2"/><circle class="d" cx="192" cy="92" r="3.2"/><circle class="d" cx="212" cy="92" r="3.2"/><circle class="d" cx="232" cy="92" r="3.2"/><circle class="d" cx="252" cy="92" r="3.2"/><circle class="d" cx="272" cy="92" r="3.2"/><circle class="d" cx="292" cy="92" r="3.2"/><circle class="d" cx="312" cy="92" r="3.2"/><circle class="d on" cx="332" cy="92" r="4.2"/><circle class="d" cx="352" cy="92" r="3.2"/><circle class="d" cx="372" cy="92" r="3.2"/><circle class="d" cx="392" cy="92" r="3.2"/><circle class="d" cx="412" cy="92" r="3.2"/><circle class="d" cx="432" cy="92" r="3.2"/><circle class="d" cx="452" cy="92" r="3.2"/><circle class="d" cx="472" cy="92" r="3.2"/><circle class="d" cx="492" cy="92" r="3.2"/><circle class="d" cx="512" cy="92" r="3.2"/><circle class="d" cx="532" cy="92" r="3.2"/><circle class="d on" cx="552" cy="92" r="4.2"/><circle class="d" cx="572" cy="92" r="3.2"/><circle class="d" cx="592" cy="92" r="3.2"/><circle class="d" cx="12" cy="112" r="3.2"/><circle class="d" cx="32" cy="112" r="3.2"/><circle class="d" cx="52" cy="112" r="3.2"/><circle class="d" cx="72" cy="112" r="3.2"/><circle class="d on" cx="92" cy="112" r="4.2"/><circle class="d" cx="112" cy="112" r="3.2"/><circle class="d" cx="132" cy="112" r="3.2"/><circle class="d" cx="152" cy="112" r="3.2"/><circle class="d" cx="172" cy="112" r="3.2"/><circle class="d" cx="192" cy="112" r="3.2"/><circle class="d" cx="212" cy="112" r="3.2"/><circle class="d" cx="232" cy="112" r="3.2"/><circle class="d" cx="252" cy="112" r="3.2"/><circle class="d" cx="272" cy="112" r="3.2"/><circle class="d" cx="292" cy="112" r="3.2"/><circle class="d" cx="312" cy="112" r="3.2"/><circle class="d" cx="332" cy="112" r="3.2"/><circle class="d" cx="352" cy="112" r="3.2"/><circle class="d" cx="372" cy="112" r="3.2"/><circle class="d" cx="392" cy="112" r="3.2"/><circle class="d" cx="412" cy="112" r="3.2"/><circle class="d" cx="432" cy="112" r="3.2"/><circle class="d" cx="452" cy="112" r="3.2"/><circle class="d" cx="472" cy="112" r="3.2"/><circle class="d" cx="492" cy="112" r="3.2"/><circle class="d" cx="512" cy="112" r="3.2"/><circle class="d" cx="532" cy="112" r="3.2"/><circle class="d" cx="552" cy="112" r="3.2"/><circle class="d" cx="572" cy="112" r="3.2"/><circle class="d" cx="592" cy="112" r="3.2"/><circle class="d" cx="12" cy="132" r="3.2"/><circle class="d" cx="32" cy="132" r="3.2"/><circle class="d" cx="52" cy="132" r="3.2"/><circle class="d" cx="72" cy="132" r="3.2"/><circle class="d" cx="92" cy="132" r="3.2"/><circle class="d on" cx="112" cy="132" r="4.2"/><circle class="d" cx="132" cy="132" r="3.2"/><circle class="d" cx="152" cy="132" r="3.2"/><circle class="d" cx="172" cy="132" r="3.2"/><circle class="d" cx="192" cy="132" r="3.2"/><circle class="d" cx="212" cy="132" r="3.2"/><circle class="d" cx="232" cy="132" r="3.2"/><circle class="d on" cx="252" cy="132" r="4.2"/><circle class="d" cx="272" cy="132" r="3.2"/><circle class="d" cx="292" cy="132" r="3.2"/><circle class="d" cx="312" cy="132" r="3.2"/><circle class="d" cx="332" cy="132" r="3.2"/><circle class="d" cx="352" cy="132" r="3.2"/><circle class="d" cx="372" cy="132" r="3.2"/><circle class="d" cx="392" cy="132" r="3.2"/><circle class="d" cx="412" cy="132" r="3.2"/><circle class="d" cx="432" cy="132" r="3.2"/><circle class="d" cx="452" cy="132" r="3.2"/><circle class="d" cx="472" cy="132" r="3.2"/><circle class="d" cx="492" cy="132" r="3.2"/><circle class="d" cx="512" cy="132" r="3.2"/><circle class="d" cx="532" cy="132" r="3.2"/><circle class="d" cx="552" cy="132" r="3.2"/><circle class="d" cx="572" cy="132" r="3.2"/><circle class="d" cx="592" cy="132" r="3.2"/><circle class="d" cx="12" cy="152" r="3.2"/><circle class="d" cx="32" cy="152" r="3.2"/><circle class="d" cx="52" cy="152" r="3.2"/><circle class="d" cx="72" cy="152" r="3.2"/><circle class="d" cx="92" cy="152" r="3.2"/><circle class="d" cx="112" cy="152" r="3.2"/><circle class="d" cx="132" cy="152" r="3.2"/><circle class="d" cx="152" cy="152" r="3.2"/><circle class="d" cx="172" cy="152" r="3.2"/><circle class="d on" cx="192" cy="152" r="4.2"/><circle class="d" cx="212" cy="152" r="3.2"/><circle class="d" cx="232" cy="152" r="3.2"/><circle class="d" cx="252" cy="152" r="3.2"/><circle class="d" cx="272" cy="152" r="3.2"/><circle class="d" cx="292" cy="152" r="3.2"/><circle class="d" cx="312" cy="152" r="3.2"/><circle class="d on" cx="332" cy="152" r="4.2"/><circle class="d" cx="352" cy="152" r="3.2"/><circle class="d on" cx="372" cy="152" r="4.2"/><circle class="d" cx="392" cy="152" r="3.2"/><circle class="d" cx="412" cy="152" r="3.2"/><circle class="d" cx="432" cy="152" r="3.2"/><circle class="d" cx="452" cy="152" r="3.2"/><circle class="d" cx="472" cy="152" r="3.2"/><circle class="d" cx="492" cy="152" r="3.2"/><circle class="d" cx="512" cy="152" r="3.2"/><circle class="d" cx="532" cy="152" r="3.2"/><circle class="d" cx="552" cy="152" r="3.2"/><circle class="d" cx="572" cy="152" r="3.2"/><circle class="d" cx="592" cy="152" r="3.2"/><circle class="d" cx="12" cy="172" r="3.2"/><circle class="d" cx="32" cy="172" r="3.2"/><circle class="d" cx="52" cy="172" r="3.2"/><circle class="d" cx="72" cy="172" r="3.2"/><circle class="d" cx="92" cy="172" r="3.2"/><circle class="d" cx="112" cy="172" r="3.2"/><circle class="d on" cx="132" cy="172" r="4.2"/><circle class="d" cx="152" cy="172" r="3.2"/><circle class="d" cx="172" cy="172" r="3.2"/><circle class="d" cx="192" cy="172" r="3.2"/><circle class="d" cx="212" cy="172" r="3.2"/><circle class="d" cx="232" cy="172" r="3.2"/><circle class="d" cx="252" cy="172" r="3.2"/><circle class="d" cx="272" cy="172" r="3.2"/><circle class="d" cx="292" cy="172" r="3.2"/><circle class="d" cx="312" cy="172" r="3.2"/><circle class="d" cx="332" cy="172" r="3.2"/><circle class="d" cx="352" cy="172" r="3.2"/><circle class="d" cx="372" cy="172" r="3.2"/><circle class="d" cx="392" cy="172" r="3.2"/><circle class="d" cx="412" cy="172" r="3.2"/><circle class="d" cx="432" cy="172" r="3.2"/><circle class="d" cx="452" cy="172" r="3.2"/><circle class="d" cx="472" cy="172" r="3.2"/><circle class="d" cx="492" cy="172" r="3.2"/><circle class="d" cx="512" cy="172" r="3.2"/><circle class="d" cx="532" cy="172" r="3.2"/><circle class="d" cx="552" cy="172" r="3.2"/><circle class="d" cx="572" cy="172" r="3.2"/><circle class="d" cx="592" cy="172" r="3.2"/><circle class="d" cx="12" cy="192" r="3.2"/><circle class="d" cx="32" cy="192" r="3.2"/><circle class="d" cx="52" cy="192" r="3.2"/><circle class="d" cx="72" cy="192" r="3.2"/><circle class="d" cx="92" cy="192" r="3.2"/><circle class="d" cx="112" cy="192" r="3.2"/><circle class="d" cx="132" cy="192" r="3.2"/><circle class="d" cx="152" cy="192" r="3.2"/><circle class="d" cx="172" cy="192" r="3.2"/><circle class="d" cx="192" cy="192" r="3.2"/><circle class="d" cx="212" cy="192" r="3.2"/><circle class="d" cx="232" cy="192" r="3.2"/><circle class="d" cx="252" cy="192" r="3.2"/><circle class="d" cx="272" cy="192" r="3.2"/><circle class="d" cx="292" cy="192" r="3.2"/><circle class="d" cx="312" cy="192" r="3.2"/><circle class="d" cx="332" cy="192" r="3.2"/><circle class="d" cx="352" cy="192" r="3.2"/><circle class="d" cx="372" cy="192" r="3.2"/><circle class="d" cx="392" cy="192" r="3.2"/><circle class="d" cx="412" cy="192" r="3.2"/><circle class="d" cx="432" cy="192" r="3.2"/><circle class="d" cx="452" cy="192" r="3.2"/><circle class="d" cx="472" cy="192" r="3.2"/><circle class="d" cx="492" cy="192" r="3.2"/><circle class="d" cx="512" cy="192" r="3.2"/><circle class="d on" cx="532" cy="192" r="4.2"/><circle class="d" cx="552" cy="192" r="3.2"/><circle class="d" cx="572" cy="192" r="3.2"/><circle class="d" cx="592" cy="192" r="3.2"/><circle class="d" cx="12" cy="212" r="3.2"/><circle class="d" cx="32" cy="212" r="3.2"/><circle class="d" cx="52" cy="212" r="3.2"/><circle class="d" cx="72" cy="212" r="3.2"/><circle class="d" cx="92" cy="212" r="3.2"/><circle class="d" cx="112" cy="212" r="3.2"/><circle class="d" cx="132" cy="212" r="3.2"/><circle class="d" cx="152" cy="212" r="3.2"/><circle class="d" cx="172" cy="212" r="3.2"/><circle class="d" cx="192" cy="212" r="3.2"/><circle class="d" cx="212" cy="212" r="3.2"/><circle class="d" cx="232" cy="212" r="3.2"/><circle class="d" cx="252" cy="212" r="3.2"/><circle class="d" cx="272" cy="212" r="3.2"/><circle class="d" cx="292" cy="212" r="3.2"/><circle class="d" cx="332" cy="212" r="3.2"/><circle class="d" cx="352" cy="212" r="3.2"/><circle class="d" cx="372" cy="212" r="3.2"/><circle class="d" cx="392" cy="212" r="3.2"/><circle class="d" cx="412" cy="212" r="3.2"/><circle class="d" cx="432" cy="212" r="3.2"/><circle class="d" cx="452" cy="212" r="3.2"/><circle class="d" cx="472" cy="212" r="3.2"/><circle class="d" cx="492" cy="212" r="3.2"/><circle class="d" cx="512" cy="212" r="3.2"/><circle class="d" cx="532" cy="212" r="3.2"/><circle class="d" cx="552" cy="212" r="3.2"/><circle class="d" cx="572" cy="212" r="3.2"/><circle class="d" cx="592" cy="212" r="3.2"/><circle class="d" cx="12" cy="232" r="3.2"/><circle class="d on" cx="32" cy="232" r="4.2"/><circle class="d" cx="52" cy="232" r="3.2"/><circle class="d" cx="72" cy="232" r="3.2"/><circle class="d" cx="92" cy="232" r="3.2"/><circle class="d" cx="112" cy="232" r="3.2"/><circle class="d" cx="132" cy="232" r="3.2"/><circle class="d" cx="152" cy="232" r="3.2"/><circle class="d" cx="172" cy="232" r="3.2"/><circle class="d" cx="192" cy="232" r="3.2"/><circle class="d" cx="212" cy="232" r="3.2"/><circle class="d" cx="232" cy="232" r="3.2"/><circle class="d" cx="252" cy="232" r="3.2"/><circle class="d" cx="272" cy="232" r="3.2"/><circle class="d" cx="292" cy="232" r="3.2"/><circle class="d" cx="312" cy="232" r="3.2"/><circle class="d" cx="332" cy="232" r="3.2"/><circle class="d" cx="352" cy="232" r="3.2"/><circle class="d" cx="372" cy="232" r="3.2"/><circle class="d" cx="392" cy="232" r="3.2"/><circle class="d" cx="412" cy="232" r="3.2"/><circle class="d" cx="432" cy="232" r="3.2"/><circle class="d" cx="452" cy="232" r="3.2"/><circle class="d" cx="472" cy="232" r="3.2"/><circle class="d" cx="492" cy="232" r="3.2"/><circle class="d" cx="512" cy="232" r="3.2"/><circle class="d" cx="532" cy="232" r="3.2"/><circle class="d" cx="552" cy="232" r="3.2"/><circle class="d" cx="572" cy="232" r="3.2"/><circle class="d" cx="592" cy="232" r="3.2"/><circle class="d" cx="12" cy="252" r="3.2"/><circle class="d" cx="32" cy="252" r="3.2"/><circle class="d" cx="52" cy="252" r="3.2"/><circle class="d" cx="72" cy="252" r="3.2"/><circle class="d" cx="92" cy="252" r="3.2"/><circle class="d" cx="112" cy="252" r="3.2"/><circle class="d" cx="132" cy="252" r="3.2"/><circle class="d" cx="152" cy="252" r="3.2"/><circle class="d" cx="172" cy="252" r="3.2"/><circle class="d" cx="192" cy="252" r="3.2"/><circle class="d" cx="212" cy="252" r="3.2"/><circle class="d" cx="232" cy="252" r="3.2"/><circle class="d" cx="252" cy="252" r="3.2"/><circle class="d" cx="272" cy="252" r="3.2"/><circle class="d on" cx="292" cy="252" r="4.2"/><circle class="d" cx="312" cy="252" r="3.2"/><circle class="d" cx="332" cy="252" r="3.2"/><circle class="d" cx="352" cy="252" r="3.2"/><circle class="d" cx="372" cy="252" r="3.2"/><circle class="d" cx="392" cy="252" r="3.2"/><circle class="d" cx="412" cy="252" r="3.2"/><circle class="d on" cx="432" cy="252" r="4.2"/><circle class="d" cx="452" cy="252" r="3.2"/><circle class="d" cx="472" cy="252" r="3.2"/><circle class="d" cx="492" cy="252" r="3.2"/><circle class="d" cx="512" cy="252" r="3.2"/><circle class="d" cx="532" cy="252" r="3.2"/><circle class="d" cx="552" cy="252" r="3.2"/><circle class="d" cx="572" cy="252" r="3.2"/><circle class="d" cx="592" cy="252" r="3.2"/><circle class="d" cx="12" cy="272" r="3.2"/><circle class="d" cx="32" cy="272" r="3.2"/><circle class="d" cx="52" cy="272" r="3.2"/><circle class="d" cx="72" cy="272" r="3.2"/><circle class="d" cx="92" cy="272" r="3.2"/><circle class="d" cx="112" cy="272" r="3.2"/><circle class="d" cx="132" cy="272" r="3.2"/><circle class="d" cx="152" cy="272" r="3.2"/><circle class="d" cx="172" cy="272" r="3.2"/><circle class="d" cx="192" cy="272" r="3.2"/><circle class="d" cx="212" cy="272" r="3.2"/><circle class="d" cx="232" cy="272" r="3.2"/><circle class="d" cx="252" cy="272" r="3.2"/><circle class="d" cx="272" cy="272" r="3.2"/><circle class="d on" cx="292" cy="272" r="4.2"/><circle class="d" cx="312" cy="272" r="3.2"/><circle class="d on" cx="332" cy="272" r="4.2"/><circle class="d" cx="352" cy="272" r="3.2"/><circle class="d" cx="372" cy="272" r="3.2"/><circle class="d" cx="392" cy="272" r="3.2"/><circle class="d" cx="412" cy="272" r="3.2"/><circle class="d" cx="432" cy="272" r="3.2"/><circle class="d" cx="452" cy="272" r="3.2"/><circle class="d" cx="472" cy="272" r="3.2"/><circle class="d" cx="492" cy="272" r="3.2"/><circle class="d" cx="512" cy="272" r="3.2"/><circle class="d" cx="532" cy="272" r="3.2"/><circle class="d" cx="552" cy="272" r="3.2"/><circle class="d" cx="572" cy="272" r="3.2"/><circle class="d" cx="592" cy="272" r="3.2"/><circle class="d" cx="12" cy="292" r="3.2"/><circle class="d" cx="32" cy="292" r="3.2"/><circle class="d" cx="52" cy="292" r="3.2"/><circle class="d" cx="72" cy="292" r="3.2"/><circle class="d" cx="92" cy="292" r="3.2"/><circle class="d" cx="112" cy="292" r="3.2"/><circle class="d" cx="132" cy="292" r="3.2"/><circle class="d" cx="152" cy="292" r="3.2"/><circle class="d on" cx="172" cy="292" r="4.2"/><circle class="d on" cx="192" cy="292" r="4.2"/><circle class="d" cx="212" cy="292" r="3.2"/><circle class="d" cx="232" cy="292" r="3.2"/><circle class="d" cx="252" cy="292" r="3.2"/><circle class="d" cx="272" cy="292" r="3.2"/><circle class="d on" cx="292" cy="292" r="4.2"/><circle class="d" cx="312" cy="292" r="3.2"/><circle class="d" cx="332" cy="292" r="3.2"/><circle class="d" cx="352" cy="292" r="3.2"/><circle class="d" cx="372" cy="292" r="3.2"/><circle class="d" cx="392" cy="292" r="3.2"/><circle class="d" cx="412" cy="292" r="3.2"/><circle class="d" cx="432" cy="292" r="3.2"/><circle class="d" cx="452" cy="292" r="3.2"/><circle class="d" cx="472" cy="292" r="3.2"/><circle class="d on" cx="492" cy="292" r="4.2"/><circle class="d" cx="512" cy="292" r="3.2"/><circle class="d" cx="532" cy="292" r="3.2"/><circle class="d" cx="552" cy="292" r="3.2"/><circle class="d" cx="572" cy="292" r="3.2"/><circle class="d" cx="592" cy="292" r="3.2"/><circle class="d" cx="12" cy="312" r="3.2"/><circle class="d" cx="32" cy="312" r="3.2"/><circle class="d" cx="52" cy="312" r="3.2"/><circle class="d" cx="72" cy="312" r="3.2"/><circle class="d" cx="92" cy="312" r="3.2"/><circle class="d" cx="112" cy="312" r="3.2"/><circle class="d" cx="132" cy="312" r="3.2"/><circle class="d" cx="152" cy="312" r="3.2"/><circle class="d" cx="172" cy="312" r="3.2"/><circle class="d" cx="192" cy="312" r="3.2"/><circle class="d" cx="212" cy="312" r="3.2"/><circle class="d" cx="232" cy="312" r="3.2"/><circle class="d" cx="252" cy="312" r="3.2"/><circle class="d" cx="272" cy="312" r="3.2"/><circle class="d" cx="292" cy="312" r="3.2"/><circle class="d" cx="312" cy="312" r="3.2"/><circle class="d" cx="332" cy="312" r="3.2"/><circle class="d" cx="352" cy="312" r="3.2"/><circle class="d" cx="372" cy="312" r="3.2"/><circle class="d" cx="392" cy="312" r="3.2"/><circle class="d" cx="412" cy="312" r="3.2"/><circle class="d" cx="432" cy="312" r="3.2"/><circle class="d" cx="452" cy="312" r="3.2"/><circle class="d" cx="472" cy="312" r="3.2"/><circle class="d" cx="492" cy="312" r="3.2"/><circle class="d" cx="512" cy="312" r="3.2"/><circle class="d" cx="532" cy="312" r="3.2"/><circle class="d" cx="552" cy="312" r="3.2"/><circle class="d" cx="572" cy="312" r="3.2"/><circle class="d" cx="592" cy="312" r="3.2"/><circle class="d" cx="12" cy="332" r="3.2"/><circle class="d" cx="32" cy="332" r="3.2"/><circle class="d" cx="52" cy="332" r="3.2"/><circle class="d" cx="72" cy="332" r="3.2"/><circle class="d" cx="92" cy="332" r="3.2"/><circle class="d" cx="112" cy="332" r="3.2"/><circle class="d" cx="132" cy="332" r="3.2"/><circle class="d" cx="152" cy="332" r="3.2"/><circle class="d" cx="172" cy="332" r="3.2"/><circle class="d" cx="192" cy="332" r="3.2"/><circle class="d" cx="212" cy="332" r="3.2"/><circle class="d" cx="232" cy="332" r="3.2"/><circle class="d" cx="252" cy="332" r="3.2"/><circle class="d" cx="272" cy="332" r="3.2"/><circle class="d" cx="292" cy="332" r="3.2"/><circle class="d" cx="312" cy="332" r="3.2"/><circle class="d" cx="332" cy="332" r="3.2"/><circle class="d" cx="352" cy="332" r="3.2"/><circle class="d" cx="372" cy="332" r="3.2"/><circle class="d" cx="392" cy="332" r="3.2"/><circle class="d" cx="412" cy="332" r="3.2"/><circle class="d" cx="432" cy="332" r="3.2"/><circle class="d" cx="452" cy="332" r="3.2"/><circle class="d" cx="472" cy="332" r="3.2"/><circle class="d" cx="492" cy="332" r="3.2"/><circle class="d" cx="512" cy="332" r="3.2"/><circle class="d" cx="532" cy="332" r="3.2"/><circle class="d" cx="552" cy="332" r="3.2"/><circle class="d" cx="572" cy="332" r="3.2"/><circle class="d" cx="592" cy="332" r="3.2"/><circle class="d" cx="12" cy="352" r="3.2"/><circle class="d" cx="32" cy="352" r="3.2"/><circle class="d" cx="52" cy="352" r="3.2"/><circle class="d" cx="72" cy="352" r="3.2"/><circle class="d" cx="92" cy="352" r="3.2"/><circle class="d" cx="112" cy="352" r="3.2"/><circle class="d" cx="132" cy="352" r="3.2"/><circle class="d" cx="152" cy="352" r="3.2"/><circle class="d" cx="172" cy="352" r="3.2"/><circle class="d on" cx="192" cy="352" r="4.2"/><circle class="d" cx="212" cy="352" r="3.2"/><circle class="d" cx="232" cy="352" r="3.2"/><circle class="d" cx="252" cy="352" r="3.2"/><circle class="d" cx="272" cy="352" r="3.2"/><circle class="d" cx="292" cy="352" r="3.2"/><circle class="d" cx="312" cy="352" r="3.2"/><circle class="d" cx="332" cy="352" r="3.2"/><circle class="d" cx="352" cy="352" r="3.2"/><circle class="d" cx="372" cy="352" r="3.2"/><circle class="d" cx="392" cy="352" r="3.2"/><circle class="d" cx="412" cy="352" r="3.2"/><circle class="d" cx="432" cy="352" r="3.2"/><circle class="d" cx="452" cy="352" r="3.2"/><circle class="d" cx="472" cy="352" r="3.2"/><circle class="d" cx="492" cy="352" r="3.2"/><circle class="d" cx="512" cy="352" r="3.2"/><circle class="d" cx="532" cy="352" r="3.2"/><circle class="d" cx="552" cy="352" r="3.2"/><circle class="d" cx="572" cy="352" r="3.2"/><circle class="d" cx="592" cy="352" r="3.2"/><circle class="d" cx="12" cy="372" r="3.2"/><circle class="d" cx="32" cy="372" r="3.2"/><circle class="d" cx="52" cy="372" r="3.2"/><circle class="d" cx="72" cy="372" r="3.2"/><circle class="d" cx="92" cy="372" r="3.2"/><circle class="d" cx="112" cy="372" r="3.2"/><circle class="d" cx="132" cy="372" r="3.2"/><circle class="d" cx="152" cy="372" r="3.2"/><circle class="d on" cx="172" cy="372" r="4.2"/><circle class="d" cx="192" cy="372" r="3.2"/><circle class="d" cx="212" cy="372" r="3.2"/><circle class="d" cx="232" cy="372" r="3.2"/><circle class="d" cx="252" cy="372" r="3.2"/><circle class="d on" cx="272" cy="372" r="4.2"/><circle class="d" cx="292" cy="372" r="3.2"/><circle class="d" cx="312" cy="372" r="3.2"/><circle class="d" cx="332" cy="372" r="3.2"/><circle class="d" cx="352" cy="372" r="3.2"/><circle class="d" cx="372" cy="372" r="3.2"/><circle class="d" cx="392" cy="372" r="3.2"/><circle class="d on" cx="412" cy="372" r="4.2"/><circle class="d" cx="432" cy="372" r="3.2"/><circle class="d" cx="452" cy="372" r="3.2"/><circle class="d" cx="472" cy="372" r="3.2"/><circle class="d on" cx="492" cy="372" r="4.2"/><circle class="d" cx="512" cy="372" r="3.2"/><circle class="d" cx="532" cy="372" r="3.2"/><circle class="d" cx="552" cy="372" r="3.2"/><circle class="d" cx="572" cy="372" r="3.2"/><circle class="d" cx="592" cy="372" r="3.2"/><circle class="d on" cx="12" cy="392" r="4.2"/><circle class="d" cx="32" cy="392" r="3.2"/><circle class="d" cx="52" cy="392" r="3.2"/><circle class="d on" cx="72" cy="392" r="4.2"/><circle class="d" cx="92" cy="392" r="3.2"/><circle class="d" cx="112" cy="392" r="3.2"/><circle class="d" cx="132" cy="392" r="3.2"/><circle class="d" cx="152" cy="392" r="3.2"/><circle class="d" cx="172" cy="392" r="3.2"/><circle class="d on" cx="192" cy="392" r="4.2"/><circle class="d" cx="212" cy="392" r="3.2"/><circle class="d" cx="232" cy="392" r="3.2"/><circle class="d" cx="252" cy="392" r="3.2"/><circle class="d" cx="272" cy="392" r="3.2"/><circle class="d on" cx="292" cy="392" r="4.2"/><circle class="d" cx="312" cy="392" r="3.2"/><circle class="d" cx="332" cy="392" r="3.2"/><circle class="d" cx="352" cy="392" r="3.2"/><circle class="d" cx="372" cy="392" r="3.2"/><circle class="d" cx="392" cy="392" r="3.2"/><circle class="d on" cx="412" cy="392" r="4.2"/><circle class="d" cx="432" cy="392" r="3.2"/><circle class="d" cx="452" cy="392" r="3.2"/><circle class="d" cx="472" cy="392" r="3.2"/><circle class="d" cx="492" cy="392" r="3.2"/><circle class="d on" cx="512" cy="392" r="4.2"/><circle class="d on" cx="532" cy="392" r="4.2"/><circle class="d" cx="552" cy="392" r="3.2"/><circle class="d" cx="572" cy="392" r="3.2"/><circle class="d on" cx="592" cy="392" r="4.2"/><circle class="d us" cx="312" cy="212" r="5"/><circle class="ring" cx="312" cy="212" r="9.5"/></svg>
-        <figcaption class="legend"><span><i class="lg"></i><span class="en">600+ teams registered</span><span class="ar">أكثر من 600 فريق مسجّل</span></span><span><i class="lg on"></i><span class="en">50 shortlisted</span><span class="ar">50 فريقاً متأهّلاً</span></span><span><i class="lg us"></i><span class="en">Mustabaq</span><span class="ar">مُستبِق</span></span></figcaption>
-      </figure>
-    </article>
+    <div class="cards cards-3">
+      <a class="card awcard k5" href="#hydronet">
+        <span class="card-img photo"><img src="assets/img/award-energython.webp" width="1600" height="828" alt="" loading="lazy" style="object-position:50% 40%"></span>
+        <span class="card-body">
+          <span class="place"><span class="en">1st place</span><span class="ar">المركز الأول</span></span>
+          <span class="card-t"><span class="en">EnergyThon 2.0, Western Region</span><span class="ar">هاكاثون EnergyThon 2.0، المنطقة الغربية</span></span>
+          <span class="card-meta"><span class="en">KSA Energy Week · Feb 2026</span><span class="ar">أسبوع الطاقة السعودي · فبراير 2026</span></span>
+          <span class="card-d"><span class="en">HydroNet, our hydrogen-storage idea, won the region and reached the national final.</span><span class="ar">فازت فكرتنا HydroNet لتخزين الهيدروجين بالمنطقة، ووصلت إلى النهائي.</span></span>
+          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="card awcard k2" href="#expo">
+        <span class="card-img photo"><img src="assets/img/award-ceremony.webp" width="1400" height="942" alt="" loading="lazy" style="object-position:50% 45%"></span>
+        <span class="card-body">
+          <span class="place"><span class="en">2nd place</span><span class="ar">المركز الثاني</span></span>
+          <span class="card-t"><span class="en">Faculty of Engineering Projects Exhibition</span><span class="ar">معرض مشاريع كلية الهندسة</span></span>
+          <span class="card-meta"><span class="en">Islamic University of Madinah · 2026</span><span class="ar">الجامعة الإسلامية · 2026</span></span>
+          <span class="card-d"><span class="en">Second of 100+ projects with the brushless DC motor and its PWM controller.</span><span class="ar">المركز الثاني من بين أكثر من 100 مشروع بالمحرّك عديم الفرش ومتحكّمه.</span></span>
+          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="card awcard k4" href="#twinsat">
+        <span class="card-img photo"><img src="assets/img/sari-cover.webp" width="1400" height="788" alt="" loading="lazy" style="object-position:50% 50%"></span>
+        <span class="card-body">
+          <span class="place"><span class="en">Top 50 of 600+</span><span class="ar">أفضل 50 من 600+</span></span>
+          <span class="card-t"><span class="en">Sari Initiative, 2nd edition</span><span class="ar">مبادرة ساري، النسخة الثانية</span></span>
+          <span class="card-meta"><span class="en">Saudi Space Agency · 2026</span><span class="ar">وكالة الفضاء السعودية · 2026</span></span>
+          <span class="card-d"><span class="en">I led team Mustabaq; our satellite proposal TwinSat made the shortlist.</span><span class="ar">قدت فريق «مُستبِق»، وتأهّل مقترحنا للقمر الصناعي TwinSat.</span></span>
+          <span class="more"><span class="en">Details</span><span class="ar">التفاصيل</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -789,7 +861,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Award navigation">
       <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
-      <span class="pos">1 / 2</span>
+      <span class="pos">1 / 3</span>
     </nav>
     <div class="p-meta">
       <span class="rolepill"><span class="en">1st place, Western Region</span><span class="ar">المركز الأول، المنطقة الغربية</span></span>
@@ -840,6 +912,48 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
       <figure class="fig s6"><a class="frame white" href="assets/img/hydro-solution.webp"><img src="assets/img/hydro-solution.webp" width="1400" height="788" loading="lazy" alt="Slide: comparison of MOF-5, MIL-101 and UiO-66, and traditional storage versus the MOF hybrid solution" data-alt-ar="شريحة: مقارنة بين MOF-5 وMIL-101 وUiO-66، وبين التخزين التقليدي وحل MOF الهجين"></a><figcaption><span class="en">The three frameworks and the hybrid design.</span><span class="ar">الأطر الثلاثة والتصميم الهجين.</span></figcaption></figure>
     </div>
     <nav class="pn" aria-label="More awards">
+      <a class="next k2" href="#expo"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Projects Exhibition</span><span class="ar">معرض مشاريع الكلية</span></b></a>
+    </nav>
+  </div>
+</article>
+<article class="project activity k2" id="p-expo" aria-labelledby="t-expo">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Award navigation">
+      <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
+      <span class="pos">2 / 3</span>
+    </nav>
+    <div class="p-meta">
+      <span class="rolepill"><span class="en">2nd place of 100+ projects</span><span class="ar">المركز الثاني من 100+ مشروع</span></span>
+      <span><span class="en">Islamic University of Madinah</span><span class="ar">الجامعة الإسلامية بالمدينة المنورة</span></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>2026</span>
+    </div>
+    <h3 class="p-title" id="t-expo"><span class="en">Faculty of Engineering Annual Projects Exhibition</span><span class="ar">المعرض السنوي لمشاريع طلاب كلية الهندسة</span></h3>
+    <p class="p-sub"><span class="en">Second place among more than 100 competing projects, with the Brushless DC Motor with PWM Controller.</span><span class="ar">المركز الثاني من بين أكثر من 100 مشروع متنافس، بمشروع المحرّك عديم الفرش مع متحكّم PWM.</span></p>
+    <div class="p-body">
+      <div class="p-text">
+        <p class="en">Every year the Faculty of Engineering exhibits its students' projects and a jury ranks them. Our 3D-printed brushless motor, commutated entirely by logic ICs instead of a microcontroller, took second place. I built it with Albaraa Alahmad for EE4381 Electromagnetic Field Theory, advised by Prof. Bilal A. Khawaja and Eng. Ahmed Emam.</p>
+        <p class="ar">تعرض كلية الهندسة مشاريع طلابها كل عام، وتقيّمها لجنة تحكيم. حصل محرّكنا عديم الفرش المطبوع ثلاثياً، الذي يُبدَّل بالكامل بدوائر منطقية بدلاً من متحكّم دقيق، على المركز الثاني. بنيته مع البراء الأحمد في مقرر EE4381 نظرية المجالات الكهرومغناطيسية، بإشراف أ.د. بلال أ. خواجة وم. أحمد إمام.</p>
+        <div class="note">
+          <p><span class="en">"It was a journey filled with challenges and learning."</span><span class="ar">«كانت رحلة مليئة بالتحدّيات والتعلّم.»</span></p>
+        </div>
+        <div class="live">
+          <div>
+            <p class="live-t"><span class="en">Brushless DC Motor with PWM Controller</span><span class="ar">محرّك تيار مستمر عديم الفرش مع متحكّم PWM</span></p>
+            <p class="live-d"><span class="en">How the winning project works.</span><span class="ar">كيف يعمل المشروع الفائز.</span></p>
+          </div>
+          <a class="btn primary" href="#bldc"><span class="en">See the project</span><span class="ar">شاهد المشروع</span><svg class="flip" style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="gallery">
+      <figure class="fig"><a class="frame cover" href="assets/img/award-ceremony.webp"><img src="assets/img/award-ceremony.webp" width="1400" height="942" loading="lazy" alt="Talal Aljohani receiving the second-place award on stage at the Faculty of Engineering projects exhibition" data-alt-ar="طلال الجهني يتسلّم جائزة المركز الثاني على المسرح في معرض مشاريع كلية الهندسة"></a>
+        <figcaption><span class="en">Receiving the award at the exhibition ceremony.</span><span class="ar">تسلّم الجائزة في حفل المعرض.</span></figcaption></figure>
+      <figure class="fig"><a class="frame cover" href="assets/img/award-trophy.webp"><img src="assets/img/award-trophy.webp" width="1400" height="1055" loading="lazy" style="object-position:50% 78%" alt="Talal holding the second-place trophy and the BLDC motor project in front of the Islamic University of Madinah sign" data-alt-ar="طلال يحمل درع المركز الثاني ومشروع المحرّك أمام شعار الجامعة الإسلامية بالمدينة المنورة"></a>
+        <figcaption><span class="en">The trophy and the project.</span><span class="ar">الدرع والمشروع.</span></figcaption></figure>
+    </div>
+    <nav class="pn" aria-label="More awards">
+      <a class="prev k5" href="#hydronet"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b>HydroNet</b></a>
       <a class="next k4" href="#twinsat"><small class="eyebrow"><span class="en">Next</span><span class="ar">التالي</span></small><b>TwinSat</b></a>
     </nav>
   </div>
@@ -848,7 +962,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Award navigation">
       <a class="back" href="#awards"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All awards</span><span class="ar">كل الجوائز</span></a>
-      <span class="pos">2 / 2</span>
+      <span class="pos">3 / 3</span>
     </nav>
     <div class="p-meta">
       <span class="rolepill"><span class="en">Top 50 of 600+ teams</span><span class="ar">أفضل 50 من 600+ فريق</span></span>
@@ -887,6 +1001,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
         <dl class="people">
           <div><dt class="eyebrow"><span class="en">Team Mustabaq</span><span class="ar">فريق مُستبِق</span></dt><dd><span class="en">Talal Aljohani, leader (Electrical Eng.) · Ahmed Ibn Omer, mechanical alignment and payload · Mohammed Mustafa, thermal and space environment · Ahmed Hamedto, ground data and IoT</span><span class="ar">طلال الجهني، القائد (هندسة كهربائية) · Ahmed Ibn Omer، المحاذاة الميكانيكية والحمولة · Mohammed Mustafa، الحرارة وبيئة الفضاء · Ahmed Hamedto، البيانات الأرضية وإنترنت الأشياء</span></dd></div>
         </dl>
+        <p><a class="chip ext" href="https://ssa.gov.sa/Sari2-en/" target="_blank" rel="noopener"><span class="en">About the Sari initiative</span><span class="ar" data-href-ar="https://ssa.gov.sa/Sari2-ar/">عن مبادرة ساري</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></p>
       </aside>
     </div>
     <div class="gallery">
@@ -899,7 +1014,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
       </figure>
     </div>
     <nav class="pn" aria-label="More awards">
-      <a class="prev k5" href="#hydronet"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b>HydroNet</b></a>
+      <a class="prev k2" href="#expo"><small class="eyebrow"><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Projects Exhibition</span><span class="ar">معرض مشاريع الكلية</span></b></a>
     </nav>
   </div>
 </article>
@@ -1112,7 +1227,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Project navigation">
       <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">CH1 · 1 / 5</span>
+      <span class="pos">1 / 5</span>
     </nav>
     <div class="p-meta">
       <span class="chip"><i></i>CH1</span>
@@ -1197,7 +1312,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Project navigation">
       <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">CH2 · 2 / 5</span>
+      <span class="pos">2 / 5</span>
     </nav>
     <div class="p-meta">
       <span class="chip"><i></i>CH2</span>
@@ -1262,6 +1377,50 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
     </div>
 
     <div class="panel">
+      <h4 class="eyebrow"><span class="en">A real launch, recorded by the board</span><span class="ar">انطلاقة حقيقية سجّلتها اللوحة</span></h4>
+      <figure class="scope-fig">
+      <div class="scope" dir="ltr">
+        <div class="scope-head"><span><b>ANAQ</b> black box</span><span>race_3.csv</span><span class="run">acq 1 kHz</span></div>
+        <div class="scope-screen">
+          <svg viewBox="0 0 1000 600" role="img" aria-labelledby="scopeTitle">
+            <title id="scopeTitle">Forward acceleration during a real STEM Racing launch: a peak of +8.0 g at 50 ms after the trigger and a −11.9 g spike at 1.16 s.</title>
+            <defs>
+              <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#F4CB4A" stop-opacity="0"/>
+                <stop offset="1" stop-color="#F4CB4A" stop-opacity=".16"/>
+              </linearGradient>
+              <filter id="glow" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="3.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path class="s-grid" d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000"/>
+            <path class="s-ticks" d="M20 294V306M40 294V306M60 294V306M80 294V306M120 294V306M140 294V306M160 294V306M180 294V306M220 294V306M240 294V306M260 294V306M280 294V306M320 294V306M340 294V306M360 294V306M380 294V306M420 294V306M440 294V306M460 294V306M480 294V306M520 294V306M540 294V306M560 294V306M580 294V306M620 294V306M640 294V306M660 294V306M680 294V306M720 294V306M740 294V306M760 294V306M780 294V306M820 294V306M840 294V306M860 294V306M880 294V306M920 294V306M940 294V306M960 294V306M980 294V306M494 20H506M494 40H506M494 60H506M494 80H506M494 120H506M494 140H506M494 160H506M494 180H506M494 220H506M494 240H506M494 260H506M494 280H506M494 320H506M494 340H506M494 360H506M494 380H506M494 420H506M494 440H506M494 460H506M494 480H506M494 520H506M494 540H506M494 560H506M494 580H506"/>
+            <path class="s-trig" d="M250 0V600"/>
+            <rect class="beam" x="-60" y="0" width="60" height="600" fill="url(#beamG)"/>
+            <g filter="url(#glow)"><path class="s-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></g>
+            <path class="s-mark" d="M241 0h18l-9 13z"/>
+            <path class="s-mark" d="M0 291l13 9-13 9z"/>
+            <text class="s-lbl hi" x="20" y="288">2</text>
+            <circle class="s-dot" cx="275" cy="100" r="8"/>
+            <text class="s-lbl hi" x="294" y="96">+8.0 g</text>
+            <text class="s-lbl" x="294" y="126">t = 50 ms</text>
+            <circle class="s-dot" cx="828" cy="592" r="8"/>
+            <text class="s-lbl hi" x="842" y="530">−11.9 g</text>
+            <text class="s-lbl" x="842" y="560">t = 1.16 s</text>
+            <text class="s-lbl" x="260" y="584">t = 0</text>
+          </svg>
+        </div>
+        <div class="scope-foot"><span><span class="c1">2</span><b>4.00 g</b>/div</span><span><b>200 ms</b>/div</span><span>trig <b>↑ 1.50 g</b></span><span><b>2000</b> pts</span></div>
+      </div>
+      <figcaption class="scope-cap">
+        <span class="en">Forward acceleration from a real launch, recorded at 1000 samples per second by the black box I designed for Team ANAQ. The trigger sits at t = 0; the board also kept the half second before it.</span>
+        <span class="ar">تسارع أمامي من انطلاقة حقيقية، سجّله الصندوق الأسود الذي صمّمته لفريق عنق بمعدل 1000 قراءة في الثانية. لحظة الإطلاق عند t = 0، واحتفظت اللوحة أيضاً بنصف الثانية التي سبقتها.</span>
+      </figcaption>
+    </figure>
+    </div>
+
+    <div class="panel">
       <h4 class="eyebrow"><span class="en">Signal chain, on the board</span><span class="ar">سلسلة معالجة الإشارة على اللوحة</span></h4>
       <ol class="chain">
         <li><b>ICM-20602</b><span><span class="en">raw counts</span><span class="ar">قراءات خام</span></span></li>
@@ -1317,7 +1476,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Project navigation">
       <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">CH3 · 3 / 5</span>
+      <span class="pos">3 / 5</span>
     </nav>
     <div class="p-meta">
       <span class="chip"><i></i>CH3</span>
@@ -1398,7 +1557,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Project navigation">
       <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">CH4 · 4 / 5</span>
+      <span class="pos">4 / 5</span>
     </nav>
     <div class="p-meta">
       <span class="chip"><i></i>CH4</span>
@@ -1501,7 +1660,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
   <div class="wrap">
     <nav class="crumbs" aria-label="Project navigation">
       <a class="back" href="#projects"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="en">All projects</span><span class="ar">كل المشاريع</span></a>
-      <span class="pos">CH5 · 5 / 5</span>
+      <span class="pos">5 / 5</span>
     </nav>
     <div class="p-meta">
       <span class="chip"><i></i>CH5</span>
@@ -1681,7 +1840,7 @@ dialog.lb .x{position:fixed;top:14px;inset-inline-end:16px;width:40px;height:40p
 (function(){
   var root=document.documentElement;
   /* ---- views (one page per project) ---- */
-  var VIEWS={hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
+  var VIEWS={expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
   function setTitle(){
     var ar=root.getAttribute('data-lang')==='ar', v=root.getAttribute('data-view'), base=ar?'طلال الجهني':'Talal Aljohani';
     document.title=(v&&VIEWS[v])?VIEWS[v][ar?1:0]+' · '+base:base;
