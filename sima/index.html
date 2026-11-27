@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sima (سيما): watch the infrared sky change</title>
+    <meta
+      name="description"
+      content="NASA SPHEREx's infrared sky: put a frame on any spot and play its real exposures in date order. Stars stay still; anything that moves or changes stands out."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Crect x='9' y='9' width='14' height='14' fill='none' stroke='%23ff4a9c' stroke-width='2.5'/%3E%3C/svg%3E"
+    />
+    <!-- The intro (src/intro/intro.ts introWanted): decided before the first paint, so the page
+         never flashes under it. ?intro=1 forces it; ?intro=0, embed=1 and a #w= workspace link
+         stop it. -->
+    <script>
+      (function () {
+        var q = new URLSearchParams(location.search);
+        var flag = q.get('intro');
+        var seen = null;
+        try {
+          seen = sessionStorage.getItem('sima-intro') !== null;
+        } catch (e) {}
+        var shared = /(?:^#|&)w=/.test(location.hash);
+        if (q.get('embed') !== '1' && !shared && (flag === '1' || (flag !== '0' && seen === false))) {
+          document.documentElement.dataset.intro = 'wait';
+        }
+      })();
+    </script>
+    <!-- The interface language (src/shell/i18n.ts pickLocale, the same rule): ?lang=ar|en, else
+         the Settings choice, else English. Set before the first paint, so no flash of the other
+         direction. -->
+    <script>
+      (function () {
+        var l = new URLSearchParams(location.search).get('lang');
+        if (l !== 'ar' && l !== 'en') {
+          try {
+            l = localStorage.getItem('sima-lang');
+          } catch (e) {}
+        }
+        if (l === 'ar') {
+          document.documentElement.lang = 'ar';
+          document.documentElement.dir = 'rtl';
+        }
+      })();
+    </script>
+    <style>html[data-intro=wait] body:after{content:"";z-index:2147483647;background:#05070d;position:fixed;inset:0}</style>
+    <script type="module" crossorigin src="/sima/assets/index-CyefuMFU.js"></script>
+    <link rel="modulepreload" crossorigin href="/sima/assets/real-B1fdL9AF.js">
+    <link rel="stylesheet" crossorigin href="/sima/assets/index-Bp7J4W9U.css">
+  </head>
+  <body>
+    <!--
+      The page skeleton: mount points only, no logic. Owner: lane F (written in phase 0).
+      Every id is a contract between lanes; docs/lanes.md lists them with their owners.
+      Only lane F edits this file. A lane that needs a new mount point asks lane F.
+
+      Attributes every lane keeps:
+      - data-card="name"   a card floating on the sky. No two visible cards may overlap, and none
+                           may leave the window (the smoke test checks). Lane C keeps sky labels
+                           clear of every visible [data-card].
+      - data-overlay="name" a popover, dialog, tip, tour or toast that may sit over cards.
+      - data-escape="N"    Escape closes the visible one with the highest N first, by clicking the
+                           [data-close] button inside it: 50 popover-like cards, 30 lists and
+                           cards, 20 tools, 10 Measure (GEN-1); the one opened last first on a
+                           tie. Open popovers and dialogs close before any of these.
+                           src/shell/escape.ts is the one place that decides; see its header.
+      - data-guide="name"  a stable name the guide uses to point at a part (docs/lanes.md).
+      - data-scroll        on the one element of a card that may scroll inside (a long list).
+    -->
+
+    <!-- Lane C: the sky map (Aladin Lite) fills the window. -->
+    <div id="sky" data-guide="sky"></div>
+    <!-- Lane C: drawn on the sky: the patch outline, the tether to the frame, dots, labels, pins. -->
+    <div id="sky-marks" aria-hidden="true"></div>
+    <!-- Lane C: the sky note, bottom left: what the map is, which channel, what was filled in (H1). -->
+    <p id="sky-note" data-card="sky-note" data-guide="sky-note"></p>
+    <!-- Lane C: the pointer's coordinates, bottom right. -->
+    <p id="sky-coords" data-card="sky-coords" data-guide="coords"></p>
+    <!-- Lane C: "Move the frame here", at the spot the user clicked (FRM-3). -->
+    <div
+      id="sky-click"
+      class="card"
+      data-card="sky-click"
+      data-guide="sky-click"
+      data-escape="50"
+      hidden
+    ></div>
+
+    <!-- Lane F: the top row, left: the wordmark and the search; lane G's chips under the search. -->
+    <div id="top-left">
+      <!-- Lane F: the wordmark: سيما then Sima. -->
+      <h1 id="wordmark" class="card" data-card="wordmark" data-guide="wordmark"></h1>
+      <!-- Lane F: the search field (viewer/omnibox.ts). Lane G adds places as a search source. -->
+      <div id="search" class="card" data-card="search" data-guide="search" role="search"></div>
+      <!-- Lane F: search suggestions, under the search field. -->
+      <div
+        id="search-results"
+        class="popover"
+        popover="manual"
+        data-overlay="search-results"
+        data-guide="search-results"
+      ></div>
+      <!-- Lane G: chips: Stars, Nearby, Changing, Clusters, Nebulae, Galaxies, Tours, Surprise me.
+           Lane F sets the row's max-width to the room beside the frame; lane G hides the chips
+           that do not fit and offers them in its own "More" menu. -->
+      <nav id="chips" data-card="chips" data-guide="chips" aria-label="Kinds of places"></nav>
+    </div>
+    <!-- Lane F: the top row, right: Guide, Places, Share, Settings, About (Settings and About in
+         Discover); the menu button on phones. The view switch sits right of it. -->
+    <nav id="actions" class="card" data-card="actions" data-guide="actions" aria-label="Page"></nav>
+    <!-- Lane F: the phone menu (under 700 px): Find, Settings, Share, About. -->
+    <div id="phone-menu" class="popover" popover data-overlay="phone-menu" data-guide="phone-menu-list"></div>
+    <!-- Lane F: the sky's loading card, top centre. Lane C reports through shell.ts skyReady(). -->
+    <div
+      id="sky-loading"
+      class="card"
+      data-card="sky-loading"
+      data-guide="sky-loading"
+      role="status"
+    >
+      <!-- On screen from the first paint, until the sky reports (GEN-4). -->
+      <p class="sky-loading-head">Loading the sky map</p>
+      <p class="sky-loading-line">The frame and the bar work meanwhile.</p>
+      <span class="sky-loading-bar" aria-hidden="true"><span></span></span>
+    </div>
+
+    <!-- Lane F: the map's tool rail: zoom in, zoom out, sky map, coordinate grid. -->
+    <nav id="rail" class="card" data-card="rail" data-guide="rail" aria-label="Sky map"></nav>
+    <!-- Lane F: the sky map chooser: SPHEREx, AllWISE 3.4 µm, AllWISE 4.6 µm (SKY-4). -->
+    <div
+      id="sky-layers"
+      class="popover"
+      popover
+      data-overlay="sky-layers"
+      data-guide="sky-layers"
+    ></div>
+
+    <!-- The workspace's tool tray (src/workspace/tray.ts): frame types to drop on the sky, and
+         saved workspaces. Opened from the rail. -->
+    <div
+      id="workspace"
+      class="popover"
+      popover
+      data-overlay="workspace"
+      data-guide="workspace-tray"
+    ></div>
+
+    <!--
+      The frame. Lane F places it: drag by #frame-head, size by #frame-grip, glide, hide, and the
+      remembered box (frame-box). Lane D fills it, except #frame-task (lane H) and #pic-tools and
+      #frame-legend (lane E).
+    -->
+    <section id="frame" class="card panel" data-card="frame" data-guide="frame" aria-label="Frame">
+      <!-- Lane D: the name, the source line, field size, the tools button, Measure, close. -->
+      <header id="frame-head"></header>
+      <!-- Lane H: the task ("Runaway star. One dot jumps. Tap it.") and Hint. -->
+      <div id="frame-task" data-guide="task"></div>
+      <!-- Lane D: the loading line ("Fetching 9 of 12"); its height is kept so nothing jumps (O-I5). -->
+      <div id="frame-load"></div>
+      <!-- Lane D: the picture: canvas, date badge, scale bar, north and east. -->
+      <div id="frame-pic" data-guide="picture">
+        <!-- Lane E: over the picture: the "Original" button and the "Processed:" label (H8). -->
+        <div id="pic-tools"></div>
+        <!-- Lane D: the busy cover while a spot loads, over the sky map's preview. -->
+        <div id="frame-cover" hidden></div>
+      </div>
+      <!-- Lane D: the views: Flip, Two dates, Difference (and Swipe, Stack, Trail in Measure). -->
+      <div id="frame-views" data-guide="views"></div>
+      <!-- In Measure's Stack view: the motion handle's readout and its two checks (O-V6, viewer/motion.ts). -->
+      <div id="frame-motion" hidden></div>
+      <!-- Lane D: one line saying exactly what data this is: source, release, dates, count, detector (H2). -->
+      <p id="frame-exif" data-guide="exif"></p>
+      <!-- Lane D: in Measure, what the view on screen shows. -->
+      <p id="frame-explain"></p>
+      <!-- Lane E: legends for what the tools draw on the picture (Gaia circles, AllWISE squares…). -->
+      <div id="frame-legend"></div>
+      <!-- Lane F: the size corner, bottom left. -->
+      <div id="frame-grip" aria-hidden="true"></div>
+    </section>
+    <!-- Lane F: while the frame is hidden, this small card in its place shows it again (FRM-5). -->
+    <div id="frame-show" class="card" data-card="frame-show" hidden></div>
+
+    <!-- The workspace's extra frames (src/workspace/card.ts): each is a [data-card]. -->
+    <div id="frames"></div>
+
+    <!-- Lane E: Measure, beside the frame. Lane E puts an empty #detectors in it for lane D's detector strip. -->
+    <section
+      id="measure"
+      class="card panel"
+      data-card="measure"
+      data-guide="measure-panel"
+      data-escape="10"
+      aria-label="Measure"
+      hidden
+    ></section>
+    <!-- Lane E: the picture tools: Picture, Clean up, Find changes, Layers. -->
+    <section
+      id="tools"
+      class="card panel"
+      data-card="tools"
+      data-guide="tools-panel"
+      data-escape="20"
+      aria-label="Picture tools"
+      hidden
+    ></section>
+
+    <!-- Lane D: the bar: play controls, the date scale, loop and speed, the wavelength scale. -->
+    <section
+      id="bar"
+      class="card big"
+      data-card="bar"
+      data-guide="bar"
+      aria-label="Playback and wavelength"
+    ></section>
+
+    <!-- Lane G: the Places menu: starting points, test targets, practice, saved places. -->
+    <div
+      id="places-menu"
+      class="popover"
+      popover
+      data-overlay="places-menu"
+      data-guide="places-menu"
+    ></div>
+    <!-- Lane G: a list of one kind of place (from a chip), or the tours. -->
+    <section
+      id="places-list"
+      class="card"
+      data-card="places-list"
+      data-guide="places-list"
+      data-escape="30"
+      hidden
+    ></section>
+    <!-- Lane G: one place's card. -->
+    <section
+      id="place-card"
+      class="card"
+      data-card="place-card"
+      data-guide="place-card"
+      data-escape="30"
+      hidden
+    ></section>
+    <!-- Catalogue search (O-V5): fast movers (Gaia DR3) and cold objects (CatWISE2020) in the view. -->
+    <section id="finds" class="card" data-card="finds" data-guide="finds" data-escape="30" hidden></section>
+    <!-- The sandbox (O-V7): a pretend planet, and whether SPHEREx would show it. -->
+    <section id="sandbox" class="card" data-card="sandbox" data-guide="sandbox" data-escape="30" hidden></section>
+
+    <!-- Lane H: the welcome card, first visit. -->
+    <section
+      id="welcome"
+      class="card big"
+      data-card="welcome"
+      data-guide="welcome"
+      data-escape="30"
+      hidden
+    ></section>
+    <!-- Lane H: the Guide menu: the tours, Explain the screen, things to try. -->
+    <div
+      id="guide-menu"
+      class="popover"
+      popover
+      data-overlay="guide-menu"
+      data-guide="guide-menu"
+    ></div>
+    <!-- Lane H: the tour: the dimmer, the ring and the step card. -->
+    <div id="tour" data-overlay="tour" hidden></div>
+    <!-- Lane H: a one-time tip. It is a card: it never covers another card (GDE-8, O-G7). -->
+    <div id="tip" data-card="tip" data-escape="50" hidden></div>
+    <!-- Lane H: "Explain the screen": a label on each part. -->
+    <div id="explain" data-overlay="explain" data-escape="50" hidden></div>
+
+    <!-- v2.0 mount points (docs/design-v2/BEGINNER-AND-MOBILE.md section 13). Empty and hidden
+         until their lane builds them. Each lane adds data-card, data-guide and keep-clear as it
+         shows them. Escape order: coach 50; mission, success, settings, the sheet's Back 30. -->
+    <!-- Lane F: the view switch (Discover | Expert), top right in both views (shell/view.ts). -->
+    <div id="view-switch" hidden></div>
+    <!-- Lane K: Discover's mission list, "Try another object" and the skills record. -->
+    <section id="discover-list" hidden></section>
+    <!-- Lane K: the mission card (brief, steps, hints). -->
+    <section id="mission" data-escape="30" hidden></section>
+    <!-- Lane K: the success card. -->
+    <section id="mission-success" data-escape="30" hidden></section>
+    <!-- Lane K: the coach card (first switch to Expert, first steps). -->
+    <div id="coach" data-escape="50" hidden></div>
+    <!-- Lane F: Settings (Panels: Glass or Solid, motion, Reset my progress). -->
+    <section id="settings" data-escape="30" hidden></section>
+    <!-- Lane M: the phone sheet (Slate, peek and half). Never over the picture. -->
+    <section id="sheet" hidden></section>
+
+    <!-- Lane F: Share (a link and an embed code) and About. Opened with showModal(). -->
+    <dialog id="share" class="dialog" data-overlay="share" data-guide="share-dialog"></dialog>
+    <dialog id="about" class="dialog" data-overlay="about" data-guide="about-dialog"></dialog>
+    <!-- Lane F: short messages. -->
+    <div id="toasts" data-overlay="toasts" role="status" aria-live="polite"></div>
+    <!-- Lane F: the one tooltip, shown for any element with data-tip. -->
+    <div id="tooltip" class="tooltip" popover="manual" data-overlay="tooltip" role="tooltip"></div>
+
+  </body>
+</html>

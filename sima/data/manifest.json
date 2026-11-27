@@ -1,0 +1,69 @@
+{
+ "version": 1,
+ "generated": "2026-11-14T09:31:37Z",
+ "source": "NASA/IPAC Infrared Science Archive (IRSA), SPHEREx Level 2 spectral images",
+ "collections": [
+  "spherex_dr1",
+  "spherex_qr3",
+  "spherex_dr1_deep",
+  "spherex_qr3_deep"
+ ],
+ "targets": {
+  "barnard": {
+   "path": "data/barnard/",
+   "label": "Barnard's Star",
+   "frames": 72,
+   "bytes": 549278,
+   "releases": [
+    "spherex_dr1",
+    "spherex_qr3"
+   ],
+   "windows": 3
+  },
+  "eps-indi-b": {
+   "path": "data/eps-indi-b/",
+   "label": "Epsilon Indi B",
+   "frames": 87,
+   "bytes": 2488548,
+   "releases": [
+    "spherex_dr1",
+    "spherex_qr3"
+   ],
+   "windows": 4
+  },
+  "wise-0855": {
+   "path": "data/wise-0855/",
+   "label": "WISE 0855−0714",
+   "frames": 70,
+   "bytes": 584003,
+   "releases": [
+    "spherex_dr1"
+   ],
+   "windows": 3
+  },
+  "rw-aur": {
+   "path": "data/rw-aur/",
+   "label": "RW Aurigae",
+   "frames": 72,
+   "bytes": 566948,
+   "releases": [
+    "spherex_dr1",
+    "spherex_qr3"
+   ],
+   "windows": 3
+  },
+  "r-dra": {
+   "path": "data/r-dra/",
+   "label": "R Draconis",
+   "frames": 144,
+   "bytes": 3769952,
+   "releases": [
+    "spherex_dr1",
+    "spherex_qr3",
+    "spherex_dr1_deep",
+    "spherex_qr3_deep"
+   ],
+   "windows": 18
+  }
+ }
+}

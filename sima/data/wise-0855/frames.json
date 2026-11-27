@@ -1,0 +1,2844 @@
+{
+ "catalogue": {
+  "ra": 133.787082,
+  "dec": -7.244433,
+  "ep": 2014.0,
+  "pmra": -8118.0,
+  "pmdec": 680.0,
+  "parallax": 449.0,
+  "from": "Luhman & Esplin 2016, AJ 152, 78, Table 4 (https://doi.org/10.3847/0004-6256/152/3/78) for the motion and parallax (too cold for Gaia); the 2014.0 position is the challenge spec’s, source not verified, within 0.1″ of their Spitzer position of 20 Jan 2014 (Luhman & Esplin 2014, ApJ 796, 6)"
+ },
+ "fov": 6,
+ "size": 0.11,
+ "units": "MJy/sr, zodiacal light model (ZODI) subtracted",
+ "flagBits": {
+  "0": "TRANSIENT",
+  "1": "OVERFLOW",
+  "2": "SUR_ERROR",
+  "6": "NONFUNC",
+  "7": "DICHROIC",
+  "9": "MISSING_DATA",
+  "10": "HOT",
+  "11": "COLD",
+  "12": "FULLSAMPLE",
+  "14": "PHANMISS",
+  "15": "NONLINEAR",
+  "17": "PERSIST",
+  "19": "OUTLIER",
+  "20": "CROSSTALK",
+  "21": "SOURCE",
+  "22": "GHOST",
+  "23": "GHOST_FPA",
+  "24": "GHOST_EXT",
+  "25": "STREAK",
+  "26": "BLOOM",
+  "27": "SNOWBALL",
+  "28": "HALO",
+  "29": "SATELLITE_HALO"
+ },
+ "badFlags": [
+  "TRANSIENT",
+  "OVERFLOW",
+  "SUR_ERROR",
+  "NONFUNC",
+  "DICHROIC",
+  "MISSING_DATA",
+  "HOT",
+  "COLD",
+  "NONLINEAR",
+  "PERSIST",
+  "OUTLIER",
+  "CROSSTALK",
+  "GHOST",
+  "GHOST_FPA",
+  "GHOST_EXT",
+  "STREAK",
+  "BLOOM",
+  "SNOWBALL",
+  "HALO",
+  "SATELLITE_HALO"
+ ],
+ "perDetPerWindow": 4,
+ "monthly": false,
+ "frames": [
+  {
+   "id": "2025W19_1B_0116_1D3",
+   "det": 3,
+   "mjd": 60800.700695,
+   "dateObs": "2025-05-05T16:49:00.018",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0116_1D3_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0116_1D3_spx_l2b-v27-2026-197.fits?center=133.761300,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 0,
+   "lam": 2.36346,
+   "bw": 0.05856,
+   "wcs": {
+    "crval": [
+     133.76064795,
+     -7.24245163
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616242862,
+     -0.0004891103826,
+     -0.0005305244026,
+     -0.001630972776
+    ]
+   },
+   "wcsErr": 0.0604,
+   "zodi": 0.13047,
+   "sigma": 0.01443,
+   "omega": 37.86,
+   "badFrac": 0.0356,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0116_1D6",
+   "det": 6,
+   "mjd": 60800.700695,
+   "dateObs": "2025-05-05T16:49:00.018",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0116_1D6_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0116_1D6_spx_l2b-v27-2026-197.fits?center=133.761300,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 24576,
+   "lam": 4.9674,
+   "bw": 0.03719,
+   "wcs": {
+    "crval": [
+     133.76180799,
+     -7.24170444
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617094204,
+     -0.0004923951956,
+     -0.0005346124948,
+     -0.001632512718
+    ]
+   },
+   "wcsErr": 0.0514,
+   "zodi": 0.68441,
+   "sigma": 0.0677,
+   "omega": 37.9305,
+   "badFrac": 0.0347,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0116_2D3",
+   "det": 3,
+   "mjd": 60800.702187,
+   "dateObs": "2025-05-05T16:51:08.949",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0116_2D3_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0116_2D3_spx_l2b-v27-2026-197.fits?center=133.761300,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 49152,
+   "lam": 2.41268,
+   "bw": 0.05045,
+   "wcs": {
+    "crval": [
+     133.76147376,
+     -7.24196127
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001615638456,
+     -0.0004888746909,
+     -0.0005299476159,
+     -0.001630497276
+    ]
+   },
+   "wcsErr": 0.0592,
+   "zodi": 0.13213,
+   "sigma": 0.0183,
+   "omega": 37.8601,
+   "badFrac": 0.729,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0116_2D6",
+   "det": 6,
+   "mjd": 60800.702187,
+   "dateObs": "2025-05-05T16:51:08.949",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0116_2D6_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0116_2D6_spx_l2b-v27-2026-197.fits?center=133.761300,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 73728,
+   "lam": 5.00346,
+   "bw": 0.03758,
+   "wcs": {
+    "crval": [
+     133.76098449,
+     -7.24241695
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616183863,
+     -0.0004924263156,
+     -0.0005333610538,
+     -0.001631308079
+    ]
+   },
+   "wcsErr": 0.0578,
+   "zodi": 0.70904,
+   "sigma": 0.07316,
+   "omega": 37.935,
+   "badFrac": 0.0264,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0138_1D3",
+   "det": 3,
+   "mjd": 60800.835104,
+   "dateObs": "2025-05-05T20:02:32.989",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0138_1D3_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/3/level2_2025W19_1B_0138_1D3_spx_l2b-v27-2026-197.fits?center=133.761299,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 98304,
+   "lam": 2.20794,
+   "bw": 0.05531,
+   "wcs": {
+    "crval": [
+     133.76196342,
+     -7.24174265
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617938001,
+     -0.0004894129777,
+     -0.000532420124,
+     -0.00163289293
+    ]
+   },
+   "wcsErr": 0.0631,
+   "zodi": 0.14342,
+   "sigma": 0.01469,
+   "omega": 37.8609,
+   "badFrac": 0.042,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0138_1D6",
+   "det": 6,
+   "mjd": 60800.835104,
+   "dateObs": "2025-05-05T20:02:32.989",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0138_1D6_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/6/level2_2025W19_1B_0138_1D6_spx_l2b-v27-2026-197.fits?center=133.761299,-7.242291&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 122880,
+   "lam": 4.8599,
+   "bw": 0.03793,
+   "wcs": {
+    "crval": [
+     133.76144815,
+     -7.24303958
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001618669558,
+     -0.0004929448044,
+     -0.0005357550295,
+     -0.001633530818
+    ]
+   },
+   "wcsErr": 0.0629,
+   "zodi": 0.58857,
+   "sigma": 0.06348,
+   "omega": 37.9376,
+   "badFrac": 0.0276,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_1D2",
+   "det": 2,
+   "mjd": 60801.107263,
+   "dateObs": "2025-05-06T02:34:27.489",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_1D2_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_1D2_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 147456,
+   "lam": 1.51524,
+   "bw": 0.0375,
+   "wcs": {
+    "crval": [
+     133.7612902,
+     -7.24220484
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001614035331,
+     -0.000540923794,
+     -0.0005322108443,
+     -0.001615178211
+    ]
+   },
+   "wcsErr": 0.0556,
+   "zodi": 0.21149,
+   "sigma": 0.01738,
+   "omega": 37.6932,
+   "badFrac": 0.0298,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_1D5",
+   "det": 5,
+   "mjd": 60801.107263,
+   "dateObs": "2025-05-06T02:34:27.489",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_1D5_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_1D5_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 172416,
+   "lam": 4.2951,
+   "bw": 0.03756,
+   "wcs": {
+    "crval": [
+     133.76119877,
+     -7.24222526
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001613095223,
+     -0.0005492134558,
+     -0.000540488237,
+     -0.001614314882
+    ]
+   },
+   "wcsErr": 0.0538,
+   "zodi": 0.25549,
+   "sigma": 0.03897,
+   "omega": 37.768,
+   "badFrac": 0.0273,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_2D2",
+   "det": 2,
+   "mjd": 60801.108755,
+   "dateObs": "2025-05-06T02:36:36.419",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_2D2_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_2D2_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 196992,
+   "lam": 1.55244,
+   "bw": 0.03797,
+   "wcs": {
+    "crval": [
+     133.76196005,
+     -7.24183166
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001613269908,
+     -0.0005406518758,
+     -0.0005320954296,
+     -0.00161461096
+    ]
+   },
+   "wcsErr": 0.0547,
+   "zodi": 0.2106,
+   "sigma": 0.01712,
+   "omega": 37.6934,
+   "badFrac": 0.0293,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_2D5",
+   "det": 5,
+   "mjd": 60801.108755,
+   "dateObs": "2025-05-06T02:36:36.419",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_2D5_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_2D5_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 221952,
+   "lam": 4.33197,
+   "bw": 0.03779,
+   "wcs": {
+    "crval": [
+     133.76205069,
+     -7.24164223
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001612405622,
+     -0.000548994764,
+     -0.0005403336702,
+     -0.001613604151
+    ]
+   },
+   "wcsErr": 0.0554,
+   "zodi": 0.26987,
+   "sigma": 0.03837,
+   "omega": 37.771,
+   "badFrac": 0.0349,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_3D2",
+   "det": 2,
+   "mjd": 60801.110247,
+   "dateObs": "2025-05-06T02:38:45.350",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_3D2_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0181_3D2_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 246912,
+   "lam": 1.58992,
+   "bw": 0.03844,
+   "wcs": {
+    "crval": [
+     133.76123454,
+     -7.24286173
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001612609813,
+     -0.0005404673573,
+     -0.0005318201843,
+     -0.001614053138
+    ]
+   },
+   "wcsErr": 0.0534,
+   "zodi": 0.20477,
+   "sigma": 0.01683,
+   "omega": 37.6928,
+   "badFrac": 0.032,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0181_3D5",
+   "det": 5,
+   "mjd": 60801.110247,
+   "dateObs": "2025-05-06T02:38:45.350",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_3D5_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0181_3D5_spx_l2b-v27-2026-197.fits?center=133.761297,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 271872,
+   "lam": 4.36899,
+   "bw": 0.03799,
+   "wcs": {
+    "crval": [
+     133.76066916,
+     -7.242267
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001611671755,
+     -0.0005489172437,
+     -0.0005400943611,
+     -0.001613065576
+    ]
+   },
+   "wcsErr": 0.0539,
+   "zodi": 0.28513,
+   "sigma": 0.03876,
+   "omega": 37.7696,
+   "badFrac": 0.0264,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0231_1D2",
+   "det": 2,
+   "mjd": 60801.446306,
+   "dateObs": "2025-05-06T10:42:40.846",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0231_1D2_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/2/level2_2025W19_1B_0231_1D2_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 296832,
+   "lam": 1.27967,
+   "bw": 0.0309,
+   "wcs": {
+    "crval": [
+     133.76099453,
+     -7.24169126
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001620091876,
+     -0.0005545470636,
+     -0.0005338340105,
+     -0.001616374145
+    ]
+   },
+   "wcsErr": 0.0643,
+   "zodi": 0.21046,
+   "sigma": 0.01797,
+   "omega": 37.6929,
+   "badFrac": 0.0252,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0231_1D5",
+   "det": 5,
+   "mjd": 60801.446306,
+   "dateObs": "2025-05-06T10:42:40.846",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0231_1D5_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/5/level2_2025W19_1B_0231_1D5_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 321792,
+   "lam": 4.03868,
+   "bw": 0.03675,
+   "wcs": {
+    "crval": [
+     133.76102401,
+     -7.24150152
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001619004052,
+     -0.0005628460366,
+     -0.0005419953187,
+     -0.001615339231
+    ]
+   },
+   "wcsErr": 0.0645,
+   "zodi": 0.17858,
+   "sigma": 0.03252,
+   "omega": 37.7691,
+   "badFrac": 0.0267,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_1D1",
+   "det": 1,
+   "mjd": 60801.514843,
+   "dateObs": "2025-05-06T12:21:22.447",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_1D1_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_1D1_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 346752,
+   "lam": 0.99267,
+   "bw": 0.02635,
+   "wcs": {
+    "crval": [
+     133.76160864,
+     -7.24184036
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001619410192,
+     -0.0005974953955,
+     -0.0005397882412,
+     -0.001597506754
+    ]
+   },
+   "wcsErr": 0.0696,
+   "zodi": 0.20324,
+   "sigma": 0.01818,
+   "omega": 37.8595,
+   "badFrac": 0.043,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_1D4",
+   "det": 4,
+   "mjd": 60801.514843,
+   "dateObs": "2025-05-06T12:21:22.447",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_1D4_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_1D4_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 371328,
+   "lam": 3.3581,
+   "bw": 0.09475,
+   "wcs": {
+    "crval": [
+     133.76145658,
+     -7.24205766
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001619730466,
+     -0.0006010749759,
+     -0.0005431906347,
+     -0.001597979091
+    ]
+   },
+   "wcsErr": 0.0702,
+   "zodi": 0.1009,
+   "sigma": 0.0117,
+   "omega": 37.9321,
+   "badFrac": 0.0366,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_2D1",
+   "det": 1,
+   "mjd": 60801.516335,
+   "dateObs": "2025-05-06T12:23:31.377",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_2D1_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_2D1_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 395904,
+   "lam": 1.01638,
+   "bw": 0.02726,
+   "wcs": {
+    "crval": [
+     133.76058184,
+     -7.24189607
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001618501519,
+     -0.0005971434043,
+     -0.0005399524204,
+     -0.001596947447
+    ]
+   },
+   "wcsErr": 0.0683,
+   "zodi": 0.20605,
+   "sigma": 0.01816,
+   "omega": 37.8595,
+   "badFrac": 0.0408,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_2D4",
+   "det": 4,
+   "mjd": 60801.516335,
+   "dateObs": "2025-05-06T12:23:31.378",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_2D4_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_2D4_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 420480,
+   "lam": 3.44932,
+   "bw": 0.09686,
+   "wcs": {
+    "crval": [
+     133.76080599,
+     -7.24204883
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.00161884695,
+     -0.0006006917658,
+     -0.0005433793939,
+     -0.001597297962
+    ]
+   },
+   "wcsErr": 0.0692,
+   "zodi": 0.10447,
+   "sigma": 0.01168,
+   "omega": 37.9311,
+   "badFrac": 0.0334,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_3D1",
+   "det": 1,
+   "mjd": 60801.517828,
+   "dateObs": "2025-05-06T12:25:40.308",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_3D1_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_3D1_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 445056,
+   "lam": 1.04073,
+   "bw": 0.02789,
+   "wcs": {
+    "crval": [
+     133.76187011,
+     -7.24283756
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617646329,
+     -0.0005967505803,
+     -0.0005401654818,
+     -0.001596359748
+    ]
+   },
+   "wcsErr": 0.0677,
+   "zodi": 0.20785,
+   "sigma": 0.01823,
+   "omega": 37.8585,
+   "badFrac": 0.0371,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_3D4",
+   "det": 4,
+   "mjd": 60801.517828,
+   "dateObs": "2025-05-06T12:25:40.308",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_3D4_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_3D4_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 469632,
+   "lam": 3.54238,
+   "bw": 0.09728,
+   "wcs": {
+    "crval": [
+     133.76088409,
+     -7.24243646
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617956505,
+     -0.0006003025558,
+     -0.0005435759045,
+     -0.001596655823
+    ]
+   },
+   "wcsErr": 0.0685,
+   "zodi": 0.10871,
+   "sigma": 0.01172,
+   "omega": 37.9312,
+   "badFrac": 0.0408,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_4D1",
+   "det": 1,
+   "mjd": 60801.51932,
+   "dateObs": "2025-05-06T12:27:49.239",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_4D1_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/1/level2_2025W19_1B_0241_4D1_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 494208,
+   "lam": 1.06549,
+   "bw": 0.02857,
+   "wcs": {
+    "crval": [
+     133.76101893,
+     -7.24146405
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616748681,
+     -0.0005964250101,
+     -0.0005403921403,
+     -0.001595624577
+    ]
+   },
+   "wcsErr": 0.0673,
+   "zodi": 0.20773,
+   "sigma": 0.02818,
+   "omega": 37.8592,
+   "badFrac": 0.0349,
+   "window": 0
+  },
+  {
+   "id": "2025W19_1B_0241_4D4",
+   "det": 4,
+   "mjd": 60801.51932,
+   "dateObs": "2025-05-06T12:27:49.239",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-197",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_4D4_spx_l2b-v27-2026-197.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W19_1B/l2b-v27-2026-197/4/level2_2025W19_1B_0241_4D4_spx_l2b-v27-2026-197.fits?center=133.761295,-7.242290&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 518784,
+   "lam": 3.6384,
+   "bw": 0.09899,
+   "wcs": {
+    "crval": [
+     133.76145625,
+     -7.24311188
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617091681,
+     -0.0005999970014,
+     -0.0005437763591,
+     -0.001596130161
+    ]
+   },
+   "wcsErr": 0.0666,
+   "zodi": 0.1171,
+   "sigma": 0.0121,
+   "omega": 37.9304,
+   "badFrac": 0.0339,
+   "window": 0
+  },
+  {
+   "id": "2025W44_2B_0305_4D1",
+   "det": 1,
+   "mjd": 60979.72782,
+   "dateObs": "2025-10-31T17:28:03.660",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/1/level2_2025W44_2B_0305_4D1_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/1/level2_2025W44_2B_0305_4D1_spx_l2b-v27-2026-246.fits?center=133.760186,-7.242198&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 543360,
+   "lam": 0.92419,
+   "bw": 0.02405,
+   "wcs": {
+    "crval": [
+     133.75963394,
+     -7.24237816
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001666566133,
+     0.0004943718594,
+     0.0004098644767,
+     0.001636768339
+    ]
+   },
+   "wcsErr": 0.0798,
+   "zodi": 0.24562,
+   "sigma": 0.01945,
+   "omega": 37.8716,
+   "badFrac": 0.042,
+   "window": 1
+  },
+  {
+   "id": "2025W44_2B_0305_4D4",
+   "det": 4,
+   "mjd": 60979.72782,
+   "dateObs": "2025-10-31T17:28:03.660",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/4/level2_2025W44_2B_0305_4D4_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/4/level2_2025W44_2B_0305_4D4_spx_l2b-v27-2026-246.fits?center=133.760186,-7.242198&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 567936,
+   "lam": 3.09491,
+   "bw": 0.09106,
+   "wcs": {
+    "crval": [
+     133.76056613,
+     -7.24259073
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001667254286,
+     0.0004981196137,
+     0.0004129353522,
+     0.001637559056
+    ]
+   },
+   "wcsErr": 0.0822,
+   "zodi": 0.12882,
+   "sigma": 0.01243,
+   "omega": 37.9431,
+   "badFrac": 0.0278,
+   "window": 1
+  },
+  {
+   "id": "2025W44_2B_0339_1D1",
+   "det": 1,
+   "mjd": 60979.857398,
+   "dateObs": "2025-10-31T20:34:39.153",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/1/level2_2025W44_2B_0339_1D1_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/1/level2_2025W44_2B_0339_1D1_spx_l2b-v27-2026-246.fits?center=133.760185,-7.242198&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 592512,
+   "lam": 1.08922,
+   "bw": 0.02874,
+   "wcs": {
+    "crval": [
+     133.76108583,
+     -7.24203819
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001660035158,
+     0.0004916722534,
+     0.0004128153667,
+     0.001632463079
+    ]
+   },
+   "wcsErr": 0.0744,
+   "zodi": 0.26418,
+   "sigma": 0.04936,
+   "omega": 37.8726,
+   "badFrac": 0.0608,
+   "window": 1
+  },
+  {
+   "id": "2025W44_2B_0339_1D4",
+   "det": 4,
+   "mjd": 60979.857398,
+   "dateObs": "2025-10-31T20:34:39.153",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/4/level2_2025W44_2B_0339_1D4_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W44_2B/l2b-v27-2026-246/4/level2_2025W44_2B_0339_1D4_spx_l2b-v27-2026-246.fits?center=133.760185,-7.242198&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 617088,
+   "lam": 3.73005,
+   "bw": 0.10161,
+   "wcs": {
+    "crval": [
+     133.7607302,
+     -7.24319614
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001660518267,
+     0.0004953338411,
+     0.0004157961003,
+     0.001632796156
+    ]
+   },
+   "wcsErr": 0.0751,
+   "zodi": 0.18482,
+   "sigma": 0.01406,
+   "omega": 37.9446,
+   "badFrac": 0.0317,
+   "window": 1
+  },
+  {
+   "id": "2025W45_1A_0095_4D1",
+   "det": 1,
+   "mjd": 60982.442854,
+   "dateObs": "2025-11-03T10:37:42.564",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/1/level2_2025W45_1A_0095_4D1_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/1/level2_2025W45_1A_0095_4D1_spx_l2b-v27-2026-247.fits?center=133.760169,-7.242197&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 641664,
+   "lam": 0.74937,
+   "bw": 0.01761,
+   "wcs": {
+    "crval": [
+     133.75960355,
+     -7.24131422
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001649053915,
+     0.000517517157,
+     0.0004680104918,
+     0.001635420098
+    ]
+   },
+   "wcsErr": 0.0761,
+   "zodi": 0.21744,
+   "sigma": 0.01907,
+   "omega": 37.8706,
+   "badFrac": 0.031,
+   "window": 1
+  },
+  {
+   "id": "2025W45_1A_0095_4D4",
+   "det": 4,
+   "mjd": 60982.442854,
+   "dateObs": "2025-11-03T10:37:42.564",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/4/level2_2025W45_1A_0095_4D4_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/4/level2_2025W45_1A_0095_4D4_spx_l2b-v27-2026-247.fits?center=133.760169,-7.242197&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 666240,
+   "lam": 2.43884,
+   "bw": 0.05071,
+   "wcs": {
+    "crval": [
+     133.75951728,
+     -7.24236624
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001649582027,
+     0.0005209991749,
+     0.000471428904,
+     0.001635269771
+    ]
+   },
+   "wcsErr": 0.0754,
+   "zodi": 0.15714,
+   "sigma": 0.01835,
+   "omega": 37.9431,
+   "badFrac": 0.0923,
+   "window": 1
+  },
+  {
+   "id": "2025W45_1A_0110_4D1",
+   "det": 1,
+   "mjd": 60982.511728,
+   "dateObs": "2025-11-03T12:16:53.336",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/1/level2_2025W45_1A_0110_4D1_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/1/level2_2025W45_1A_0110_4D1_spx_l2b-v27-2026-247.fits?center=133.760168,-7.242197&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 690816,
+   "lam": 0.84169,
+   "bw": 0.02098,
+   "wcs": {
+    "crval": [
+     133.75957286,
+     -7.24184722
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.00164457404,
+     0.0005157291395,
+     0.0004684494386,
+     0.001631281203
+    ]
+   },
+   "wcsErr": 0.0707,
+   "zodi": 0.23225,
+   "sigma": 0.01935,
+   "omega": 37.8712,
+   "badFrac": 0.0264,
+   "window": 1
+  },
+  {
+   "id": "2025W45_1A_0110_4D4",
+   "det": 4,
+   "mjd": 60982.511728,
+   "dateObs": "2025-11-03T12:16:53.337",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/4/level2_2025W45_1A_0110_4D4_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_1A/l2b-v27-2026-247/4/level2_2025W45_1A_0110_4D4_spx_l2b-v27-2026-247.fits?center=133.760168,-7.242197&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 715392,
+   "lam": 2.77673,
+   "bw": 0.08041,
+   "wcs": {
+    "crval": [
+     133.75964797,
+     -7.24187586
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001645148571,
+     0.0005191767733,
+     0.0004720484128,
+     0.001631715983
+    ]
+   },
+   "wcsErr": 0.0705,
+   "zodi": 0.13114,
+   "sigma": 0.01309,
+   "omega": 37.9438,
+   "badFrac": 0.0322,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0278_1D2",
+   "det": 2,
+   "mjd": 60986.783468,
+   "dateObs": "2025-11-07T18:48:11.654",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0278_1D2_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0278_1D2_spx_l2b-v27-2026-247.fits?center=133.760142,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 739968,
+   "lam": 1.25719,
+   "bw": 0.03005,
+   "wcs": {
+    "crval": [
+     133.76077618,
+     -7.24214768
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     -0.001610331555,
+     0.0005455705779,
+     0.0005646424931,
+     0.001620469863
+    ]
+   },
+   "wcsErr": 0.0641,
+   "zodi": 0.24729,
+   "sigma": 0.01929,
+   "omega": 37.7071,
+   "badFrac": 0.0252,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0278_1D5",
+   "det": 5,
+   "mjd": 60986.783468,
+   "dateObs": "2025-11-07T18:48:11.654",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0278_1D5_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0278_1D5_spx_l2b-v27-2026-247.fits?center=133.760142,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 764928,
+   "lam": 4.0122,
+   "bw": 0.03658,
+   "wcs": {
+    "crval": [
+     133.75990482,
+     -7.24244259
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001609225374,
+     0.0005539800324,
+     0.0005729325877,
+     0.001619234166
+    ]
+   },
+   "wcsErr": 0.0632,
+   "zodi": 0.2225,
+   "sigma": 0.03376,
+   "omega": 37.7834,
+   "badFrac": 0.0325,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_1D2",
+   "det": 2,
+   "mjd": 60986.92191,
+   "dateObs": "2025-11-07T22:07:33.059",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_1D2_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_1D2_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 789504,
+   "lam": 1.5176,
+   "bw": 0.03702,
+   "wcs": {
+    "crval": [
+     133.76046822,
+     -7.24264118
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     -0.001605018051,
+     0.0005440589572,
+     0.0005612235706,
+     0.001614791822
+    ]
+   },
+   "wcsErr": 0.0584,
+   "zodi": 0.24923,
+   "sigma": 0.01859,
+   "omega": 37.7066,
+   "badFrac": 0.0312,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_1D5",
+   "det": 5,
+   "mjd": 60986.92191,
+   "dateObs": "2025-11-07T22:07:33.059",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_1D5_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_1D5_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 814464,
+   "lam": 4.29716,
+   "bw": 0.0371,
+   "wcs": {
+    "crval": [
+     133.75962757,
+     -7.24287279
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     -0.001603976765,
+     0.0005523429203,
+     0.000569336415,
+     0.001613684846
+    ]
+   },
+   "wcsErr": 0.0572,
+   "zodi": 0.334,
+   "sigma": 0.0404,
+   "omega": 37.7834,
+   "badFrac": 0.0243,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_2D2",
+   "det": 2,
+   "mjd": 60986.923403,
+   "dateObs": "2025-11-07T22:09:41.989",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_2D2_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_2D2_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 65,
+   "offset": 839424,
+   "lam": 1.5546,
+   "bw": 0.03782,
+   "wcs": {
+    "crval": [
+     133.76025103,
+     -7.24232696
+    ],
+    "crpix": [
+     32.0,
+     32.0
+    ],
+    "cd": [
+     -0.001604384694,
+     0.0005439558068,
+     0.0005607591447,
+     0.001614077922
+    ]
+   },
+   "wcsErr": 0.0583,
+   "zodi": 0.24735,
+   "sigma": 0.01828,
+   "omega": 37.7061,
+   "badFrac": 0.0343,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_2D5",
+   "det": 5,
+   "mjd": 60986.923403,
+   "dateObs": "2025-11-07T22:09:41.989",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_2D5_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_2D5_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 864774,
+   "lam": 4.33391,
+   "bw": 0.03757,
+   "wcs": {
+    "crval": [
+     133.75953116,
+     -7.2418924
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001603356106,
+     0.0005522026039,
+     0.0005689129604,
+     0.001613042504
+    ]
+   },
+   "wcsErr": 0.0548,
+   "zodi": 0.35261,
+   "sigma": 0.04133,
+   "omega": 37.7805,
+   "badFrac": 0.0298,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_3D2",
+   "det": 2,
+   "mjd": 60986.924895,
+   "dateObs": "2025-11-07T22:11:50.920",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_3D2_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/2/level2_2025W45_2A_0308_3D2_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 65,
+   "offset": 889350,
+   "lam": 1.59195,
+   "bw": 0.03864,
+   "wcs": {
+    "crval": [
+     133.75978004,
+     -7.24286277
+    ],
+    "crpix": [
+     32.0,
+     32.0
+    ],
+    "cd": [
+     -0.001603749649,
+     0.0005437778517,
+     0.0005602452246,
+     0.001613525813
+    ]
+   },
+   "wcsErr": 0.0567,
+   "zodi": 0.24079,
+   "sigma": 0.01799,
+   "omega": 37.7058,
+   "badFrac": 0.0364,
+   "window": 1
+  },
+  {
+   "id": "2025W45_2A_0308_3D5",
+   "det": 5,
+   "mjd": 60986.924895,
+   "dateObs": "2025-11-07T22:11:50.920",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-247",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_3D5_spx_l2b-v27-2026-247.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W45_2A/l2b-v27-2026-247/5/level2_2025W45_2A_0308_3D5_spx_l2b-v27-2026-247.fits?center=133.760141,-7.242194&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 914700,
+   "lam": 4.37075,
+   "bw": 0.03806,
+   "wcs": {
+    "crval": [
+     133.76051718,
+     -7.24315268
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     -0.001602684298,
+     0.0005519631488,
+     0.0005686451199,
+     0.001612392105
+    ]
+   },
+   "wcsErr": 0.0559,
+   "zodi": 0.37268,
+   "sigma": 0.04222,
+   "omega": 37.7821,
+   "badFrac": 0.0279,
+   "window": 1
+  },
+  {
+   "id": "2025W46_1A_0075_4D3",
+   "det": 3,
+   "mjd": 60989.297474,
+   "dateObs": "2025-11-10T07:08:21.724",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-206",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/3/level2_2025W46_1A_0075_4D3_spx_l2b-v27-2026-206.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/3/level2_2025W46_1A_0075_4D3_spx_l2b-v27-2026-206.fits?center=133.760126,-7.242193&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 939660,
+   "lam": 1.6313,
+   "bw": 0.03927,
+   "wcs": {
+    "crval": [
+     133.75939521,
+     -7.24260295
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001595456352,
+     0.000568963571,
+     0.0006353148116,
+     0.001619493438
+    ]
+   },
+   "wcsErr": 0.0796,
+   "zodi": 0.2271,
+   "sigma": 0.01862,
+   "omega": 37.8743,
+   "badFrac": 0.0376,
+   "window": 1
+  },
+  {
+   "id": "2025W46_1A_0075_4D6",
+   "det": 6,
+   "mjd": 60989.297474,
+   "dateObs": "2025-11-10T07:08:21.723",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-206",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/6/level2_2025W46_1A_0075_4D6_spx_l2b-v27-2026-206.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/6/level2_2025W46_1A_0075_4D6_spx_l2b-v27-2026-206.fits?center=133.760126,-7.242193&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 964236,
+   "lam": 4.4178,
+   "bw": 0.03725,
+   "wcs": {
+    "crval": [
+     133.76010656,
+     -7.24234387
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001596049775,
+     0.0005726697221,
+     0.0006389174505,
+     0.001620132647
+    ]
+   },
+   "wcsErr": 0.0826,
+   "zodi": 0.38629,
+   "sigma": 0.04893,
+   "omega": 37.9497,
+   "badFrac": 0.0244,
+   "window": 1
+  },
+  {
+   "id": "2025W46_1A_0090_3D3",
+   "det": 3,
+   "mjd": 60989.368427,
+   "dateObs": "2025-11-10T08:50:32.077",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-206",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/3/level2_2025W46_1A_0090_3D3_spx_l2b-v27-2026-206.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/3/level2_2025W46_1A_0090_3D3_spx_l2b-v27-2026-206.fits?center=133.760126,-7.242193&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 988812,
+   "lam": 1.87206,
+   "bw": 0.04627,
+   "wcs": {
+    "crval": [
+     133.75927985,
+     -7.24239344
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.00159184297,
+     0.000567980649,
+     0.0006303301766,
+     0.001614021401
+    ]
+   },
+   "wcsErr": 0.0755,
+   "zodi": 0.19554,
+   "sigma": 0.01687,
+   "omega": 37.8729,
+   "badFrac": 0.0615,
+   "window": 1
+  },
+  {
+   "id": "2025W46_1A_0090_3D6",
+   "det": 6,
+   "mjd": 60989.368427,
+   "dateObs": "2025-11-10T08:50:32.077",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-206",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/6/level2_2025W46_1A_0090_3D6_spx_l2b-v27-2026-206.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_1A/l2b-v27-2026-206/6/level2_2025W46_1A_0090_3D6_spx_l2b-v27-2026-206.fits?center=133.760126,-7.242193&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1013388,
+   "lam": 4.61304,
+   "bw": 0.03633,
+   "wcs": {
+    "crval": [
+     133.75966768,
+     -7.24143197
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001592432415,
+     0.000571578015,
+     0.0006337335779,
+     0.001614419457
+    ]
+   },
+   "wcsErr": 0.0766,
+   "zodi": 0.50695,
+   "sigma": 0.0542,
+   "omega": 37.9477,
+   "badFrac": 0.0291,
+   "window": 1
+  },
+  {
+   "id": "2025W46_2A_0226_2D3",
+   "det": 3,
+   "mjd": 60993.576408,
+   "dateObs": "2025-11-14T13:50:01.679",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-207",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/3/level2_2025W46_2A_0226_2D3_spx_l2b-v27-2026-207.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/3/level2_2025W46_2A_0226_2D3_spx_l2b-v27-2026-207.fits?center=133.760099,-7.242191&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1037964,
+   "lam": 2.22912,
+   "bw": 0.05555,
+   "wcs": {
+    "crval": [
+     133.75970852,
+     -7.24244609
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001583588196,
+     0.0005729673364,
+     0.0006411661466,
+     0.001606662745
+    ]
+   },
+   "wcsErr": 0.0718,
+   "zodi": 0.15539,
+   "sigma": 0.01518,
+   "omega": 37.8744,
+   "badFrac": 0.0359,
+   "window": 1
+  },
+  {
+   "id": "2025W46_2A_0226_2D6",
+   "det": 6,
+   "mjd": 60993.576408,
+   "dateObs": "2025-11-14T13:50:01.679",
+   "release": "spherex_dr1",
+   "pipeline": "",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b_retry-v27-2026-207/6/level2_2025W46_2A_0226_2D6_spx_l2b_retry-v27-2026-207.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b_retry-v27-2026-207/6/level2_2025W46_2A_0226_2D6_spx_l2b_retry-v27-2026-207.fits?center=133.760099,-7.242191&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1062540,
+   "lam": 4.87481,
+   "bw": 0.03727,
+   "wcs": {
+    "crval": [
+     133.76003103,
+     -7.24178694
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001583851464,
+     0.0005763183714,
+     0.0006447358919,
+     0.00160692815
+    ]
+   },
+   "wcsErr": 0.0722,
+   "zodi": 0.68089,
+   "sigma": 0.0652,
+   "omega": 37.9518,
+   "badFrac": 0.0332,
+   "window": 1
+  },
+  {
+   "id": "2025W46_2A_0289_1D3",
+   "det": 3,
+   "mjd": 60993.913551,
+   "dateObs": "2025-11-14T21:55:30.834",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-207",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/3/level2_2025W46_2A_0289_1D3_spx_l2b-v27-2026-207.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/3/level2_2025W46_2A_0289_1D3_spx_l2b-v27-2026-207.fits?center=133.760097,-7.242191&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1087116,
+   "lam": 2.38536,
+   "bw": 0.05913,
+   "wcs": {
+    "crval": [
+     133.76052627,
+     -7.24148654
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.001582103862,
+     0.0005727912654,
+     0.0006385480447,
+     0.001604705639
+    ]
+   },
+   "wcsErr": 0.0689,
+   "zodi": 0.14252,
+   "sigma": 0.01639,
+   "omega": 37.8744,
+   "badFrac": 0.0535,
+   "window": 1
+  },
+  {
+   "id": "2025W46_2A_0289_1D6",
+   "det": 6,
+   "mjd": 60993.913551,
+   "dateObs": "2025-11-14T21:55:30.835",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-207",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/6/level2_2025W46_2A_0289_1D6_spx_l2b-v27-2026-207.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W46_2A/l2b-v27-2026-207/6/level2_2025W46_2A_0289_1D6_spx_l2b-v27-2026-207.fits?center=133.760097,-7.242191&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1111692,
+   "lam": 4.98212,
+   "bw": 0.03739,
+   "wcs": {
+    "crval": [
+     133.75916554,
+     -7.24256659
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     -0.00158241339,
+     0.0005758970952,
+     0.0006420749294,
+     0.001605026148
+    ]
+   },
+   "wcsErr": 0.0683,
+   "zodi": 0.78517,
+   "sigma": 0.07517,
+   "omega": 37.9514,
+   "badFrac": 0.0239,
+   "window": 1
+  },
+  {
+   "id": "2026W17_1B_0227_2D3",
+   "det": 3,
+   "mjd": 61151.198599,
+   "dateObs": "2026-04-21T04:45:58.988",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-242",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/3/level2_2026W17_1B_0227_2D3_spx_l2b-v27-2026-242.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/3/level2_2026W17_1B_0227_2D3_spx_l2b-v27-2026-242.fits?center=133.759118,-7.242109&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 62,
+   "offset": 1136268,
+   "lam": 1.63851,
+   "bw": 0.03902,
+   "wcs": {
+    "crval": [
+     133.75984244,
+     -7.24001255
+    ],
+    "crpix": [
+     31.5,
+     30.5
+    ],
+    "cd": [
+     0.001634588345,
+     -0.0004510895798,
+     -0.0005472030529,
+     -0.001657858948
+    ]
+   },
+   "wcsErr": 0.0863,
+   "zodi": 0.17351,
+   "sigma": 0.01657,
+   "omega": 37.8599,
+   "badFrac": 0.0247,
+   "window": 2
+  },
+  {
+   "id": "2026W17_1B_0227_2D6",
+   "det": 6,
+   "mjd": 61151.198599,
+   "dateObs": "2026-04-21T04:45:58.988",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-242",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/6/level2_2026W17_1B_0227_2D6_spx_l2b-v27-2026-242.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/6/level2_2026W17_1B_0227_2D6_spx_l2b-v27-2026-242.fits?center=133.759118,-7.242109&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1160076,
+   "lam": 4.42375,
+   "bw": 0.03584,
+   "wcs": {
+    "crval": [
+     133.75872326,
+     -7.24116632
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001635485751,
+     -0.0004544272486,
+     -0.0005508707655,
+     -0.00165847633
+    ]
+   },
+   "wcsErr": 0.0902,
+   "zodi": 0.2446,
+   "sigma": 0.04267,
+   "omega": 37.9372,
+   "badFrac": 0.0261,
+   "window": 2
+  },
+  {
+   "id": "2026W17_1B_0634_1D3",
+   "det": 3,
+   "mjd": 61153.437123,
+   "dateObs": "2026-04-23T10:29:27.447",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-242",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/3/level2_2026W17_1B_0634_1D3_spx_l2b-v27-2026-242.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/3/level2_2026W17_1B_0634_1D3_spx_l2b-v27-2026-242.fits?center=133.759105,-7.242108&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1184652,
+   "lam": 1.87824,
+   "bw": 0.0464,
+   "wcs": {
+    "crval": [
+     133.75839984,
+     -7.24250934
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001630772879,
+     -0.0004507837791,
+     -0.0005411991002,
+     -0.001652084133
+    ]
+   },
+   "wcsErr": 0.0823,
+   "zodi": 0.15102,
+   "sigma": 0.01519,
+   "omega": 37.8602,
+   "badFrac": 0.0344,
+   "window": 2
+  },
+  {
+   "id": "2026W17_1B_0634_1D6",
+   "det": 6,
+   "mjd": 61153.437123,
+   "dateObs": "2026-04-23T10:29:27.447",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-242",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/6/level2_2026W17_1B_0634_1D6_spx_l2b-v27-2026-242.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W17_1B/l2b-v27-2026-242/6/level2_2026W17_1B_0634_1D6_spx_l2b-v27-2026-242.fits?center=133.759105,-7.242108&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1209228,
+   "lam": 4.61729,
+   "bw": 0.03621,
+   "wcs": {
+    "crval": [
+     133.76007195,
+     -7.24154718
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001631724373,
+     -0.0004540972463,
+     -0.0005449344018,
+     -0.001652792486
+    ]
+   },
+   "wcsErr": 0.0855,
+   "zodi": 0.3331,
+   "sigma": 0.04761,
+   "omega": 37.9363,
+   "badFrac": 0.0291,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0264_1D1",
+   "det": 1,
+   "mjd": 61161.65584,
+   "dateObs": "2026-05-01T15:44:24.554",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0264_1D1_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0264_1D1_spx_l2b-v27-2026-244.fits?center=133.759053,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1233804,
+   "lam": 1.09083,
+   "bw": 0.02939,
+   "wcs": {
+    "crval": [
+     133.75856088,
+     -7.24112236
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001615947277,
+     -0.0005959390425,
+     -0.0005403761765,
+     -0.001595236988
+    ]
+   },
+   "wcsErr": 0.0663,
+   "zodi": 0.19894,
+   "sigma": 0.03886,
+   "omega": 37.8592,
+   "badFrac": 0.0354,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0264_1D4",
+   "det": 4,
+   "mjd": 61161.65584,
+   "dateObs": "2026-05-01T15:44:24.553",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0264_1D4_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0264_1D4_spx_l2b-v27-2026-244.fits?center=133.759053,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1258380,
+   "lam": 3.73519,
+   "bw": 0.10166,
+   "wcs": {
+    "crval": [
+     133.75943928,
+     -7.24277636
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616313483,
+     -0.0005997494957,
+     -0.0005438338223,
+     -0.001595445392
+    ]
+   },
+   "wcsErr": 0.066,
+   "zodi": 0.11741,
+   "sigma": 0.01195,
+   "omega": 37.9308,
+   "badFrac": 0.0305,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0424_2D1",
+   "det": 1,
+   "mjd": 61162.334638,
+   "dateObs": "2026-05-02T08:01:52.718",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0424_2D1_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0424_2D1_spx_l2b-v27-2026-244.fits?center=133.759049,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1282956,
+   "lam": 0.74392,
+   "bw": 0.01778,
+   "wcs": {
+    "crval": [
+     133.75941751,
+     -7.24202147
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001633733791,
+     -0.000614023249,
+     -0.0005376404366,
+     -0.00160314974
+    ]
+   },
+   "wcsErr": 0.0838,
+   "zodi": 0.17287,
+   "sigma": 0.01726,
+   "omega": 37.8579,
+   "badFrac": 0.0347,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0424_2D4",
+   "det": 4,
+   "mjd": 61162.334638,
+   "dateObs": "2026-05-02T08:01:52.718",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0424_2D4_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0424_2D4_spx_l2b-v27-2026-244.fits?center=133.759049,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1307532,
+   "lam": 2.42667,
+   "bw": 0.04459,
+   "wcs": {
+    "crval": [
+     133.75950024,
+     -7.24151781
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001634367854,
+     -0.0006175206806,
+     -0.0005410113657,
+     -0.001603104589
+    ]
+   },
+   "wcsErr": 0.0842,
+   "zodi": 0.12021,
+   "sigma": 0.01861,
+   "omega": 37.9297,
+   "badFrac": 0.5862,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0441_2D2",
+   "det": 2,
+   "mjd": 61162.40369,
+   "dateObs": "2026-05-02T09:41:18.838",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/2/level2_2026W18_2A_0441_2D2_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/2/level2_2026W18_2A_0441_2D2_spx_l2b-v27-2026-244.fits?center=133.759049,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1332108,
+   "lam": 1.24977,
+   "bw": 0.03026,
+   "wcs": {
+    "crval": [
+     133.75927238,
+     -7.2423864
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001620904934,
+     -0.0005548077922,
+     -0.0005338807453,
+     -0.001617139325
+    ]
+   },
+   "wcsErr": 0.0648,
+   "zodi": 0.20182,
+   "sigma": 0.01777,
+   "omega": 37.6929,
+   "badFrac": 0.0224,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0441_2D5",
+   "det": 5,
+   "mjd": 61162.40369,
+   "dateObs": "2026-05-02T09:41:18.838",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/5/level2_2026W18_2A_0441_2D5_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/5/level2_2026W18_2A_0441_2D5_spx_l2b-v27-2026-244.fits?center=133.759049,-7.242104&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1357068,
+   "lam": 4.00367,
+   "bw": 0.03649,
+   "wcs": {
+    "crval": [
+     133.75832691,
+     -7.2420765
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001619790201,
+     -0.0005630755934,
+     -0.0005420227877,
+     -0.001616152668
+    ]
+   },
+   "wcsErr": 0.0654,
+   "zodi": 0.15702,
+   "sigma": 0.0304,
+   "omega": 37.7692,
+   "badFrac": 0.0361,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0684_3D1",
+   "det": 1,
+   "mjd": 61163.286981,
+   "dateObs": "2026-05-03T06:53:15.130",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0684_3D1_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/1/level2_2026W18_2A_0684_3D1_spx_l2b-v27-2026-244.fits?center=133.759043,-7.242103&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1382028,
+   "lam": 0.83585,
+   "bw": 0.02085,
+   "wcs": {
+    "crval": [
+     133.75817644,
+     -7.2420064
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001628741954,
+     -0.0006115806818,
+     -0.000538816572,
+     -0.00159910626
+    ]
+   },
+   "wcsErr": 0.0797,
+   "zodi": 0.18785,
+   "sigma": 0.01779,
+   "omega": 37.8593,
+   "badFrac": 0.0317,
+   "window": 2
+  },
+  {
+   "id": "2026W18_2A_0684_3D4",
+   "det": 4,
+   "mjd": 61163.286981,
+   "dateObs": "2026-05-03T06:53:15.130",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-244",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0684_3D4_spx_l2b-v27-2026-244.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W18_2A/l2b-v27-2026-244/4/level2_2026W18_2A_0684_3D4_spx_l2b-v27-2026-244.fits?center=133.759043,-7.242103&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1406604,
+   "lam": 2.75568,
+   "bw": 0.07734,
+   "wcs": {
+    "crval": [
+     133.7580422,
+     -7.24244377
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001629254183,
+     -0.0006151744558,
+     -0.0005422088353,
+     -0.001599450633
+    ]
+   },
+   "wcsErr": 0.0805,
+   "zodi": 0.10174,
+   "sigma": 0.01202,
+   "omega": 37.9293,
+   "badFrac": 0.0364,
+   "window": 2
+  },
+  {
+   "id": "2026W19_1A_0493_1D1",
+   "det": 1,
+   "mjd": 61165.320871,
+   "dateObs": "2026-05-05T07:42:03.233",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-245",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_1A/l2b-v27-2026-245/1/level2_2026W19_1A_0493_1D1_spx_l2b-v27-2026-245.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_1A/l2b-v27-2026-245/1/level2_2026W19_1A_0493_1D1_spx_l2b-v27-2026-245.fits?center=133.759031,-7.242102&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1431180,
+   "lam": 0.91799,
+   "bw": 0.0234,
+   "wcs": {
+    "crval": [
+     133.75984463,
+     -7.24202828
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001624953484,
+     -0.0006097318508,
+     -0.0005398394269,
+     -0.001596232071
+    ]
+   },
+   "wcsErr": 0.0759,
+   "zodi": 0.19254,
+   "sigma": 0.01769,
+   "omega": 37.8597,
+   "badFrac": 0.0396,
+   "window": 2
+  },
+  {
+   "id": "2026W19_1A_0493_1D4",
+   "det": 4,
+   "mjd": 61165.320871,
+   "dateObs": "2026-05-05T07:42:03.233",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-245",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_1A/l2b-v27-2026-245/4/level2_2026W19_1A_0493_1D4_spx_l2b-v27-2026-245.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_1A/l2b-v27-2026-245/4/level2_2026W19_1A_0493_1D4_spx_l2b-v27-2026-245.fits?center=133.759031,-7.242102&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1455756,
+   "lam": 3.06978,
+   "bw": 0.08911,
+   "wcs": {
+    "crval": [
+     133.75978128,
+     -7.24168467
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001625328239,
+     -0.000613387343,
+     -0.0005432290041,
+     -0.001596679918
+    ]
+   },
+   "wcsErr": 0.0774,
+   "zodi": 0.09452,
+   "sigma": 0.01133,
+   "omega": 37.9305,
+   "badFrac": 0.031,
+   "window": 2
+  },
+  {
+   "id": "2026W19_2A_0651_1D3",
+   "det": 3,
+   "mjd": 61169.194889,
+   "dateObs": "2026-05-09T04:40:38.387",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-245",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_2A/l2b-v27-2026-245/3/level2_2026W19_2A_0651_1D3_spx_l2b-v27-2026-245.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_2A/l2b-v27-2026-245/3/level2_2026W19_2A_0651_1D3_spx_l2b-v27-2026-245.fits?center=133.759006,-7.242100&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1480332,
+   "lam": 2.20763,
+   "bw": 0.0553,
+   "wcs": {
+    "crval": [
+     133.75984407,
+     -7.24190985
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001617923567,
+     -0.0004893353926,
+     -0.0005323206329,
+     -0.001632852113
+    ]
+   },
+   "wcsErr": 0.0638,
+   "zodi": 0.14842,
+   "sigma": 0.01476,
+   "omega": 37.8599,
+   "badFrac": 0.0696,
+   "window": 2
+  },
+  {
+   "id": "2026W19_2A_0651_1D6",
+   "det": 6,
+   "mjd": 61169.194889,
+   "dateObs": "2026-05-09T04:40:38.387",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-245",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_2A/l2b-v27-2026-245/6/level2_2026W19_2A_0651_1D6_spx_l2b-v27-2026-245.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W19_2A/l2b-v27-2026-245/6/level2_2026W19_2A_0651_1D6_spx_l2b-v27-2026-245.fits?center=133.759006,-7.242100&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1504908,
+   "lam": 4.85969,
+   "bw": 0.03793,
+   "wcs": {
+    "crval": [
+     133.75982266,
+     -7.24163916
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001618704072,
+     -0.0004928497762,
+     -0.0005356902067,
+     -0.001633559077
+    ]
+   },
+   "wcsErr": 0.0618,
+   "zodi": 0.62355,
+   "sigma": 0.06383,
+   "omega": 37.9364,
+   "badFrac": 0.03,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0033_1D3",
+   "det": 3,
+   "mjd": 61171.097016,
+   "dateObs": "2026-05-11T02:19:42.221",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/3/level2_2026W20_1A_0033_1D3_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/3/level2_2026W20_1A_0033_1D3_spx_l2b-v27-2026-246.fits?center=133.758995,-7.242099&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1529484,
+   "lam": 2.36324,
+   "bw": 0.05855,
+   "wcs": {
+    "crval": [
+     133.75966173,
+     -7.24164572
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616166957,
+     -0.0004890220081,
+     -0.0005304532699,
+     -0.001631062358
+    ]
+   },
+   "wcsErr": 0.0601,
+   "zodi": 0.13822,
+   "sigma": 0.01474,
+   "omega": 37.8586,
+   "badFrac": 0.0378,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0033_1D6",
+   "det": 6,
+   "mjd": 61171.097016,
+   "dateObs": "2026-05-11T02:19:42.221",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/6/level2_2026W20_1A_0033_1D6_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/6/level2_2026W20_1A_0033_1D6_spx_l2b-v27-2026-246.fits?center=133.758995,-7.242099&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1554060,
+   "lam": 4.96729,
+   "bw": 0.03719,
+   "wcs": {
+    "crval": [
+     133.75873691,
+     -7.24220524
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.001616953372,
+     -0.0004925460175,
+     -0.0005338588975,
+     -0.001631788904
+    ]
+   },
+   "wcsErr": 0.0583,
+   "zodi": 0.75276,
+   "sigma": 0.07005,
+   "omega": 37.9348,
+   "badFrac": 0.0305,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0728_1D2",
+   "det": 2,
+   "mjd": 61173.064732,
+   "dateObs": "2026-05-13T01:33:12.862",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_0728_1D2_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_0728_1D2_spx_l2b-v27-2026-246.fits?center=133.758982,-7.242098&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1578636,
+   "lam": 1.51513,
+   "bw": 0.0375,
+   "wcs": {
+    "crval": [
+     133.75938524,
+     -7.24134477
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001614015797,
+     -0.0005408397892,
+     -0.0005321442092,
+     -0.001615181171
+    ]
+   },
+   "wcsErr": 0.0555,
+   "zodi": 0.22712,
+   "sigma": 0.01776,
+   "omega": 37.691,
+   "badFrac": 0.0401,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0728_1D5",
+   "det": 5,
+   "mjd": 61173.064732,
+   "dateObs": "2026-05-13T01:33:12.863",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_0728_1D5_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_0728_1D5_spx_l2b-v27-2026-246.fits?center=133.758982,-7.242098&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1603596,
+   "lam": 4.29498,
+   "bw": 0.03756,
+   "wcs": {
+    "crval": [
+     133.75850635,
+     -7.24110863
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.00161310262,
+     -0.0005491878052,
+     -0.0005403692964,
+     -0.001614248225
+    ]
+   },
+   "wcsErr": 0.0552,
+   "zodi": 0.29057,
+   "sigma": 0.03818,
+   "omega": 37.7675,
+   "badFrac": 0.0296,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0939_1D2",
+   "det": 2,
+   "mjd": 61173.676841,
+   "dateObs": "2026-05-13T16:14:39.061",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_0939_1D2_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_0939_1D2_spx_l2b-v27-2026-246.fits?center=133.758979,-7.242098&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1628556,
+   "lam": 1.55231,
+   "bw": 0.03796,
+   "wcs": {
+    "crval": [
+     133.75894117,
+     -7.24228081
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001613322881,
+     -0.000540666653,
+     -0.000531965118,
+     -0.001614610761
+    ]
+   },
+   "wcsErr": 0.0549,
+   "zodi": 0.22779,
+   "sigma": 0.01766,
+   "omega": 37.6924,
+   "badFrac": 0.0558,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_0939_1D5",
+   "det": 5,
+   "mjd": 61173.676841,
+   "dateObs": "2026-05-13T16:14:39.061",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_0939_1D5_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_0939_1D5_spx_l2b-v27-2026-246.fits?center=133.758979,-7.242098&size=0.11",
+   "exptime": 113.5826,
+   "w": 64,
+   "h": 64,
+   "offset": 1653516,
+   "lam": 4.33185,
+   "bw": 0.03779,
+   "wcs": {
+    "crval": [
+     133.75817996,
+     -7.24179889
+    ],
+    "crpix": [
+     31.5,
+     31.5
+    ],
+    "cd": [
+     0.00161244356,
+     -0.0005489544495,
+     -0.000540186389,
+     -0.00161370501
+    ]
+   },
+   "wcsErr": 0.0531,
+   "zodi": 0.31058,
+   "sigma": 0.0392,
+   "omega": 37.7682,
+   "badFrac": 0.053,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_1166_1D2",
+   "det": 2,
+   "mjd": 61174.287884,
+   "dateObs": "2026-05-14T06:54:33.173",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_1166_1D2_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/2/level2_2026W20_1A_1166_1D2_spx_l2b-v27-2026-246.fits?center=133.758975,-7.242097&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1678092,
+   "lam": 1.58969,
+   "bw": 0.03842,
+   "wcs": {
+    "crval": [
+     133.7599487,
+     -7.24153693
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001612604065,
+     -0.0005404163561,
+     -0.0005317458233,
+     -0.001614012161
+    ]
+   },
+   "wcsErr": 0.0542,
+   "zodi": 0.22303,
+   "sigma": 0.01744,
+   "omega": 37.6919,
+   "badFrac": 0.0563,
+   "window": 2
+  },
+  {
+   "id": "2026W20_1A_1166_1D5",
+   "det": 5,
+   "mjd": 61174.287884,
+   "dateObs": "2026-05-14T06:54:33.173",
+   "release": "spherex_dr1",
+   "pipeline": "l2b-v27-2026-246",
+   "url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_1166_1D5_spx_l2b-v27-2026-246.fits",
+   "cutout": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W20_1A/l2b-v27-2026-246/5/level2_2026W20_1A_1166_1D5_spx_l2b-v27-2026-246.fits?center=133.758975,-7.242097&size=0.11",
+   "exptime": 113.5826,
+   "w": 65,
+   "h": 64,
+   "offset": 1703052,
+   "lam": 4.36876,
+   "bw": 0.03799,
+   "wcs": {
+    "crval": [
+     133.75884782,
+     -7.24250988
+    ],
+    "crpix": [
+     32.0,
+     31.5
+    ],
+    "cd": [
+     0.001611742781,
+     -0.0005488409629,
+     -0.0005399853191,
+     -0.001613049059
+    ]
+   },
+   "wcsErr": 0.0541,
+   "zodi": 0.33214,
+   "sigma": 0.04053,
+   "omega": 37.7678,
+   "badFrac": 0.0447,
+   "window": 2
+  }
+ ],
+ "neighbours": [
+  {
+   "cat": "gaia",
+   "id": "Gaia DR3 5756956644387831296",
+   "ra": 133.7581825,
+   "dec": -7.2411559,
+   "ep": 2016.0,
+   "pmra": -6.188,
+   "pmdec": 1.931,
+   "mag": 16.315
+  },
+  {
+   "cat": "gaia",
+   "id": "Gaia DR3 5756956640092049792",
+   "ra": 133.7512401,
+   "dec": -7.2389882,
+   "ep": 2016.0,
+   "pmra": 6.865,
+   "pmdec": -10.253,
+   "mag": 19.13
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085501.95-071428.2",
+   "ra": 133.7581654,
+   "dec": -7.2411795,
+   "ep": 2015.4018,
+   "pmra": -5.88,
+   "pmdec": -10.4,
+   "mag": 15.044
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085500.30-071420.3",
+   "ra": 133.7512531,
+   "dec": -7.238998,
+   "ep": 2015.4018,
+   "pmra": 23.22,
+   "pmdec": -41.0,
+   "mag": 15.549
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085502.17-071500.1",
+   "ra": 133.7590795,
+   "dec": -7.250042,
+   "ep": 2015.4018,
+   "pmra": -41.38,
+   "pmdec": -69.9,
+   "mag": 17.204
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085503.71-071428.8",
+   "ra": 133.7654261,
+   "dec": -7.2413861,
+   "ep": 2015.4018,
+   "pmra": 53.14,
+   "pmdec": 13.6,
+   "mag": 17.683
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085508.34-071439.2",
+   "ra": 133.7839831,
+   "dec": -7.2441961,
+   "ep": 2015.4018,
+   "pmra": -7965.0,
+   "pmdec": 806.2,
+   "mag": 17.966,
+   "target": true
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085502.09-071434.5",
+   "ra": 133.7587345,
+   "dec": -7.2429592,
+   "ep": 2015.4018,
+   "pmra": -30.85,
+   "pmdec": -115.0,
+   "mag": 18.185
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085507.96-071439.3",
+   "ra": 133.783924,
+   "dec": -7.2443404,
+   "ep": 2015.4018,
+   "pmra": -8021.2,
+   "pmdec": 1035.7,
+   "mag": 18.288,
+   "target": true
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085506.91-071437.5",
+   "ra": 133.7835555,
+   "dec": -7.244052,
+   "ep": 2015.4018,
+   "pmra": -7919.9,
+   "pmdec": 493.9,
+   "mag": 18.38,
+   "target": true
+  },
+  {
+   "cat": "catwise",
+   "id": "CWISE J085500.43-071441.1",
+   "ra": 133.751826,
+   "dec": -7.2447989,
+   "ep": 2015.4018,
+   "pmra": -143.72,
+   "pmdec": 38.5,
+   "mag": 18.434
+  }
+ ],
+ "neighboursFrom": {
+  "gaia": "ESA Gaia archive TAP (gaiadr3.gaia_source)",
+  "catwise": "IRSA TAP (catwise_2020)"
+ }
+}
