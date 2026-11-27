@@ -14,7 +14,7 @@
 <script>
 (function(){var l='en';try{l=localStorage.getItem('tsa-lang')||'en'}catch(e){}
 if(location.hash==='#ar')l='ar';if(location.hash==='#en')l='en';
-var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','sima','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
+var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','sima','ircloner','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
 var r=document.documentElement;r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
 </script>
 <style>
@@ -207,7 +207,7 @@ html[data-lang="ar"] .ix-y{font-family:var(--arabic);font-size:14px}
 
 /* ---------- views ---------- */
 .project{display:none}
-html[data-view="expo"] #p-expo,html[data-view="sima"] #p-sima,html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
+html[data-view="expo"] #p-expo,html[data-view="ircloner"] #p-ircloner,html[data-view="sima"] #p-sima,html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
 html[data-view] .home-part{display:none}
 html[dir="rtl"] svg.flip{transform:scaleX(-1)}
 
@@ -249,6 +249,9 @@ html[data-lang="ar"] .badge{font-family:var(--arabic);font-size:12.5px}
 .btn-row{display:flex;flex-wrap:wrap;gap:8px}
 .video-player{background:#000}
 .video-player video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.tl.steps li{grid-template-columns:minmax(0,1fr);gap:2px}
+.gallery .fig.wide{grid-column:1/-1}
+.gallery .fig.wide .frame{aspect-ratio:1400/618}
 .team{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
 .team li{display:grid;gap:1px}
 .team b{font-weight:600;font-size:14.5px}
@@ -938,7 +941,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
       <div class="ch-info">
         <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
         <p class="ch-handle"><span class="en">Electrical Engineering student · Islamic University of Madinah · Class of 2028</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة · دفعة 2028</span></p>
-        <p class="ch-stats"><span class="en">5 projects · 4 achievements · 4 activities</span><span class="ar">5 مشاريع · 4 إنجازات · 4 أنشطة</span></p>
+        <p class="ch-stats"><span class="en">6 projects · 4 achievements · 4 activities</span><span class="ar">6 مشاريع · 4 إنجازات · 4 أنشطة</span></p>
         <p class="ch-about"><span class="en">I design and build hardware: telemetry boards, motor drives, logic circuits and robots, and I teach PCB design to fellow students.</span><span class="ar">أصمّم وأبني أنظمة العتاد: لوحات التيليمتري، ومشغّلات المحرّكات، والدوائر المنطقية، والروبوتات، وأدرّس تصميم اللوحات المطبوعة لزملائي.</span></p>
         <div class="cta">
           <a class="btn primary" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
@@ -959,6 +962,10 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 <section class="feed home-part" id="feed" aria-label="Work">
   <div class="wrap">
     <div class="vgrid">
+      <a class="vcard" href="#ircloner" data-cat="project">
+        <span class="thumb contain" style="--bg:#000000"><img src="assets/img/ir-device.webp" width="700" height="721" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">IR Cloner and Analyzer</span><span class="ar">ناسخ ومحلّل إشارات الأشعة تحت الحمراء</span></span><span class="v-meta"><span class="en">EE3521 Signals and Systems · Nov 2026</span><span class="ar">EE3521 الإشارات والأنظمة · نوفمبر 2026</span></span></span></span>
+      </a>
       <a class="vcard" href="#sima" data-cat="award">
         <span class="thumb cover" style="--bg:#0B0D10"><img src="assets/img/sima-site.webp" width="1600" height="900" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Hackathon</span><span class="ar">هاكاثون</span></span></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">Achievement</span><span class="ar">إنجاز</span></span><span class="v-title"><span class="en">Sima, NASA Space Apps Challenge</span><span class="ar">سيما، هاكاثون ناسا لتطبيقات الفضاء</span></span><span class="v-meta"><span class="en">Madinah · Nov 2026</span><span class="ar">المدينة المنورة · نوفمبر 2026</span></span></span></span>
@@ -1495,6 +1502,90 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
       </div>
     </div>
     <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="engclub"></div></aside>
+  </div>
+</article>
+<!-- ================= IR CLONER ================= -->
+<article class="project watchpage activity k1" id="p-ircloner" aria-labelledby="t-ircloner">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player contain" style="--bg:#000000"><a class="frame" href="assets/img/ir-device.webp"><img src="assets/img/ir-device.webp" width="700" height="721" alt="The IR Cloner device in its case, showing the Capture screen" data-alt-ar="جهاز ناسخ الأشعة تحت الحمراء داخل علبته وتظهر شاشة الالتقاط" style="object-position:50% 50%"></a></div>
+
+      <h3 class="p-title" id="t-ircloner"><span class="en">IR Cloner and Analyzer</span><span class="ar">ناسخ ومحلّل إشارات الأشعة تحت الحمراء</span></h3>
+      <div class="w-row">
+        <span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span>
+  <div class="p-meta">
+      <span><span class="en">EE3521 Signals and Systems</span><span class="ar">EE3521 الإشارات والأنظمة</span></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span><span class="en">November 2026</span><span class="ar">نوفمبر 2026</span></span>
+    </div>
+      </div>
+      <div class="desc">
+    <p class="p-sub"><span class="en">A handheld device that captures the signal of any infrared remote, analyzes it with the tools of the Signals and Systems course, and sends it again in place of the original remote.</span><span class="ar">جهاز محمول يلتقط إشارة أي جهاز تحكّم بالأشعة تحت الحمراء، ويحلّلها بأدوات مقرر الإشارات والأنظمة، ثم يعيد إرسالها بدلاً من جهاز التحكّم الأصلي.</span></p>
+    <div class="p-body">
+      <div class="p-text">
+        <p class="en">Instead of a ready-made IR receiver chip, the device reads a raw photodiode with the ESP32's ADC and does the demodulation in software. That puts the whole course on the screen: sampling, convolution, Fourier series, the DFT and the Z-transform each have a job in the signal chain. A Math screen applies them to your own capture: it measures the sensor's RC time constant from the 90 % to 10 % fall, plots |H(jω)|, and runs a first-order filter with its pole on the z-plane.</p>
+        <p class="ar">بدلاً من شريحة استقبال جاهزة، يقرأ الجهاز ثنائياً ضوئياً خاماً عبر المحوّل التناظري الرقمي في ESP32 ويفكّ التعديل برمجياً. وهكذا يظهر المقرر كله على الشاشة: أخذ العيّنات، والالتفاف، ومتسلسلة فورييه، وتحويل DFT، وتحويل Z، ولكلّ منها دور في سلسلة معالجة الإشارة. وفي شاشة «الرياضيات» تُطبَّق على الإشارة التي التقطتها بنفسك: تقيس ثابت الزمن RC للحسّاس من هبوط الإشارة بين 90 % و10 %، وترسم |H(jω)|، وتشغّل مرشّحاً من الرتبة الأولى مع قطبه على مستوى Z.</p>
+
+        <h4 class="eyebrow"><span class="en">The signal chain</span><span class="ar">سلسلة معالجة الإشارة</span></h4>
+        <ol class="tl steps">
+          <li><b><span class="en">Sampling</span><span class="ar">أخذ العيّنات</span></b><span class="d"><span class="en">The ADC samples the photodiode at 200 kSa/s through DMA. The 38 kHz carrier lands at 0.38π, below π, so there is no aliasing.</span><span class="ar">يأخذ المحوّل التناظري الرقمي عيّنات من الثنائي الضوئي بمعدل 200 ألف عيّنة في الثانية عبر DMA، فتقع الموجة الحاملة 38 كيلوهرتز عند 0.38π، أقل من π، فلا يحدث تداخل طيفي.</span></span></li>
+          <li><b><span class="en">Envelope</span><span class="ar">الغلاف</span></b><span class="d"><span class="en">The maximum of every 50 µs window removes the carrier, and a first-order difference equation tracks and removes ambient light.</span><span class="ar">أكبر قيمة في كل نافذة 50 ميكروثانية تُزيل الحاملة، ومعادلة فرق من الرتبة الأولى تتتبّع الضوء المحيط وتطرحه.</span></span></li>
+          <li><b><span class="en">Marks and spaces</span><span class="ar">النبضات والفواصل</span></b><span class="d"><span class="en">A threshold turns the envelope into the message m(t). The sensor is a slow LTI system, so its convolution stretches every mark.</span><span class="ar">العتبة تحوّل الغلاف إلى الرسالة m(t). والحسّاس نظام خطي ثابت بطيء، فالالتفاف يطيل كل نبضة.</span></span></li>
+          <li><b><span class="en">Carrier frequency</span><span class="ar">تردد الحاملة</span></b><span class="d"><span class="en">A Hann window and an FFT over 1024 samples find the carrier: 38.00 kHz on our remotes.</span><span class="ar">نافذة Hann وتحويل FFT على 1024 عيّنة يحدّدان تردد الحاملة: 38.00 كيلوهرتز في أجهزة التحكّم لدينا.</span></span></li>
+          <li><b><span class="en">Decode and transmit</span><span class="ar">فك الترميز والإرسال</span></b><span class="d"><span class="en">NEC codes are decoded from mark plus space, the stretch is removed, and the RMT rebuilds x(t) = m(t)·c(t) on three IR LEDs.</span><span class="ar">يُفكّ ترميز NEC من مجموع النبضة والفاصل، ثم تُزال الإطالة، ويعيد مولّد RMT بناء x(t) = m(t)·c(t) على ثلاثة مصابيح أشعة تحت حمراء.</span></span></li>
+        </ol>
+
+        <div class="note">
+          <p class="eyebrow"><span class="en">Two versions</span><span class="ar">نسختان</span></p>
+          <p><span class="en">The first version used our own main board with an ESP32 module, a separate display, a charger and a boost converter: six modules and 31 wires. The final version is one CYD board (ESP32 with a 2.8 inch touch screen and charger) plus our IR board, in a 3D-printed case.</span><span class="ar">النسخة الأولى كانت على لوحة رئيسية صمّمناها مع وحدة ESP32 وشاشة منفصلة وشاحن ومحوّل رافع: ست وحدات و31 سلكاً. أمّا النسخة النهائية فلوحة CYD واحدة (ESP32 مع شاشة لمس 2.8 بوصة وشاحن) مع لوحة الأشعة تحت الحمراء الخاصة بنا، داخل علبة مطبوعة ثلاثياً.</span></p>
+        </div>
+
+        <div class="live">
+          <div>
+            <p class="live-t"><span class="en">Code and build guide</span><span class="ar">الكود ودليل البناء</span></p>
+            <p class="live-d"><span class="en">The firmware, the KiCad IR board, the case files and a step-by-step hardware guide, on GitHub.</span><span class="ar">البرنامج الثابت، ولوحة KiCad، وملفات العلبة، ودليل بناء خطوة بخطوة، على GitHub.</span></p>
+          </div>
+          <span class="btn-row">
+            <a class="btn primary" href="https://github.com/Talal-Aljohani/IR-Cloner-Analyzer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>GitHub</a>
+            <a class="btn ghost" href="https://github.com/Talal-Aljohani/IR-Cloner-Analyzer/blob/main/docs/Hardware_Guide.pdf" target="_blank" rel="noopener"><span class="en">Hardware guide</span><span class="ar">دليل العتاد</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          </span>
+        </div>
+      </div>
+
+      <aside>
+        <table class="spec">
+          <caption class="eyebrow"><span class="en">At a glance</span><span class="ar">نظرة سريعة</span></caption>
+          <tbody>
+            <tr><th><span class="en">Course</span><span class="ar">المقرر</span></th><td><span class="en">EE3521 Signals and Systems</span><span class="ar">EE3521 الإشارات والأنظمة</span></td></tr>
+            <tr><th><span class="en">Controller</span><span class="ar">المتحكّم</span></th><td><span class="en">ESP32, 2.8 in ILI9341 touch screen (CYD)</span><span class="ar">ESP32 مع شاشة لمس ILI9341 مقاس 2.8 بوصة (CYD)</span></td></tr>
+            <tr><th><span class="en">Receiver</span><span class="ar">الاستقبال</span></th><td><span class="en">Raw photodiode, ADC at 200 kSa/s</span><span class="ar">ثنائي ضوئي خام، ومحوّل بمعدل 200 ألف عيّنة/ث</span></td></tr>
+            <tr><th><span class="en">Transmitter</span><span class="ar">الإرسال</span></th><td><span class="en">3 IR LEDs, 2N2222, ESP32 RMT</span><span class="ar">3 مصابيح IR، وترانزستور 2N2222، ومولّد RMT</span></td></tr>
+            <tr><th><span class="en">Carrier found</span><span class="ar">الحاملة المقاسة</span></th><td><span class="en">38.00 kHz, FFT bin 195 Hz</span><span class="ar">38.00 كيلوهرتز، دقة FFT 195 هرتز</span></td></tr>
+            <tr><th><span class="en">Firmware</span><span class="ar">البرنامج الثابت</span></th><td><span class="en">3,746 lines, Arduino C++</span><span class="ar">3,746 سطراً، Arduino C++</span></td></tr>
+            <tr><th><span class="en">Hardware</span><span class="ar">العتاد</span></th><td><span class="en">KiCad IR board, Fusion 3D-printed case</span><span class="ar">لوحة IR على KiCad، وعلبة مطبوعة من Fusion</span></td></tr>
+          </tbody>
+        </table>
+        <dl class="people">
+          <div><dt class="eyebrow"><span class="en">Team</span><span class="ar">الفريق</span></dt><dd><span class="en">Talal Aljohani, Saad Obaid, Moatasim Ahmad, Yousef Ahmed</span><span class="ar">طلال الجهني، سعد عبيد، معتصم أحمد، يوسف أحمد</span></dd></div>
+          <div><dt class="eyebrow"><span class="en">Supervisor</span><span class="ar">المشرف</span></dt><dd><span class="en">Dr. Abdulmajeed Alenezi</span><span class="ar">د. عبدالمجيد العنزي</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="gallery">
+      <figure class="fig wide"><a class="frame white" href="assets/img/ir-pipeline.webp"><img src="assets/img/ir-pipeline.webp" width="1400" height="618" loading="lazy" alt="Signal chain diagram: remote light, sensor, sampling, ripple removal, timings, spectrum, carrier frequency, rebuilding the light, IR LEDs" data-alt-ar="مخطط سلسلة الإشارة: ضوء جهاز التحكّم، والحسّاس، وأخذ العيّنات، وإزالة التموّج، والتوقيتات، والطيف، وتردد الحاملة، وإعادة بناء الضوء، والمصابيح"></a><figcaption><span class="en">The signal chain, with the course chapter behind each step.</span><span class="ar">سلسلة الإشارة، مع فصل المقرر وراء كل خطوة.</span></figcaption></figure>
+      <figure class="fig"><a class="frame white" href="assets/img/ir-spectrum.webp"><img src="assets/img/ir-spectrum.webp" width="1400" height="448" loading="lazy" alt="Measured spectrum with the carrier peak at 38.00 kHz" data-alt-ar="الطيف المقاس مع قمّة الحاملة عند 38.00 كيلوهرتز"></a><figcaption><span class="en">Measured spectrum: the carrier at 38.00 kHz.</span><span class="ar">الطيف المقاس: الحاملة عند 38.00 كيلوهرتز.</span></figcaption></figure>
+      <figure class="fig"><a class="frame contain" href="assets/img/ir-board.webp"><img src="assets/img/ir-board.webp" width="800" height="614" loading="lazy" alt="3D render of the IR board with three IR LEDs, the receiver and a 2N2222 transistor" data-alt-ar="مجسّم لوحة الأشعة تحت الحمراء مع ثلاثة مصابيح والمستقبل وترانزستور 2N2222"></a><figcaption><span class="en">Our IR board: receiver and three IR LEDs.</span><span class="ar">لوحتنا: المستقبل وثلاثة مصابيح أشعة تحت حمراء.</span></figcaption></figure>
+      <figure class="fig"><a class="frame white" href="assets/img/ir-case.webp"><img src="assets/img/ir-case.webp" width="1000" height="771" loading="lazy" alt="Exploded view of the 3D-printed case with all parts" data-alt-ar="منظر مفكّك للعلبة المطبوعة ثلاثياً بكل أجزائها"></a><figcaption><span class="en">The 3D-printed case, exploded.</span><span class="ar">العلبة المطبوعة ثلاثياً مفكّكة.</span></figcaption></figure>
+      <figure class="fig"><a class="frame white" href="assets/img/ir-old-new.webp"><img src="assets/img/ir-old-new.webp" width="1000" height="725" loading="lazy" alt="Inside view: the first design with six modules on the left, the final CYD design on the right" data-alt-ar="من الداخل: التصميم الأول بست وحدات على اليسار، والتصميم النهائي بلوحة CYD على اليمين"></a><figcaption><span class="en">Version 1 (left) and the final CYD design (right).</span><span class="ar">النسخة الأولى (يسار) والتصميم النهائي بلوحة CYD (يمين).</span></figcaption></figure>
+    </div>
+
+    <ul class="tags" aria-label="Tools">
+      <li>ESP32</li><li>DSP</li><li>FFT</li><li>Z-transform</li><li>Arduino C++</li><li>KiCad</li><li>Fusion</li><li>3D printing</li>
+    </ul>
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="ircloner"></div></aside>
   </div>
 </article>
 <!-- ================= KICAD WORKSHOP ================= -->
@@ -2139,7 +2230,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 (function(){
   var root=document.documentElement;
   /* ---- views (one page per project) ---- */
-  var VIEWS={sima:['Sima, NASA Space Apps','سيما، هاكاثون ناسا'],expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
+  var VIEWS={ircloner:['IR Cloner and Analyzer','ناسخ ومحلّل الأشعة تحت الحمراء'],sima:['Sima, NASA Space Apps','سيما، هاكاثون ناسا'],expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
   function setTitle(){
     var ar=root.getAttribute('data-lang')==='ar', v=root.getAttribute('data-view'), base=ar?'طلال الجهني':'Talal Aljohani';
     document.title=(v&&VIEWS[v])?VIEWS[v][ar?1:0]+' · '+base:base;
