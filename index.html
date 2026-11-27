@@ -14,7 +14,7 @@
 <script>
 (function(){var l='en';try{l=localStorage.getItem('tsa-lang')||'en'}catch(e){}
 if(location.hash==='#ar')l='ar';if(location.hash==='#en')l='en';
-var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
+var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','sima','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
 var r=document.documentElement;r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
 </script>
 <style>
@@ -207,7 +207,7 @@ html[data-lang="ar"] .ix-y{font-family:var(--arabic);font-size:14px}
 
 /* ---------- views ---------- */
 .project{display:none}
-html[data-view="expo"] #p-expo,html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
+html[data-view="expo"] #p-expo,html[data-view="sima"] #p-sima,html[data-view="hydronet"] #p-hydronet,html[data-view="twinsat"] #p-twinsat,html[data-view="ihour"] #p-ihour,html[data-view="ieee"] #p-ieee,html[data-view="inno"] #p-inno,html[data-view="engclub"] #p-engclub,html[data-view="kicad"] #p-kicad,html[data-view="anaq"] #p-anaq,html[data-view="bldc"] #p-bldc,html[data-view="pwm"] #p-pwm,html[data-view="lfr"] #p-lfr{display:block}
 html[data-view] .home-part{display:none}
 html[dir="rtl"] svg.flip{transform:scaleX(-1)}
 
@@ -247,6 +247,12 @@ html[data-lang="ar"] .badge{font-family:var(--arabic);font-size:12.5px}
 .k4 .aw-place{background:color-mix(in srgb,var(--ch4) 12%,var(--surface));border-color:color-mix(in srgb,var(--ch4) 38%,var(--rule));color:var(--ch4)}
 .chip.ext svg{width:13px;height:13px}
 .btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.video-player{background:#000}
+.video-player video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.team{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.team li{display:grid;gap:1px}
+.team b{font-weight:600;font-size:14.5px}
+.team span{color:var(--muted);font-size:13px}
 .desc .live + .live{margin-top:10px}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px}
 .k5 .aw-place{background:color-mix(in srgb,var(--ch5) 12%,var(--surface));border-color:color-mix(in srgb,var(--ch5) 38%,var(--rule));color:var(--ch5)}
@@ -932,7 +938,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
       <div class="ch-info">
         <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
         <p class="ch-handle"><span class="en">Electrical Engineering student · Islamic University of Madinah · Class of 2028</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة · دفعة 2028</span></p>
-        <p class="ch-stats"><span class="en">5 projects · 3 achievements · 4 activities</span><span class="ar">5 مشاريع · 3 إنجازات · 4 أنشطة</span></p>
+        <p class="ch-stats"><span class="en">5 projects · 4 achievements · 4 activities</span><span class="ar">5 مشاريع · 4 إنجازات · 4 أنشطة</span></p>
         <p class="ch-about"><span class="en">I design and build hardware: telemetry boards, motor drives, logic circuits and robots, and I teach PCB design to fellow students.</span><span class="ar">أصمّم وأبني أنظمة العتاد: لوحات التيليمتري، ومشغّلات المحرّكات، والدوائر المنطقية، والروبوتات، وأدرّس تصميم اللوحات المطبوعة لزملائي.</span></p>
         <div class="cta">
           <a class="btn primary" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
@@ -953,6 +959,10 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 <section class="feed home-part" id="feed" aria-label="Work">
   <div class="wrap">
     <div class="vgrid">
+      <a class="vcard" href="#sima" data-cat="award">
+        <span class="thumb cover" style="--bg:#0B0D10"><img src="assets/img/sima-site.webp" width="1600" height="900" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Hackathon</span><span class="ar">هاكاثون</span></span></span>
+        <span class="v-info"><span class="v-text"><span class="v-cat c-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">Achievement</span><span class="ar">إنجاز</span></span><span class="v-title"><span class="en">Sima, NASA Space Apps Challenge</span><span class="ar">سيما، هاكاثون ناسا لتطبيقات الفضاء</span></span><span class="v-meta"><span class="en">Madinah · Nov 2026</span><span class="ar">المدينة المنورة · نوفمبر 2026</span></span></span></span>
+      </a>
       <a class="vcard" href="#kicad" data-cat="project">
         <span class="thumb cover" style="--bg:#1B2A44"><img src="assets/img/pcb-ws-hall.webp" width="1600" height="900" alt="" loading="lazy" style="object-position:50% 45%"><span class="badge-t"><span class="en">Workshop</span><span class="ar">ورشة</span></span></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">PCB Design Basics Using KiCad</span><span class="ar">أساسيات تصميم اللوحات المطبوعة باستخدام KiCad</span></span><span class="v-meta"><span class="en">IEEE IUM Student Branch · Oct 2026</span><span class="ar">فرع IEEE الطلابي · أكتوبر 2026</span></span></span></span>
@@ -1007,6 +1017,86 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 </section>
 
 <!-- ================= AWARD PAGES ================= -->
+<article class="project watchpage activity k4" id="p-sima" aria-labelledby="t-sima">
+  <div class="wrap watch">
+    <div class="w-main">
+      <div class="player video-player"><video controls playsinline preload="none" poster="assets/img/sima-poster.webp" aria-label="Sima demo video"><source src="assets/video/sima-demo.mp4" type="video/mp4"></video></div>
+
+      <h3 class="p-title" id="t-sima"><span class="en">Sima: watch the infrared sky change</span><span class="ar">سيما: شاهد سماء الأشعة تحت الحمراء تتغيّر</span></h3>
+      <div class="w-row">
+        <span class="v-cat c-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">Achievement</span><span class="ar">إنجاز</span></span>
+  <div class="p-meta">
+      <span class="rolepill"><span class="en">UX designer</span><span class="ar">مصمّم تجربة المستخدم</span></span>
+      <span><span class="en">NASA Space Apps Challenge 2026 · Madinah</span><span class="ar">هاكاثون ناسا لتطبيقات الفضاء 2026 · المدينة المنورة</span></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span><span class="en">November 2026</span><span class="ar">نوفمبر 2026</span></span>
+    </div>
+      </div>
+      <div class="desc">
+    <p class="p-sub"><span class="en">Sima is a website that lets anyone watch NASA's SPHEREx infrared sky change over time. Our team built it for the Planet X and SPHEREx challenge at the NASA Space Apps Challenge 2026 in Madinah.</span><span class="ar">سيما موقع يتيح لأي شخص أن يشاهد سماء الأشعة تحت الحمراء من تلسكوب SPHEREx التابع لناسا وهي تتغيّر مع الوقت. بناه فريقنا لتحدّي «الكوكب X وSPHEREx» في هاكاثون ناسا لتطبيقات الفضاء 2026 بالمدينة المنورة.</span></p>
+    <div class="p-body">
+      <div class="p-text">
+        <p class="en">You pick a spot on the sky, either by moving around a globe or by typing a star's name or coordinates. Sima then plays SPHEREx's real pictures of that spot in date order, like a short video. Stars that don't move stay still, so anything that moves or changes jumps out.</p>
+        <p class="ar">تختار موضعاً في السماء، إمّا بتحريك الكرة السماوية أو بكتابة اسم نجم أو إحداثياته. ثم يعرض سيما صور SPHEREx الحقيقية لذلك الموضع مرتّبة حسب التاريخ مثل مقطع قصير. النجوم الثابتة تبقى ساكنة، فيبرز كل ما يتحرّك أو يتغيّر.</p>
+        <p class="en">In 1930, Pluto was found by flipping between two photos of the same sky taken on different nights. SPHEREx photographs the whole sky every six months in 102 infrared colors, and all of it is public. But its all-sky map blends a year of pictures into one, which hides anything that moved. To compare single dates today, you have to find the pictures, crop them and line them up yourself, usually by writing code.</p>
+        <p class="ar">عام 1930 اكتُشف بلوتو بالتنقّل بين صورتين للسماء نفسها التُقطتا في ليلتين مختلفتين. وتلسكوب SPHEREx يصوّر السماء كلها مرة كل ستة أشهر في 102 من ألوان الأشعة تحت الحمراء، وكل صوره متاحة للجميع. لكن خريطته الشاملة تدمج صور سنة كاملة في صورة واحدة، فتُخفي كل ما تحرّك. ولمقارنة تواريخ منفردة اليوم عليك أن تجد الصور وتقصّها وتطابقها بنفسك، وغالباً بكتابة كود.</p>
+        <p class="en">Sima does that work for you. Beginners get short missions, like catching a runaway star. Experts get real measurements: Sima measures Barnard's Star moving 10.50″ per year straight from the pictures, close to the known value of 10.39″ from the Gaia space telescope. Every picture is real NASA data and says where it came from. Sima works on phones and in Arabic.</p>
+        <p class="ar">سيما يقوم بهذا العمل عنك. للمبتدئين مهمّات قصيرة، مثل الإمساك بنجم هارب. وللخبراء قياسات حقيقية: يقيس سيما حركة نجم برنارد بمقدار 10.50″ في السنة مباشرة من الصور، قريباً من القيمة المعروفة 10.39″ من تلسكوب Gaia الفضائي. كل صورة بيانات حقيقية من ناسا، وتذكر مصدرها. ويعمل سيما على الجوال وباللغة العربية.</p>
+
+        <div class="note">
+          <p class="eyebrow"><span class="en">My part</span><span class="ar">دوري</span></p>
+          <p><span class="en">I was the team's user experience designer: how a beginner finds a star, how the missions guide them, and how the same screens serve an expert who wants the numbers.</span><span class="ar">كنت مصمّم تجربة المستخدم في الفريق: كيف يجد المبتدئ نجماً، وكيف ترشده المهمّات، وكيف تخدم الشاشات نفسها الخبير الذي يريد الأرقام.</span></p>
+        </div>
+
+        <div class="live">
+          <div>
+            <p class="live-t"><span class="en">Try Sima</span><span class="ar">جرّب سيما</span></p>
+            <p class="live-d"><span class="en">The live site. It runs on a free server, so the first visit can take a few seconds to wake up. The video and screenshots here keep a record if the link ever stops working.</span><span class="ar">الموقع المباشر. يعمل على خادم مجاني، فقد تستغرق أول زيارة بضع ثوانٍ حتى يعمل. والفيديو والصور هنا تحفظ نسخة منه إذا توقّف الرابط يوماً.</span></p>
+          </div>
+          <a class="btn primary" href="https://sima-spherex.onrender.com/" target="_blank" rel="noopener"><span class="en">Open Sima</span><span class="ar">افتح سيما</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+
+      <aside>
+        <table class="spec">
+          <caption class="eyebrow"><span class="en">At a glance</span><span class="ar">نظرة سريعة</span></caption>
+          <tbody>
+            <tr><th><span class="en">Event</span><span class="ar">الفعالية</span></th><td><span class="en">NASA Space Apps Challenge 2026, Madinah</span><span class="ar">هاكاثون ناسا لتطبيقات الفضاء 2026، المدينة المنورة</span></td></tr>
+            <tr><th><span class="en">Challenge</span><span class="ar">التحدّي</span></th><td><span class="en">Planet X and SPHEREx</span><span class="ar">الكوكب X وSPHEREx</span></td></tr>
+            <tr><th><span class="en">Data</span><span class="ar">البيانات</span></th><td><span class="en">Public SPHEREx images, 0.75 to 5 µm</span><span class="ar">صور SPHEREx العامة، من 0.75 إلى 5 ميكرومتر</span></td></tr>
+            <tr><th><span class="en">Views</span><span class="ar">طرق المقارنة</span></th><td><span class="en">Flip, swipe, two dates, difference, stack, trail</span><span class="ar">التقليب، والسحب، وتاريخان، والفرق، والتكديس، والأثر</span></td></tr>
+            <tr><th><span class="en">Check</span><span class="ar">التحقّق</span></th><td><span class="en">Barnard's Star 10.50″/yr, Gaia 10.39″/yr</span><span class="ar">نجم برنارد 10.50″/سنة، وGaia 10.39″/سنة</span></td></tr>
+            <tr><th><span class="en">Works on</span><span class="ar">يعمل على</span></th><td><span class="en">Phones and computers, English and Arabic</span><span class="ar">الجوال والكمبيوتر، بالعربية والإنجليزية</span></td></tr>
+          </tbody>
+        </table>
+        <div class="people">
+          <p class="eyebrow"><span class="en">Team Sima</span><span class="ar">فريق سيما</span></p>
+          <ul class="team">
+            <li><b><span class="en">Moaz Altamimi</span><span class="ar">معاذ التميمي</span></b><span><span class="en">Lead developer</span><span class="ar">المطوّر الرئيسي</span></span></li>
+            <li><b><span class="en">Talal Aljohani</span><span class="ar">طلال الجهني</span></b><span><span class="en">User experience designer</span><span class="ar">مصمّم تجربة المستخدم</span></span></li>
+            <li><b><span class="en">Sahl Mersal</span><span class="ar">سهل مرسال</span></b><span><span class="en">Project manager</span><span class="ar">مدير المشروع</span></span></li>
+            <li><b><span class="en">Mohammed Sami</span><span class="ar">محمد سامي</span></b><span><span class="en">Testing and scientific validation</span><span class="ar">مسؤول الاختبار والتحقق العلمي</span></span></li>
+            <li><b><span class="en">Ahmed Saif</span><span class="ar">أحمد سيف</span></b><span><span class="en">Presentation and content designer</span><span class="ar">مصمّم العرض والمحتوى</span></span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <div class="gallery">
+      <figure class="fig"><a class="frame cover" href="assets/img/sima-team.webp"><img src="assets/img/sima-team.webp" width="825" height="1100" loading="lazy" style="object-position:50% 62%" alt="Talal with two teammates in front of the NASA Space Apps Challenge 2026 Madinah venue" data-alt-ar="طلال مع زميلين أمام مقرّ هاكاثون ناسا لتطبيقات الفضاء 2026 بالمدينة المنورة"></a><figcaption><span class="en">At the NASA Space Apps Challenge 2026 in Madinah.</span><span class="ar">في هاكاثون ناسا لتطبيقات الفضاء 2026 بالمدينة المنورة.</span></figcaption></figure>
+      <figure class="fig"><a class="frame cover" href="assets/img/sima-expert.webp"><img src="assets/img/sima-expert.webp" width="1600" height="900" loading="lazy" style="object-position:50% 50%" alt="Sima in Expert mode measuring Barnard's Star at 10.50 arcseconds per year, matching the catalogue" data-alt-ar="سيما في وضع الخبير يقيس حركة نجم برنارد بمقدار 10.50 ثانية قوسية في السنة، مطابقاً للفهرس"></a><figcaption><span class="en">Expert mode: Barnard's Star measured at 10.50″ per year.</span><span class="ar">وضع الخبير: حركة نجم برنارد 10.50″ في السنة.</span></figcaption></figure>
+      <figure class="fig"><a class="frame cover" href="assets/img/sima-site.webp"><img src="assets/img/sima-site.webp" width="1600" height="900" loading="lazy" style="object-position:50% 50%" alt="Sima home: the infrared sky globe with Barnard's Star selected and its SPHEREx images playing" data-alt-ar="الصفحة الرئيسية لسيما: كرة السماء بالأشعة تحت الحمراء ونجم برنارد محدّد وصوره تُعرض"></a><figcaption><span class="en">Discover mode: pick a star, then watch its real pictures play.</span><span class="ar">وضع الاستكشاف: اختر نجماً وشاهد صوره الحقيقية.</span></figcaption></figure>
+      <figure class="fig"><a class="frame contain" href="assets/img/sima-phone.webp"><img src="assets/img/sima-phone.webp" width="430" height="932" loading="lazy" style="object-position:50% 50%" alt="Sima on a phone" data-alt-ar="سيما على الجوال"></a><figcaption><span class="en">Sima on a phone.</span><span class="ar">سيما على الجوال.</span></figcaption></figure>
+    </div>
+
+    <ul class="tags" aria-label="Topics">
+      <li>NASA SPHEREx</li><li>Infrared astronomy</li><li>UX design</li><li>Web app</li><li>Hackathon</li>
+    </ul>
+      </div>
+    </div>
+    <aside class="w-side" aria-label="More work"><h4><span class="en">Up next</span><span class="ar">التالي</span></h4><div class="upnext" data-self="sima"></div></aside>
+  </div>
+</article>
 <article class="project watchpage activity k5" id="p-hydronet" aria-labelledby="t-hydronet">
   <div class="wrap watch">
     <div class="w-main">
@@ -2039,7 +2129,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 (function(){
   var root=document.documentElement;
   /* ---- views (one page per project) ---- */
-  var VIEWS={expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
+  var VIEWS={sima:['Sima, NASA Space Apps','سيما، هاكاثون ناسا'],expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
   function setTitle(){
     var ar=root.getAttribute('data-lang')==='ar', v=root.getAttribute('data-view'), base=ar?'طلال الجهني':'Talal Aljohani';
     document.title=(v&&VIEWS[v])?VIEWS[v][ar?1:0]+' · '+base:base;
