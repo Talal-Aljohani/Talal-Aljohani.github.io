@@ -15,7 +15,7 @@
 (function(){var l='en';try{l=localStorage.getItem('tsa-lang')||'en'}catch(e){}
 if(location.hash==='#ar')l='ar';if(location.hash==='#en')l='en';
 var h=location.hash.slice(1);var TB={projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};if(TB[h])document.documentElement.setAttribute('data-tab',TB[h]);if(['kicad','anaq','bldc','pwm','lfr','ihour','ieee','inno','engclub','sima','ircloner','hydronet','expo','twinsat'].indexOf(h)>=0)document.documentElement.setAttribute('data-view',h);
-var r=document.documentElement;r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
+var r=document.documentElement;try{var th=localStorage.getItem('tsa-theme');if(th==='dark'||th==='light')r.setAttribute('data-theme',th)}catch(e){}r.setAttribute('data-lang',l);r.lang=l;r.dir=l==='ar'?'rtl':'ltr';})();
 </script>
 <style>
 :root{
@@ -683,215 +683,262 @@ html[data-lang="ar"] h3.p-title{font-size:clamp(1.7rem,3.8vw,2.4rem)}
 }
 
 /* =====================================================================
-   YouTube-style layout: top bar with search, side guide (bottom bar on
-   phones), channel header with tabs, thumbnail grid, watch pages.
+   FROST: neutral black and white, frosted glass panels, square corners,
+   four measured accents: 01 blue, 02 amber, 03 red, 04 green.
    ===================================================================== */
-:root{--side:232px;--bar-h:64px}
-html{scroll-padding-top:128px}
-.bar .wrap{max-width:none;min-height:var(--bar-h);padding-inline:16px 20px;gap:14px}
-.mark .sig-head{height:48px}
-.nav{flex:1;gap:10px;margin-inline-start:12px}
-.search{position:relative;flex:1;max-width:600px;margin-inline:auto;display:flex;align-items:center}
-.search input{width:100%;height:42px;border:1px solid var(--rule-2);border-radius:999px;background:var(--surface);color:var(--ink);font:15px var(--sans);padding-inline:44px 16px;outline:none}
-html[data-lang="ar"] .search input{font-family:var(--arabic)}
-.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.s-ico{position:absolute;inset-inline-start:15px;display:inline-flex;color:var(--muted);pointer-events:none}
-.s-ico svg,.s-open svg,.s-close svg{width:19px;height:19px}
-.s-open,.s-close{display:none;appearance:none;border:0;background:transparent;color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;align-items:center;justify-content:center}
-.s-open:hover,.s-close:hover{background:var(--sunken)}
+:root{
+  --maxw:1200px; --r:3px;
+  --paper:#ECEDEF; --surface:rgba(255,255,255,.5); --sunken:rgba(13,14,16,.045);
+  --ink:#0D0E10; --ink-2:#34373C; --muted:#61656C; --rule:rgba(13,14,16,.11); --rule-2:rgba(13,14,16,.22);
+  --a1:#2459E0; --a2:#B97E00; --a3:#D23A32; --a4:#0F8A54; --accent:var(--a1); --accent-soft:rgba(36,89,224,.09); --on-accent:#fff;
+  --g1:rgba(255,255,255,.70); --g2:rgba(255,255,255,.42); --g-line:rgba(255,255,255,.85); --g-edge:rgba(13,14,16,.09); --g-hi:#fff;
+  --g-shadow:0 1px 1px rgba(13,14,16,.04),0 24px 48px -32px rgba(13,14,16,.4);
+  --b1:rgba(36,89,224,.17); --b2:rgba(232,170,20,.15); --b3:rgba(210,58,50,.09); --b4:rgba(15,138,84,.10);
+  --lat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cpath d='M36 36h40v40H36zM56 27.7 84.3 56 56 84.3 27.7 56zM56 27.7V0M84.3 56H112M56 84.3V112M27.7 56H0M36 36 0 0M76 36 112 0M76 76l36 36M36 76 0 112' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E"); --lat-o:.07;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 .06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --c-project:var(--a1); --c-award:var(--a2); --c-activity:var(--a3);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --paper:#0A0B0C; --surface:rgba(255,255,255,.035); --sunken:rgba(255,255,255,.05);
+    --ink:#F1F2F3; --ink-2:#C8CBD0; --muted:#8D9299; --rule:rgba(255,255,255,.09); --rule-2:rgba(255,255,255,.2);
+    --a1:#6B96FF; --a2:#F2B53A; --a3:#FF6A61; --a4:#3FCF8C; --accent-soft:rgba(107,150,255,.14); --on-accent:#0A0B0C;
+    --g1:rgba(34,35,38,.62); --g2:rgba(20,21,23,.46); --g-line:rgba(255,255,255,.10); --g-edge:rgba(0,0,0,.55); --g-hi:rgba(255,255,255,.14);
+    --g-shadow:0 1px 1px rgba(0,0,0,.3),0 28px 56px -32px rgba(0,0,0,.95);
+    --b1:rgba(107,150,255,.20); --b2:rgba(242,181,58,.12); --b3:rgba(255,106,97,.11); --b4:rgba(63,207,140,.11);
+    --lat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cpath d='M36 36h40v40H36zM56 27.7 84.3 56 56 84.3 27.7 56zM56 27.7V0M84.3 56H112M56 84.3V112M27.7 56H0M36 36 0 0M76 36 112 0M76 76l36 36M36 76 0 112' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E"); --lat-o:.07; color-scheme:dark; } }
+:root[data-theme="dark"]{ --paper:#0A0B0C; --surface:rgba(255,255,255,.035); --sunken:rgba(255,255,255,.05);
+    --ink:#F1F2F3; --ink-2:#C8CBD0; --muted:#8D9299; --rule:rgba(255,255,255,.09); --rule-2:rgba(255,255,255,.2);
+    --a1:#6B96FF; --a2:#F2B53A; --a3:#FF6A61; --a4:#3FCF8C; --accent-soft:rgba(107,150,255,.14); --on-accent:#0A0B0C;
+    --g1:rgba(34,35,38,.62); --g2:rgba(20,21,23,.46); --g-line:rgba(255,255,255,.10); --g-edge:rgba(0,0,0,.55); --g-hi:rgba(255,255,255,.14);
+    --g-shadow:0 1px 1px rgba(0,0,0,.3),0 28px 56px -32px rgba(0,0,0,.95);
+    --b1:rgba(107,150,255,.20); --b2:rgba(242,181,58,.12); --b3:rgba(255,106,97,.11); --b4:rgba(63,207,140,.11);
+    --lat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cpath d='M36 36h40v40H36zM56 27.7 84.3 56 56 84.3 27.7 56zM56 27.7V0M84.3 56H112M56 84.3V112M27.7 56H0M36 36 0 0M76 36 112 0M76 76l36 36M36 76 0 112' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E"); --lat-o:.07; color-scheme:dark; }
+:root[data-theme="light"]{color-scheme:light}
 
-/* side guide */
-.side{position:fixed;z-index:25;top:calc(var(--bar-h) + 1px + env(safe-area-inset-top,0px));bottom:0;inset-inline-start:0;width:var(--side);padding:12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;background:var(--paper)}
-.side-i{display:flex;align-items:center;gap:20px;padding:10px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:14.5px;line-height:1.2}
-.side-i svg{width:22px;height:22px;flex:none}
-.side-i:hover{background:var(--sunken)}
-.side-i.on{background:var(--sunken);font-weight:650}
-.side hr{border:0;border-top:1px solid var(--rule);margin:10px 4px}
-.side-foot{margin:auto 0 0;padding:12px 14px;font-size:12px;color:var(--muted)}
-main,footer{margin-inline-start:var(--side)}
+/* backdrop: four faint blooms and a fine lattice that fades down the page */
+html{background:var(--paper)}
+body{background:transparent;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+  radial-gradient(44vmax 34vmax at 2% 0%,var(--b1),transparent 64%),
+  radial-gradient(38vmax 30vmax at 100% 10%,var(--b2),transparent 64%),
+  radial-gradient(40vmax 34vmax at 94% 100%,var(--b3),transparent 64%),
+  radial-gradient(34vmax 30vmax at 0% 98%,var(--b4),transparent 64%)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--lat) 0 0/112px 112px;opacity:var(--lat-o);
+  -webkit-mask-image:radial-gradient(140% 85% at 50% 0%,#000 20%,transparent 78%);mask-image:radial-gradient(140% 85% at 50% 0%,#000 20%,transparent 78%)}
 
-/* channel header */
-.channel{padding-top:16px}
-.channel .wrap,.feed .wrap,.about-tab .wrap{max-width:1560px}
-.banner{height:clamp(96px,15vw,190px);border-radius:16px;overflow:hidden;background:linear-gradient(120deg,#0B1013,#131B2B)}
-.banner svg{display:block;width:100%;height:100%}
-.b-grid{stroke:rgba(160,190,230,.10);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}
-.b-trace{stroke:#F4CB4A;stroke-width:2.2;fill:none;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(244,203,74,.55))}
-.ch-head{display:flex;gap:clamp(16px,2.6vw,28px);align-items:center;padding-block:22px 12px}
-.ch-head .avatar{width:clamp(84px,11vw,156px);height:clamp(84px,11vw,156px);border:0;box-shadow:none}
-.ch-info{display:grid;gap:6px;min-width:0}
-.ch-info h1{font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.15;margin:0}
-.ch-handle{color:var(--muted);font-size:14.5px}
-.ch-about{color:var(--ink-2);font-size:15px;max-width:62em}
-.channel .cta{margin-top:8px;gap:10px}
-.channel .btn{border-radius:999px;padding:9px 18px;font-size:14.5px}
-.channel .btn svg{width:17px;height:17px}
-.tabs{position:sticky;top:calc(var(--bar-h) + 1px + env(safe-area-inset-top,0px));z-index:15;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;background:var(--paper);border-bottom:1px solid var(--rule);margin-top:6px}
-.tabs::-webkit-scrollbar{display:none}
-.tab{padding:13px 14px 11px;color:var(--muted);font-weight:650;font-size:15px;text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent}
-.tab:hover{color:var(--ink)}
-.tab.on{color:var(--ink);border-bottom-color:var(--ink)}
-html:not([data-tab]) .tab[data-tab="all"],html:not([data-tab]) .side-i[data-tab="all"]{color:var(--ink)}
-html:not([data-tab]) .tab[data-tab="all"]{border-bottom-color:var(--ink)}
-html:not([data-tab]) .side-i[data-tab="all"]{background:var(--sunken);font-weight:650}
+/* the glass recipe */
+.glass,.vcard,.desc,.pager a,.skill,.about-tab .about,.about-tab .contact,.btn.ghost{
+  background:var(--grain),linear-gradient(180deg,var(--g1),var(--g2));
+  -webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  border:1px solid var(--g-line);border-radius:var(--r);
+  box-shadow:0 0 0 1px var(--g-edge),inset 0 1px 0 var(--g-hi),var(--g-shadow)}
 
-/* thumbnail grid */
-.feed{padding-bottom:56px}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:34px 18px;padding-top:24px}
-.vcard,.mcard{display:grid;gap:12px;text-decoration:none;color:inherit;align-content:start}
-.thumb{position:relative;display:block;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--bg,var(--sunken))}
-.thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
-.thumb.contain img{object-fit:contain;padding:5% 9%}
-.vcard:hover .thumb img,.mcard:hover .thumb img{transform:scale(1.035)}
-.badge-t{position:absolute;inset-inline-end:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;font:600 12px/1 var(--sans);padding:4px 7px;border-radius:5px}
-html[data-lang="ar"] .badge-t{font-family:var(--arabic)}
-.badge-t.gold{background:#F4CB4A;color:#1A1A1A}
-.tile{background:linear-gradient(135deg,#2B5DD1,#6A3FD1)}
+/* square corners everywhere (LEDs and legend dots stay round) */
+.frame,.note,.live,.chip,.stat,.modes,.chain li,.pwm,.award,.aw-place,.field-fig,.empty,.scope,.scope-screen,.btn,.dipbox,.thumb,.player,.lang,.iconbtn,dialog.lb img,dialog.lb .x{border-radius:var(--r)}
+.tags li,.topics li,.rolepill,.prize,.place,.copy,.badge-t{border-radius:2px}
+.facts-line li::before{border-radius:0}
+:focus-visible{border-radius:var(--r)}
+
+/* accents per section */
+.k1,.k2,.k3,.k4,.k5{--ch:var(--acc,var(--a1))}
+[data-sec="projects"],.vcard[data-cat="project"],.d1,.nav a[data-tab="projects"]{--acc:var(--a1)}
+[data-sec="awards"],.vcard[data-cat="award"],.d2,.nav a[data-tab="awards"]{--acc:var(--a2)}
+[data-sec="activities"],.vcard[data-cat="activity"],.d3,.nav a[data-tab="activities"]{--acc:var(--a3)}
+[data-sec="about"],.d4,.nav a[data-tab="about"],#about-tab{--acc:var(--a4)}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:30;background:var(--grain),linear-gradient(180deg,var(--g1),var(--g2));-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);border-bottom:1px solid var(--g-line);box-shadow:0 1px 0 var(--g-edge)}
+.bar .wrap{min-height:64px;gap:18px}
+.mark .sig-head{height:44px}
+.nav{margin-inline-start:auto;gap:0}
+.nav ul{display:flex;gap:2px}
+.nav a{position:relative;padding:8px 12px;border-radius:var(--r);font-size:14.5px;font-weight:500;color:var(--ink-2)}
+.nav a:hover{background:var(--sunken);color:var(--ink)}
+.nav a.on{color:var(--ink)}
+.nav a.on::after{content:"";position:absolute;inset-inline:12px;bottom:1px;height:2px;background:var(--acc)}
+.tools{display:flex;align-items:center;gap:8px}
+.iconbtn,.lang{height:36px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--rule-2);background:transparent;color:var(--ink);cursor:pointer}
+.iconbtn{width:36px;padding:0}
+.iconbtn svg{width:17px;height:17px}
+.lang{margin:0;padding:0 12px;font-size:13.5px}
+.iconbtn:hover,.lang:hover{border-color:var(--ink)}
+
+/* shared bits */
+.d-n{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--mono);color:var(--acc);letter-spacing:.02em}
+.d-n::after{content:"";width:1.5px;height:1.05em;background:var(--ink);opacity:.8}
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:500 12.5px/1.4 var(--mono);letter-spacing:.03em;color:var(--muted)}
+html[data-lang="ar"] .crumb{font-family:var(--arabic);font-size:13.5px}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.crumb .sl{opacity:.5}
+.crumb .cur{color:var(--ink)}
+.btn{padding:10px 16px;font-size:14.5px}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.ghost{color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+.arr{width:18px;height:18px;flex:none}
+html[dir="rtl"] .arr{transform:scaleX(-1)}
+
+/* home */
+.home{padding-block:clamp(36px,6vw,76px) clamp(48px,7vw,88px)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,72px);align-items:center}
+.hero h1{margin:0;font-family:var(--sans);font-weight:600;font-size:clamp(2.6rem,6vw,4.9rem);line-height:.98;letter-spacing:-.035em;max-width:10ch}
+html[data-lang="ar"] .hero h1{font-family:var(--arabic);font-weight:700;line-height:1.2;letter-spacing:0;max-width:none;font-size:clamp(2.3rem,5.2vw,4.1rem)}
+.role{margin-top:20px;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.role i{font-style:normal;color:var(--muted);margin-inline:8px}
+.intro{margin-top:10px;max-width:50ch;color:var(--muted);font-size:15.5px}
+.hero .cta{margin-top:26px;gap:10px}
+.portrait{margin:0;padding:8px;width:clamp(190px,22vw,270px)}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:2px}
+.doors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:clamp(36px,5vw,60px)}
+.door{position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto auto;gap:8px;min-height:208px;padding:18px 18px 16px;color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.door > *{position:relative}
+.door::before{content:"";position:absolute;width:90%;aspect-ratio:1;inset-inline-end:-38%;bottom:-62%;background:radial-gradient(closest-side,color-mix(in srgb,var(--acc) 30%,transparent),transparent);transition:transform .35s ease}
+.door::after{content:"";position:absolute;inset-inline:-1px;top:-1px;height:2px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+html[dir="rtl"] .door::after{transform-origin:right}
+.door:hover{transform:translateY(-2px)}
+.door:hover::after{transform:scaleX(1)}
+.door:hover::before{transform:scale(1.25)}
+.d-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.d-c{font-size:13px;color:var(--muted)}
+.d-c b{font:600 13px var(--mono);color:var(--ink)}
+.d-t{align-self:end;font-size:clamp(1.3rem,1.9vw,1.6rem);font-weight:600;letter-spacing:-.015em;line-height:1.15}
+html[data-lang="ar"] .d-t{letter-spacing:0;font-weight:700}
+.d-s{font-size:14px;line-height:1.5;color:var(--muted);min-height:3em}
+.d-go{display:flex;justify-content:flex-end;color:var(--acc);margin-top:4px}
+.door:hover .d-go .arr{translate:3px 0}
+html[dir="rtl"] .door:hover .d-go .arr{translate:-3px 0}
+.d-go .arr{transition:translate .2s ease}
+.latest-row{margin-top:26px;display:grid;gap:10px}
+.latest{display:grid;grid-template-columns:150px minmax(0,1fr) auto;align-items:center;gap:18px;padding:8px;padding-inline-end:18px;color:inherit;text-decoration:none;transition:transform .2s ease}
+.latest:hover{transform:translateY(-2px)}
+.latest .thumb{aspect-ratio:16/9;border-radius:2px}
+.latest .thumb .badge-t{display:none}
+.lt-t{display:grid;gap:3px;min-width:0}
+.lt-t b{font-weight:600;font-size:16px;line-height:1.35}
+.lt-t small{color:var(--muted);font-size:13.5px}
+.latest > .arr{color:var(--a1)}
+
+/* section pages */
+.sechead{padding-top:clamp(28px,4vw,48px)}
+.sh-t{display:flex;align-items:center;gap:16px;margin:16px 0 8px;font-family:var(--sans);font-size:clamp(2rem,4.4vw,3.2rem);font-weight:600;line-height:1.1;letter-spacing:-.025em;text-transform:none}
+html[data-lang="ar"] .sh-t{font-family:var(--arabic);font-weight:700;letter-spacing:0}
+.sh-t .d-n{font-size:15px}
+.sh-d{color:var(--muted);max-width:60ch;font-size:15.5px}
+.feed{padding-block:28px 80px}
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vcard{position:relative;display:grid;grid-template-rows:auto 1fr;overflow:hidden;color:inherit;text-decoration:none;transition:transform .2s ease}
+.vcard::after{content:"";position:absolute;inset-inline:-1px;top:-1px;height:2px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+html[dir="rtl"] .vcard::after{transform-origin:right}
+.vcard:hover{transform:translateY(-2px)}
+.vcard:hover::after{transform:scaleX(1)}
+.thumb{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:var(--bg,#111)}
+.vcard .thumb{border-radius:0;border-bottom:1px solid var(--g-line)}
+.thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.thumb.contain img{object-fit:contain;padding:6% 10%}
+.vcard:hover .thumb img{transform:scale(1.03)}
+.badge-t{position:absolute;top:10px;inset-inline-start:10px;font:600 11.5px/1 var(--sans);padding:6px 8px;color:#fff;background:rgba(12,13,15,.5);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+html[data-lang="ar"] .badge-t{font-family:var(--arabic);font-size:12px}
+.badge-t.gold{background:rgba(242,181,58,.92);color:#16130A;border-color:rgba(255,255,255,.4)}
+.v-info{display:block;padding:14px 16px 16px}
+.v-text{display:grid;gap:5px}
+.vcard .v-cat{display:none}
+.v-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:600;font-size:16px;line-height:1.38;color:var(--ink)}
+.v-meta{display:block;color:var(--muted);font-size:13.5px;line-height:1.45}
+.tile{background:linear-gradient(135deg,#151619,#2A2C31)}
 .tile-in{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:6px;color:#fff;text-align:center;padding:12px}
-.tile-in svg{width:34px;height:34px;opacity:.9}
+.tile-in svg{width:34px;height:34px;color:var(--a3)}
 .tile-in b{font-size:clamp(1.1rem,2vw,1.4rem)}
-.tile-in small{font-size:12.5px;opacity:.85}
+.tile-in small{font-size:12.5px;opacity:.8}
 .tile.big .tile-in svg{width:56px;height:56px}
 .tile.big .tile-in b{font-size:clamp(1.6rem,3.4vw,2.4rem)}
 .tile.big .tile-in small{font-size:15px}
-.v-info{display:flex;gap:12px;align-items:flex-start}
-.av-mini{width:36px;height:36px;border-radius:50%;flex:none;background:var(--sunken) url("assets/img/talal.webp") center/cover}
-.v-text{display:grid;gap:3px;min-width:0}
-.v-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:650;font-size:16px;line-height:1.38;color:var(--ink);margin-bottom:2px}
-.v-meta{display:block;color:var(--muted);font-size:13.5px;line-height:1.4}
-.noresult{padding:40px 0;color:var(--muted);font-size:15px}
-html[data-tab="projects"] .vcard:not([data-cat="project"]),html[data-tab="awards"] .vcard:not([data-cat="award"]),html[data-tab="activities"] .vcard:not([data-cat="activity"]){display:none}
-html[data-tab="about"] #feed{display:none}
-html:not([data-tab="about"]) #about-tab{display:none}
-.about-tab .sec:first-child{padding-top:28px}
 
-/* watch pages */
-.watchpage{padding-block:20px 60px}
-.watchpage .wrap.watch{max-width:1720px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:24px;align-items:start}
-.player{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--bg,#0F1113)}
+/* visibility: home, section pages, about */
+html[data-tab]:not([data-tab="all"]) #top{display:none}
+html:not([data-tab]) #sechead,html[data-tab="all"] #sechead{display:none}
+html:not([data-tab]) #feed,html[data-tab="all"] #feed,html[data-tab="about"] #feed{display:none}
+html:not([data-tab="about"]) #about-tab{display:none}
+html[data-tab="projects"] .vcard:not([data-cat="project"]),html[data-tab="awards"] .vcard:not([data-cat="award"]),html[data-tab="activities"] .vcard:not([data-cat="activity"]){display:none}
+
+/* about page */
+.about-tab{padding-block:12px 80px}
+.about-tab .sec{padding-block:0;margin-top:30px}
+.about-tab .sec:first-child{margin-top:20px}
+#about .sec-head{display:none}
+.about-tab .sec-head{margin-bottom:12px}
+.about-tab .sec-head h2{font-size:1.2rem;font-weight:600;letter-spacing:0}
+.about-tab .about{margin-top:0;padding:clamp(18px,2.8vw,30px)}
+.about-tab .contact{margin-top:0;max-width:none;padding:6px clamp(18px,2.8vw,30px)}
+.about-tab .links{border-top:0}
+.about-tab .links li:last-child{border-bottom:0}
+.about-tab .skills{margin-top:0;gap:12px}
+.skill{padding:18px 20px}
+
+/* item pages */
+.watchpage{padding-block:24px 80px}
+.watchpage .wrap.watch{max-width:980px;display:block}
+.w-side{display:none}
+.w-main > .crumb{margin-bottom:16px}
+.player{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg,#0F1113);box-shadow:0 0 0 1px var(--g-edge),var(--g-shadow)}
 .player .frame{display:block;width:100%;height:100%;border:0;border-radius:0;background:transparent}
 .player .frame img{width:100%;height:100%;object-fit:cover}
 .player.contain .frame img{object-fit:contain;padding:4% 8%}
 .player .thumb{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
-.player.scope-player{aspect-ratio:auto;overflow:visible;background:transparent}
+.player.scope-player{aspect-ratio:auto;overflow:visible;background:transparent;box-shadow:none}
 .player.scope-player .scope-cap{margin-top:10px}
-.w-main h3.p-title{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.3;margin:16px 0 12px}
-html[data-lang="ar"] .w-main h3.p-title{font-size:clamp(1.25rem,2.2vw,1.6rem)}
-.w-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
-.w-chan{display:flex;align-items:center;gap:12px}
-.w-chan b{display:block;font-size:15px;font-weight:650}
-.w-chan small{display:block;color:var(--muted);font-size:12.5px}
+.w-main h3.p-title{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:600;line-height:1.2;letter-spacing:-.02em;margin:24px 0 12px}
+html[data-lang="ar"] .w-main h3.p-title{font-weight:700;letter-spacing:0;font-size:clamp(1.5rem,3vw,2.1rem)}
+.w-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.w-row .v-cat{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;line-height:1;padding:7px 10px;border-radius:2px;color:var(--acc);border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);background:color-mix(in srgb,var(--acc) 9%,transparent)}
+.w-row .v-cat svg{width:15px;height:15px}
 .w-row .p-meta{margin:0;font-size:13.5px}
-.desc{margin-top:16px;background:var(--sunken);border-radius:14px;padding:clamp(16px,2.2vw,24px)}
+.desc{margin-top:18px;padding:clamp(18px,2.8vw,30px)}
 .desc .p-sub{color:var(--ink);font-weight:500}
-.desc .p-body{max-width:none;margin-top:20px}
-.desc .spec caption{border-bottom-color:var(--rule-2)}
+.desc .p-body{max-width:none;margin-top:22px}
 .desc .gallery{margin-top:28px}
-.w-side h4{margin:0 0 12px;font-size:16px;font-weight:650}
-.upnext{display:grid;gap:10px}
-.mcard{grid-template-columns:168px minmax(0,1fr);gap:10px}
-.mcard .thumb{border-radius:9px}
-.mcard .badge-t{font-size:10.5px;bottom:5px;inset-inline-end:5px;padding:3px 5px}
-.mcard .av-mini{display:none}
-.mcard .v-info{display:block}
-.mcard .v-title{font-size:14px}
-.mcard .v-meta{font-size:12.5px}
-.mcard .tile-in small{display:none}
-.mcard .tile-in b{font-size:.95rem}
-.mcard .tile-in svg{width:22px;height:22px}
+.note{background:color-mix(in srgb,var(--acc,var(--a1)) 7%,transparent);border:1px solid color-mix(in srgb,var(--acc,var(--a1)) 26%,transparent)}
+.live{background:var(--surface);border-color:var(--rule)}
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.pager a{display:grid;gap:4px;padding:14px 16px;color:inherit;text-decoration:none;transition:transform .2s ease}
+.pager a:hover{transform:translateY(-2px)}
+.pager .next{grid-column:2;text-align:end}
+.pager small{display:inline-flex;align-items:center;gap:6px;font:500 12px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+html[data-lang="ar"] .pager small{font-family:var(--arabic);font-size:13px;text-transform:none;letter-spacing:0}
+.pager .next small{justify-content:flex-end}
+.pager .prev small::before{content:"\2190"}
+.pager .next small::after{content:"\2192"}
+html[dir="rtl"] .pager .prev small::before{content:"\2192"}
+html[dir="rtl"] .pager .next small::after{content:"\2190"}
+.pager b{font-weight:600;font-size:15px;line-height:1.35}
 
-/* medium: mini guide */
-@media (max-width: 1180px){
-  :root{--side:78px}
-  .side{padding:6px 4px}
-  .side-i{flex-direction:column;gap:6px;padding:14px 2px;font-size:10.5px;text-align:center}
-  .side hr,.side-x,.side-foot{display:none}
-  .watchpage .wrap.watch{grid-template-columns:minmax(0,1fr)}
-  .upnext{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+footer{border-top:1px solid var(--rule);padding-block:22px 30px}
+.sig-foot{height:58px}
+
+@media (max-width: 1000px){
+  .doors{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-/* phones: bottom bar */
 @media (max-width: 760px){
-  :root{--side:0px}
-  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
-  .side{top:auto;bottom:0;inset-inline:0;width:auto;height:calc(58px + env(safe-area-inset-bottom,0px));flex-direction:row;justify-content:space-around;padding:2px 4px env(safe-area-inset-bottom,0px);border-top:1px solid var(--rule);overflow:visible}
-  .side-i{flex:1;padding:8px 0 6px;font-size:10.5px;gap:4px;border-radius:8px}
-  .side-i.on{background:transparent;color:var(--accent)}
-  html:not([data-tab]) .side-i[data-tab="all"]{background:transparent;color:var(--accent)}
-  .homebtn{display:none}
-  .search{display:none}
-  .s-open{display:inline-flex}
-  .bar.searching .search{display:flex;position:absolute;inset:0;z-index:5;background:var(--paper);max-width:none;padding-inline:8px 12px;gap:6px}
-  .bar.searching .s-close{display:inline-flex}
-  .bar.searching .s-ico{inset-inline-start:62px}
-  .mark .sig-head{height:42px}
-  .ch-head{align-items:flex-start}
-  .channel .cta .btn{padding:8px 14px}
-  .vgrid{grid-template-columns:minmax(0,1fr);gap:26px}
-  .upnext{grid-template-columns:minmax(0,1fr)}
-  .mcard{grid-template-columns:150px minmax(0,1fr)}
-  .watchpage{padding-top:0}
-  .watchpage .wrap.watch{padding-inline:0}
-  .player{border-radius:0}
-  .player.scope-player{padding-inline:12px}
-  .w-main > :not(.player){margin-inline:16px}
-  .w-side{padding-inline:16px}
+  .nav{display:none}
+  .tools{margin-inline-start:auto}
+  .mark .sig-head{height:38px}
+  .bar .wrap{min-height:58px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:20px}
+  .portrait{order:-1;width:112px;padding:5px}
+  .door{min-height:0;padding:15px 14px 12px;gap:6px}
+  .d-s{font-size:13px;min-height:0}
+  .doors{gap:10px}
+  .latest{grid-template-columns:104px minmax(0,1fr) auto;gap:12px;padding-inline-end:12px}
+  .lt-t b{font-size:14.5px}
+  .vgrid{grid-template-columns:minmax(0,1fr)}
+  .pager b{font-size:14px}
 }
-
-/* ---------- polish: a little colour and depth, nothing loud ---------- */
-:root{--c-project:var(--accent);--c-award:#B7791F;--c-activity:#15845A}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-award:#F2C94C;--c-activity:#4FD39A}}
-:root[data-theme="dark"]{--c-award:#F2C94C;--c-activity:#4FD39A}
-
-/* soft glow behind the channel header */
-.channel{background:radial-gradient(900px 260px at 18% 0%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)}
-.banner{position:relative;box-shadow:0 18px 40px -26px rgba(0,0,0,.6)}
-.b-tag{position:absolute;inset-inline-start:14px;bottom:12px;font:500 11.5px/1 "IBM Plex Mono",ui-monospace,monospace;color:#C9D6E8;background:rgba(10,14,20,.55);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 10px;backdrop-filter:blur(4px)}
-html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
-.ch-head .avatar{box-shadow:0 0 0 3px var(--paper),0 0 0 5.5px var(--accent)}
-.ch-stats{font-size:13.5px;font-weight:600;color:var(--ink-2)}
-
-/* tabs as rounded chips */
-.tabs{gap:8px;padding-block:12px;border-bottom:1px solid var(--rule)}
-.tab{padding:8px 16px;border-radius:999px;border:0;background:var(--sunken);color:var(--ink);font-weight:600;font-size:14.5px;transition:background .15s ease,color .15s ease}
-.tab:hover{background:color-mix(in srgb,var(--ink) 10%,var(--sunken))}
-.tab.on,html:not([data-tab]) .tab[data-tab="all"]{background:var(--ink);color:var(--paper)}
-
-/* category tags */
-.v-cat{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:650;line-height:1;color:var(--c-project)}
-.v-cat svg{width:14px;height:14px}
-.v-cat.c-award{color:var(--c-award)}
-.v-cat.c-activity{color:var(--c-activity)}
-.v-text{gap:6px}
-.v-info{display:block}
-.w-row .v-cat{font-size:13.5px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,currentColor 11%,transparent)}
-.w-row .v-cat svg{width:16px;height:16px}
-
-/* thumbnails: gentle lift on hover */
-.thumb{box-shadow:0 1px 0 rgba(0,0,0,.04);transition:transform .25s ease,box-shadow .25s ease}
-.vcard:hover .thumb{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(0,0,0,.55)}
-.vcard:hover .v-title{color:var(--accent)}
-.vcard{animation:rise .35s ease both}
-@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-/* side guide: tinted active item */
-.side-i.on,html:not([data-tab]) .side-i[data-tab="all"]{background:var(--accent-soft);color:var(--accent)}
-
-/* watch page */
-.desc{border:1px solid var(--rule)}
-.w-side h4{display:flex;align-items:center;gap:8px}
-.w-side h4::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--accent)}
-.mcard{padding:4px;border-radius:12px;transition:background .15s ease}
-.mcard:hover{background:var(--sunken)}
-.mcard .v-cat{font-size:11.5px}
-.mcard .v-cat svg{width:12px;height:12px}
-
-@media (max-width: 760px){
-  .side-i.on,html:not([data-tab]) .side-i[data-tab="all"]{background:transparent}
-  .b-tag{font-size:10px;padding:4px 8px;bottom:8px;inset-inline-start:8px}
+@media (max-width: 420px){
+  .d-s{display:none}
+  .door{grid-template-rows:auto 1fr auto}
 }
 @media (prefers-reduced-motion: reduce){
-  .vcard{animation:none}
-  .thumb,.tab,.mcard{transition:none}
+  .door,.vcard,.latest,.pager a,.thumb img,.door::before,.door::after,.vcard::after{transition:none}
 }
 </style>
 </head>
@@ -902,60 +949,75 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 <header class="bar">
   <div class="wrap">
     <a class="mark sigmark" href="#top" aria-label="Talal Aljohani, home"><svg class="sig-head" viewBox="0 0 1756.2 978.8" role="img" aria-label="Talal Aljohani"><use href="#sig"/></svg></a>
-    <a class="homebtn" href="#top" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></svg></a>
     <nav class="nav" aria-label="Main">
-      <form class="search" id="searchForm" role="search" onsubmit="return false">
-        <button class="s-close" id="sClose" type="button" aria-label="Close search"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-        <span class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
-        <input id="q" type="search" autocomplete="off" placeholder="Search" aria-label="Search">
-      </form>
-      <button class="s-open" id="sOpen" type="button" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
-      <button class="lang" id="langBtn" type="button" aria-label="Switch language / تغيير اللغة">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
-        <span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span>
-      </button>
+      <ul>
+        <li><a href="#projects" data-tab="projects"><span class="en">Projects</span><span class="ar">المشاريع</span></a></li>
+        <li><a href="#awards" data-tab="awards"><span class="en">Achievements</span><span class="ar">الإنجازات</span></a></li>
+        <li><a href="#activities" data-tab="activities"><span class="en">Activities</span><span class="ar">الأنشطة</span></a></li>
+        <li><a href="#about" data-tab="about"><span class="en">About</span><span class="ar">نبذة</span></a></li>
+      </ul>
     </nav>
+    <div class="tools">
+      <button class="iconbtn" id="themeBtn" type="button" aria-label="Light or dark theme" title="Light / dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" fill="currentColor"/></svg></button>
+      <button class="lang" id="langBtn" type="button" aria-label="Switch language / تغيير اللغة"><span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span></button>
+    </div>
   </div>
 </header>
-<nav class="side" aria-label="Main">
-  <a class="side-i" data-tab="all" href="#top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></svg><span><span class="en">Home</span><span class="ar">الرئيسية</span></span></a>
-  <a class="side-i" data-tab="projects" href="#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span><span class="en">Projects</span><span class="ar">المشاريع</span></span></a>
-  <a class="side-i" data-tab="awards" href="#awards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span><span class="en">Achievements</span><span class="ar">الإنجازات</span></span></a>
-  <a class="side-i" data-tab="activities" href="#activities"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg><span><span class="en">Activities</span><span class="ar">الأنشطة</span></span></a>
-  <a class="side-i" data-tab="about" href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span><span class="en">About</span><span class="ar">نبذة</span></span></a>
-  <hr>
-  <a class="side-i side-x" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg><span>LinkedIn</span></a>
-  <p class="side-foot"><span class="en">© 2026 Talal Sultan Aljohani</span><span class="ar">© 2026 طلال سلطان الجهني</span></p>
-</nav>
 
 <main id="main">
-<!-- ================= CHANNEL HOME ================= -->
-<section class="channel home-part" id="top">
+<!-- ================= HOME ================= -->
+<section class="home home-part" id="top">
   <div class="wrap">
-    <div class="banner">
-      <svg viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><path class="b-grid" d="M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600M800 0V600M900 0V600"/><path class="b-trace" d="M0.5,300.0 L2.5,300.0 L5.0,300.0 L7.0,300.0 L8.5,300.0 L10.5,300.0 L12.5,300.0 L14.5,300.0 L16.5,300.0 L19.0,300.0 L21.5,300.0 L22.5,300.0 L24.5,300.0 L28.0,300.0 L29.0,300.0 L32.0,300.0 L32.5,300.0 L34.5,300.0 L36.5,300.0 L38.5,300.0 L42.0,300.0 L42.5,300.0 L44.5,300.0 L48.0,300.0 L48.5,300.0 L50.5,300.0 L53.0,300.0 L54.5,300.0 L56.5,300.0 L59.0,300.0 L60.5,300.0 L62.5,300.0 L64.5,300.0 L67.5,300.0 L69.0,300.0 L70.5,300.0 L73.5,300.0 L74.5,300.0 L77.0,300.0 L80.0,300.0 L81.0,300.0 L83.0,300.0 L84.5,300.0 L86.5,300.0 L88.5,300.0 L92.0,300.0 L93.5,300.0 L95.5,300.0 L96.5,300.0 L99.0,300.0 L102.0,300.0 L102.5,300.0 L104.5,300.0 L106.5,300.0 L110.0,300.0 L112.0,300.0 L113.5,300.0 L114.5,300.0 L118.0,300.0 L118.5,300.0 L120.5,300.0 L124.0,300.0 L125.5,300.0 L126.5,300.0 L128.5,300.0 L131.5,300.0 L132.5,300.0 L136.0,300.0 L137.0,300.0 L138.5,300.0 L140.5,300.0 L143.0,300.0 L144.5,300.0 L146.5,300.0 L150.0,300.0 L150.5,300.0 L152.5,300.0 L154.5,300.0 L156.5,300.0 L158.5,300.0 L162.0,300.0 L163.0,300.0 L166.0,300.0 L166.5,300.0 L169.0,300.0 L171.5,300.0 L172.5,300.0 L175.5,300.0 L176.5,300.0 L179.5,300.0 L180.5,300.0 L182.5,300.0 L184.5,300.0 L187.0,300.0 L189.0,300.0 L190.5,300.0 L193.5,300.0 L194.5,300.0 L198.0,300.0 L199.5,300.0 L200.5,300.0 L202.5,300.0 L205.0,300.0 L206.5,300.0 L210.0,300.0 L211.5,300.0 L212.5,300.0 L215.0,300.0 L217.5,300.0 L219.5,300.0 L220.5,300.0 L222.5,300.0 L225.5,300.0 L228.0,299.9 L228.5,299.9 L232.0,299.8 L232.5,299.9 L235.0,300.1 L238.0,299.9 L238.5,299.9 L240.5,300.1 L243.5,299.6 L246.0,299.2 L248.0,270.4 L250.0,251.8 L252.0,227.7 L254.0,195.7 L256.0,176.2 L258.0,161.4 L260.0,146.1 L262.0,136.3 L264.0,124.3 L266.0,116.4 L267.0,113.0 L270.0,113.8 L272.0,105.9 L274.0,101.6 L275.0,100.1 L276.5,108.4 L280.0,103.3 L282.0,100.7 L282.5,100.9 L284.5,104.6 L288.0,107.2 L288.5,106.3 L292.0,105.7 L294.0,102.4 L294.5,102.0 L296.5,108.8 L300.0,108.8 L300.5,109.4 L304.0,113.3 L304.5,115.8 L308.0,118.4 L309.5,114.8 L311.0,116.9 L314.0,115.7 L315.0,114.6 L316.5,121.8 L318.5,126.2 L322.0,126.7 L324.0,125.1 L326.0,123.4 L327.0,123.2 L328.5,126.2 L331.0,138.3 L333.0,136.8 L336.0,134.7 L336.5,134.5 L338.5,138.7 L341.5,144.5 L342.5,144.3 L345.0,144.1 L346.5,147.7 L349.0,149.4 L351.0,149.3 L352.5,151.0 L354.5,157.5 L356.5,158.6 L358.5,160.1 L362.0,159.6 L362.5,162.0 L364.5,178.0 L367.0,174.8 L370.0,172.0 L372.0,170.9 L372.5,168.8 L374.5,169.4 L376.5,170.8 L380.0,175.7 L381.5,174.8 L383.5,177.2 L385.0,178.2 L386.5,180.6 L388.5,186.0 L390.5,190.2 L392.5,193.3 L394.5,214.1 L398.0,219.6 L400.0,219.6 L401.5,219.1 L403.0,220.0 L404.5,221.4 L406.5,225.8 L408.5,229.3 L410.5,231.6 L412.5,233.6 L414.5,237.8 L418.0,241.7 L418.5,244.7 L420.5,255.6 L424.0,254.5 L424.5,253.9 L427.5,255.5 L429.5,256.6 L431.0,257.4 L432.5,260.0 L434.5,264.7 L437.5,265.8 L438.5,266.2 L440.5,269.7 L444.0,280.4 L445.5,281.0 L446.5,281.1 L448.5,283.0 L452.0,283.7 L453.5,283.7 L455.5,284.1 L457.0,284.8 L458.5,284.9 L460.5,289.3 L464.0,304.1 L465.5,306.2 L466.5,304.1 L468.5,301.8 L470.5,301.4 L473.0,297.9 L475.0,298.5 L476.5,298.1 L478.5,298.6 L482.0,301.9 L484.0,307.1 L485.5,307.8 L488.0,307.9 L490.0,309.1 L492.0,314.6 L494.0,320.0 L495.0,321.8 L497.0,319.6 L499.0,320.2 L501.0,323.0 L503.0,321.8 L505.0,320.9 L508.0,320.3 L509.5,323.1 L511.5,323.4 L512.5,322.7 L514.5,321.1 L517.0,319.7 L519.5,319.4 L521.0,318.8 L523.0,317.5 L524.5,316.2 L528.0,316.1 L529.5,318.8 L531.0,319.1 L532.5,317.5 L535.5,320.1 L537.0,322.5 L538.5,319.3 L542.0,318.7 L543.0,321.6 L545.5,321.5 L547.5,318.5 L549.0,316.8 L551.0,315.6 L552.5,313.6 L555.0,313.3 L557.5,314.2 L560.0,319.1 L561.0,319.9 L564.0,320.5 L564.5,320.8 L566.5,319.0 L568.5,317.7 L570.5,316.8 L574.0,315.9 L576.0,315.5 L578.0,317.3 L579.5,318.1 L581.5,318.9 L583.5,319.5 L586.0,319.3 L587.0,319.8 L588.5,318.2 L591.5,317.6 L594.0,316.7 L596.0,317.7 L596.5,318.4 L600.0,319.6 L600.5,319.5 L603.5,318.2 L605.0,317.5 L607.5,318.8 L609.0,318.4 L610.5,318.5 L613.0,319.1 L614.5,318.4 L618.0,318.3 L618.5,318.0 L622.0,316.7 L622.5,316.2 L625.0,315.2 L627.0,315.2 L628.5,314.6 L632.0,315.6 L633.5,319.6 L635.5,319.6 L637.0,319.3 L639.5,319.9 L640.5,318.0 L643.5,317.2 L644.5,315.5 L647.0,316.4 L650.0,317.7 L652.0,318.4 L653.0,320.4 L654.5,320.2 L656.5,319.0 L659.5,317.4 L662.0,317.9 L662.5,318.1 L664.5,317.9 L668.0,317.7 L670.0,320.4 L671.5,318.2 L672.5,317.8 L676.0,318.4 L676.5,319.5 L679.0,317.8 L680.5,316.6 L682.5,314.1 L684.5,313.3 L687.5,313.4 L689.5,320.2 L691.5,320.8 L694.0,322.4 L694.5,320.8 L697.0,318.4 L698.5,317.1 L701.5,315.5 L702.5,314.5 L704.5,313.9 L708.0,320.1 L709.0,322.1 L710.5,320.4 L714.0,319.3 L714.5,318.2 L716.5,315.2 L719.1,314.9 L720.5,313.9 L723.5,313.0 L726.0,313.7 L727.5,314.3 L729.5,322.8 L731.5,321.0 L732.5,318.5 L734.5,317.4 L736.5,314.4 L738.5,314.6 L741.5,313.5 L744.0,312.0 L745.5,311.1 L748.0,310.5 L750.0,311.4 L751.5,321.9 L753.5,321.9 L754.5,321.2 L756.5,319.1 L758.5,317.5 L760.5,315.0 L762.5,314.4 L766.0,312.2 L767.0,311.6 L769.5,312.1 L772.0,322.0 L773.0,322.7 L774.5,321.4 L776.5,318.3 L779.0,317.0 L780.5,314.5 L782.5,313.4 L785.5,312.7 L786.5,311.6 L790.0,312.6 L791.5,318.7 L793.5,320.0 L794.5,317.9 L797.5,316.1 L798.5,313.4 L800.5,312.9 L804.0,312.5 L806.0,319.9 L808.0,319.4 L808.5,319.4 L811.5,315.4 L814.0,337.8 L816.0,403.2 L818.0,456.4 L820.0,499.8 L822.0,535.2 L824.0,564.0 L826.0,587.4 L828.0,597.1 L828.5,595.5 L830.5,578.1 L832.5,558.1 L834.5,541.1 L836.5,523.6 L838.5,507.0 L840.5,494.4 L842.5,487.7 L844.5,479.6 L846.5,469.1 L848.5,456.3 L850.5,443.5 L852.5,431.8 L854.5,422.2 L856.5,412.6 L858.5,404.1 L860.5,396.7 L862.5,390.0 L864.5,382.9 L866.5,375.0 L868.5,367.0 L870.5,358.8 L872.5,350.8 L874.5,343.1 L876.5,335.9 L878.5,330.7 L880.5,326.2 L882.5,322.2 L884.5,318.6 L886.5,315.4 L888.5,312.5 L890.5,310.0 L892.5,308.3 L894.5,307.0 L897.0,306.6 L899.5,306.5 L902.0,308.0 L904.0,309.3 L906.0,309.5 L906.5,309.4 L908.5,309.0 L910.5,308.3 L912.5,308.0 L914.5,308.1 L917.0,308.1 L918.5,308.2 L920.5,308.1 L922.5,307.9 L926.0,307.7 L928.0,307.9 L929.0,307.9 L930.5,307.9 L932.5,307.8 L934.5,307.7 L936.5,307.3 L938.5,306.3 L940.5,305.0 L942.5,303.8 L944.5,303.0 L946.5,302.3 L948.5,301.8 L950.5,301.5 L952.5,301.3 L954.5,301.2 L956.5,301.2 L958.5,301.2 L960.5,301.1 L962.5,301.1 L964.5,301.0 L966.5,300.9 L968.5,300.8 L970.5,300.7 L972.5,300.6 L974.5,300.5 L976.5,300.4 L978.5,300.3 L982.0,299.9 L984.0,299.7 L986.0,299.6 L987.0,299.5 L988.5,299.5 L990.5,299.5 L992.5,299.5 L994.5,299.6 L996.5,299.6 L998.5,299.6"/></svg>
-      <span class="b-tag" dir="ltr">race_3.csv · 1 kHz · <span class="en">real launch data</span><span class="ar">بيانات انطلاقة حقيقية</span></span>
-    </div>
-    <div class="ch-head">
-      <img class="avatar" src="assets/img/talal.webp" width="440" height="440" alt="Portrait of Talal Aljohani" data-alt-ar="صورة طلال الجهني">
-      <div class="ch-info">
+    <div class="hero">
+      <div class="hero-t">
         <h1><span class="en">Talal Sultan Aljohani</span><span class="ar">طلال سلطان الجهني</span></h1>
-        <p class="ch-handle"><span class="en">Electrical Engineering student · Islamic University of Madinah · Class of 2028</span><span class="ar">طالب هندسة كهربائية · الجامعة الإسلامية بالمدينة المنورة · دفعة 2028</span></p>
-        <p class="ch-stats"><span class="en">6 projects · 4 achievements · 4 activities</span><span class="ar">6 مشاريع · 4 إنجازات · 4 أنشطة</span></p>
-        <p class="ch-about"><span class="en">I design and build hardware: telemetry boards, motor drives, logic circuits and robots, and I teach PCB design to fellow students.</span><span class="ar">أصمّم وأبني أنظمة العتاد: لوحات التيليمتري، ومشغّلات المحرّكات، والدوائر المنطقية، والروبوتات، وأدرّس تصميم اللوحات المطبوعة لزملائي.</span></p>
+        <p class="role"><span class="en">Electrical Engineering student<i>/</i>Islamic University of Madinah<i>/</i>Class of 2028</span><span class="ar">طالب هندسة كهربائية<i>/</i>الجامعة الإسلامية بالمدينة المنورة<i>/</i>دفعة 2028</span></p>
+        <p class="intro"><span class="en">I design and build hardware: telemetry boards, motor drives, logic circuits and robots, and I teach PCB design to fellow students.</span><span class="ar">أصمّم وأبني أنظمة العتاد: لوحات التيليمتري، ومشغّلات المحرّكات، والدوائر المنطقية، والروبوتات، وأدرّس تصميم اللوحات المطبوعة لزملائي.</span></p>
         <div class="cta">
           <a class="btn primary" href="https://www.linkedin.com/in/talal-aljohani-4b7717397" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></svg>LinkedIn</a>
-          <a class="btn ghost" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span class="en">Contact</span><span class="ar">تواصل</span></a>
+          <a class="btn ghost" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m4 7 8 6 8-6"/></svg><span class="en">Contact</span><span class="ar">تواصل</span></a>
         </div>
       </div>
+      <figure class="portrait glass"><img src="assets/img/talal.webp" width="440" height="440" alt="Portrait of Talal Aljohani" data-alt-ar="صورة طلال الجهني"></figure>
     </div>
-    <nav class="tabs" role="tablist" aria-label="Sections">
-      <a class="tab" role="tab" data-tab="all" href="#top"><span class="en">All</span><span class="ar">الكل</span></a>
-      <a class="tab" role="tab" data-tab="projects" href="#projects"><span class="en">Projects</span><span class="ar">المشاريع</span></a>
-      <a class="tab" role="tab" data-tab="awards" href="#awards"><span class="en">Achievements</span><span class="ar">الإنجازات</span></a>
-      <a class="tab" role="tab" data-tab="activities" href="#activities"><span class="en">Activities</span><span class="ar">الأنشطة</span></a>
-      <a class="tab" role="tab" data-tab="about" href="#about"><span class="en">About</span><span class="ar">نبذة</span></a>
+    <nav class="doors" aria-label="Sections">
+      <a class="door glass d1" href="#projects">
+        <span class="d-top"><span class="d-n">01</span><span class="d-c"><b data-count="project"></b> <span class="en">projects</span><span class="ar">مشاريع</span></span></span>
+        <b class="d-t"><span class="en">Projects</span><span class="ar">المشاريع</span></b>
+        <span class="d-s"><span class="en">Boards, firmware and machines I designed and built.</span><span class="ar">لوحات وبرامج وأجهزة صمّمتها وبنيتها.</span></span>
+        <span class="d-go"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="door glass d2" href="#awards">
+        <span class="d-top"><span class="d-n">02</span><span class="d-c"><b data-count="award"></b> <span class="en">entries</span><span class="ar">مشاركات</span></span></span>
+        <b class="d-t"><span class="en">Achievements</span><span class="ar">الإنجازات</span></b>
+        <span class="d-s"><span class="en">Competitions, hackathons and their results.</span><span class="ar">المسابقات والهاكاثونات ونتائجها.</span></span>
+        <span class="d-go"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="door glass d3" href="#activities">
+        <span class="d-top"><span class="d-n">03</span><span class="d-c"><b data-count="activity"></b> <span class="en">activities</span><span class="ar">أنشطة</span></span></span>
+        <b class="d-t"><span class="en">Activities</span><span class="ar">الأنشطة</span></b>
+        <span class="d-s"><span class="en">Student clubs, workshops and university programs.</span><span class="ar">الأندية الطلابية والورش وبرامج الجامعة.</span></span>
+        <span class="d-go"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="door glass d4" href="#about">
+        <span class="d-top"><span class="d-n">04</span><span class="d-c"></span></span>
+        <b class="d-t"><span class="en">About</span><span class="ar">نبذة</span></b>
+        <span class="d-s"><span class="en">Studies, skills and how to reach me.</span><span class="ar">الدراسة والمهارات وطرق التواصل.</span></span>
+        <span class="d-go"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
     </nav>
+    <div class="latest-row">
+      <p class="eyebrow"><span class="en">Latest</span><span class="ar">الأحدث</span></p>
+      <a class="latest glass" id="latest" href="#top"></a>
+    </div>
+  </div>
+</section>
+
+<section class="sechead home-part" id="sechead">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="#top"><span class="en">Home</span><span class="ar">الرئيسية</span></a><span class="sl">/</span><span class="cur" id="shCur"></span></nav>
+    <h2 class="sh-t"><span class="d-n" id="shN"></span><span id="shT"></span></h2>
+    <p class="sh-d" id="shD"></p>
   </div>
 </section>
 
@@ -963,7 +1025,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
   <div class="wrap">
     <div class="vgrid">
       <a class="vcard" href="#ircloner" data-cat="project">
-        <span class="thumb cover" style="--bg:#000000"><img src="assets/img/ir-tv-on.webp" width="511" height="279" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="thumb cover" style="--bg:#000000"><img src="assets/img/ir-tv-on.webp" width="511" height="279" alt="" loading="lazy" style="object-position:50% 50%"></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">IR Cloner and Analyzer</span><span class="ar">ناسخ ومحلّل إشارات الأشعة تحت الحمراء</span></span><span class="v-meta"><span class="en">EE3521 Signals and Systems · Nov 2026</span><span class="ar">EE3521 الإشارات والأنظمة · نوفمبر 2026</span></span></span></span>
       </a>
       <a class="vcard" href="#sima" data-cat="award">
@@ -983,7 +1045,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
         <span class="v-info"><span class="v-text"><span class="v-cat c-activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg><span class="en">Activity</span><span class="ar">نشاط</span></span><span class="v-title"><span class="en">IEEE Student Branch at IUM</span><span class="ar">فرع IEEE الطلابي بالجامعة الإسلامية</span></span><span class="v-meta"><span class="en">Member · Current</span><span class="ar">عضو · حالياً</span></span></span></span>
       </a>
       <a class="vcard" href="#anaq" data-cat="project">
-        <span class="thumb contain" style="--bg:#151A1D"><img src="assets/img/anaq-board.webp" width="690" height="653" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="thumb contain" style="--bg:#151A1D"><img src="assets/img/anaq-board.webp" width="690" height="653" alt="" loading="lazy" style="object-position:50% 50%"></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">ANAQ Digital Twin</span><span class="ar">التوأم الرقمي لفريق عنق</span></span><span class="v-meta"><span class="en">With Team ANAQ · 2026</span><span class="ar">بالتعاون مع فريق عنق · 2026</span></span></span></span>
       </a>
       <a class="vcard" href="#twinsat" data-cat="award">
@@ -999,7 +1061,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
         <span class="v-info"><span class="v-text"><span class="v-cat c-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">Achievement</span><span class="ar">إنجاز</span></span><span class="v-title"><span class="en">Faculty of Engineering Projects Exhibition</span><span class="ar">معرض مشاريع كلية الهندسة</span></span><span class="v-meta"><span class="en">2nd of 100+ projects · 2026</span><span class="ar">الثاني من 100+ مشروع · 2026</span></span></span></span>
       </a>
       <a class="vcard" href="#bldc" data-cat="project">
-        <span class="thumb contain" style="--bg:#E9ECEF"><img src="assets/img/bldc-outer-rotor.webp" width="442" height="348" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="thumb contain" style="--bg:#E9ECEF"><img src="assets/img/bldc-outer-rotor.webp" width="442" height="348" alt="" loading="lazy" style="object-position:50% 50%"></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">Brushless DC Motor with PWM Controller</span><span class="ar">محرّك عديم الفرش مع متحكّم PWM</span></span><span class="v-meta"><span class="en">EE4381 · Apr 2026</span><span class="ar">EE4381 · أبريل 2026</span></span></span></span>
       </a>
       <a class="vcard" href="#hydronet" data-cat="award">
@@ -1007,7 +1069,7 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
         <span class="v-info"><span class="v-text"><span class="v-cat c-award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span class="en">Achievement</span><span class="ar">إنجاز</span></span><span class="v-title"><span class="en">HydroNet, EnergyThon 2.0</span><span class="ar">HydroNet، هاكاثون EnergyThon 2.0</span></span><span class="v-meta"><span class="en">Western Region · Feb 2026</span><span class="ar">المنطقة الغربية · فبراير 2026</span></span></span></span>
       </a>
       <a class="vcard" href="#pwm" data-cat="project">
-        <span class="thumb contain" style="--bg:#15181B"><img src="assets/img/pwm-box.webp" width="623" height="539" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="thumb contain" style="--bg:#15181B"><img src="assets/img/pwm-box.webp" width="623" height="539" alt="" loading="lazy" style="object-position:50% 50%"></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">Digital PWM Generator</span><span class="ar">مولّد PWM رقمي</span></span><span class="v-meta"><span class="en">EE3361 · Dec 2025</span><span class="ar">EE3361 · ديسمبر 2025</span></span></span></span>
       </a>
       <a class="vcard" href="#inno" data-cat="activity">
@@ -1015,11 +1077,10 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
         <span class="v-info"><span class="v-text"><span class="v-cat c-activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg><span class="en">Activity</span><span class="ar">نشاط</span></span><span class="v-title"><span class="en">The Scientific Innovation Club</span><span class="ar">نادي الابتكار العلمي</span></span><span class="v-meta"><span class="en">Vice president · Fall 2025</span><span class="ar">نائب الرئيس · الفصل الأول 2025</span></span></span></span>
       </a>
       <a class="vcard" href="#lfr" data-cat="project">
-        <span class="thumb cover" style="--bg:#777"><img src="assets/img/lfr-final.webp" width="800" height="570" alt="" loading="lazy" style="object-position:50% 50%"><span class="badge-t"><span class="en">Project</span><span class="ar">مشروع</span></span></span>
+        <span class="thumb cover" style="--bg:#777"><img src="assets/img/lfr-final.webp" width="800" height="570" alt="" loading="lazy" style="object-position:50% 50%"></span>
         <span class="v-info"><span class="v-text"><span class="v-cat c-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg><span class="en">Project</span><span class="ar">مشروع</span></span><span class="v-title"><span class="en">Fast Line Follower Robot</span><span class="ar">روبوت سريع لتتبّع الخط</span></span><span class="v-meta"><span class="en">ENGR3020 · 2025</span><span class="ar">ENGR3020 · 2025</span></span></span></span>
       </a>
     </div>
-    <p class="noresult" id="noResult" hidden><span class="en">Nothing matches your search.</span><span class="ar">لا توجد نتائج مطابقة لبحثك.</span></p>
   </div>
 </section>
 
@@ -2121,48 +2182,8 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
   </div>
 </article>
 
-<!-- ================= SKILLS ================= -->
+<!-- ================= ABOUT PAGE ================= -->
 <div class="about-tab home-part" id="about-tab">
-<section class="sec home-part" id="skills">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="en">Skills</span><span class="ar">المهارات</span></h2>
-      <p><span class="en">Grouped by area. The channel tags show which projects used each one.</span><span class="ar">مصنّفة حسب المجال، وتشير وسوم القنوات إلى المشاريع التي استُخدمت فيها.</span></p>
-    </div>
-    <div class="skills">
-      <div class="skill">
-        <h3><span class="en">Embedded systems</span><span class="ar">الأنظمة المدمجة</span></h3>
-        <ul><li>ESP32-C3</li><li>Arduino Nano</li><li>C++</li><li>FreeRTOS</li><li>SPI</li><li><span class="en">Wi-Fi access point and web server</span><span class="ar">نقطة وصول Wi-Fi وخادم ويب</span></li><li>LittleFS</li></ul>
-        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
-      </div>
-      <div class="skill">
-        <h3><span class="en">Signal processing</span><span class="ar">معالجة الإشارات</span></h3>
-        <ul><li><span class="en">IIR high-pass and low-pass filters</span><span class="ar">مرشّحات IIR عالية ومنخفضة التمرير</span></li><li><span class="en">Sensor calibration</span><span class="ar">معايرة الحسّاسات</span></li><li><span class="en">Numerical integration</span><span class="ar">التكامل العددي</span></li><li><span class="en">IMU data</span><span class="ar">بيانات وحدات IMU</span></li></ul>
-        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a></div>
-      </div>
-      <div class="skill">
-        <h3><span class="en">Power and motor control</span><span class="ar">القدرة والتحكّم بالمحرّكات</span></h3>
-        <ul><li><span class="en">PWM speed control</span><span class="ar">التحكّم بالسرعة عبر PWM</span></li><li><span class="en">3-phase BLDC commutation</span><span class="ar">التبديل ثلاثي الأطوار لمحرّكات BLDC</span></li><li><span class="en">Gate drivers and MOSFETs</span><span class="ar">مشغّلات البوابات وترانزستورات MOSFET</span></li><li><span class="en">H-bridge drivers</span><span class="ar">مشغّلات H-bridge</span></li></ul>
-        <div class="ev"><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
-      </div>
-      <div class="skill">
-        <h3><span class="en">Digital logic</span><span class="ar">الدوائر المنطقية الرقمية</span></h3>
-        <ul><li><span class="en">555 timers</span><span class="ar">مؤقّتات 555</span></li><li><span class="en">Binary counters</span><span class="ar">العدّادات الثنائية</span></li><li><span class="en">Magnitude comparators</span><span class="ar">مقارنات المقدار</span></li><li><span class="en">Logic gates</span><span class="ar">البوابات المنطقية</span></li></ul>
-        <div class="ev"><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a></div>
-      </div>
-      <div class="skill">
-        <h3><span class="en">Hardware and PCB</span><span class="ar">العتاد واللوحات المطبوعة</span></h3>
-        <ul><li><span class="en">PCB layout in KiCad</span><span class="ar">تصميم اللوحات على KiCad</span></li><li><span class="en">Teaching PCB design</span><span class="ar">تدريس تصميم اللوحات</span></li><li><span class="en">Schematics and NI Multisim</span><span class="ar">المخططات ومحاكاة Multisim</span></li><li><span class="en">LiPo power and charging</span><span class="ar">تغذية وشحن بطاريات LiPo</span></li><li><span class="en">Prototyping and soldering</span><span class="ar">النماذج الأولية واللحام</span></li></ul>
-        <div class="ev"><a class="chip k5" href="#kicad"><i></i>CH1</a><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a></div>
-      </div>
-      <div class="skill">
-        <h3><span class="en">Software and tools</span><span class="ar">البرمجيات والأدوات</span></h3>
-        <ul><li>JavaScript</li><li>Three.js</li><li>Plotly</li><li>Python</li><li>Tinkercad</li><li><span class="en">3D printing</span><span class="ar">الطباعة ثلاثية الأبعاد</span></li></ul>
-        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ================= ABOUT ================= -->
 <section class="sec home-part" id="about">
@@ -2214,6 +2235,46 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
     </div>
   </div>
 </section>
+
+<section class="sec home-part" id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="en">Skills</span><span class="ar">المهارات</span></h2>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <h3><span class="en">Embedded systems</span><span class="ar">الأنظمة المدمجة</span></h3>
+        <ul><li>ESP32-C3</li><li>Arduino Nano</li><li>C++</li><li>FreeRTOS</li><li>SPI</li><li><span class="en">Wi-Fi access point and web server</span><span class="ar">نقطة وصول Wi-Fi وخادم ويب</span></li><li>LittleFS</li></ul>
+        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
+      </div>
+      <div class="skill">
+        <h3><span class="en">Signal processing</span><span class="ar">معالجة الإشارات</span></h3>
+        <ul><li><span class="en">IIR high-pass and low-pass filters</span><span class="ar">مرشّحات IIR عالية ومنخفضة التمرير</span></li><li><span class="en">Sensor calibration</span><span class="ar">معايرة الحسّاسات</span></li><li><span class="en">Numerical integration</span><span class="ar">التكامل العددي</span></li><li><span class="en">IMU data</span><span class="ar">بيانات وحدات IMU</span></li></ul>
+        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a></div>
+      </div>
+      <div class="skill">
+        <h3><span class="en">Power and motor control</span><span class="ar">القدرة والتحكّم بالمحرّكات</span></h3>
+        <ul><li><span class="en">PWM speed control</span><span class="ar">التحكّم بالسرعة عبر PWM</span></li><li><span class="en">3-phase BLDC commutation</span><span class="ar">التبديل ثلاثي الأطوار لمحرّكات BLDC</span></li><li><span class="en">Gate drivers and MOSFETs</span><span class="ar">مشغّلات البوابات وترانزستورات MOSFET</span></li><li><span class="en">H-bridge drivers</span><span class="ar">مشغّلات H-bridge</span></li></ul>
+        <div class="ev"><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
+      </div>
+      <div class="skill">
+        <h3><span class="en">Digital logic</span><span class="ar">الدوائر المنطقية الرقمية</span></h3>
+        <ul><li><span class="en">555 timers</span><span class="ar">مؤقّتات 555</span></li><li><span class="en">Binary counters</span><span class="ar">العدّادات الثنائية</span></li><li><span class="en">Magnitude comparators</span><span class="ar">مقارنات المقدار</span></li><li><span class="en">Logic gates</span><span class="ar">البوابات المنطقية</span></li></ul>
+        <div class="ev"><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a></div>
+      </div>
+      <div class="skill">
+        <h3><span class="en">Hardware and PCB</span><span class="ar">العتاد واللوحات المطبوعة</span></h3>
+        <ul><li><span class="en">PCB layout in KiCad</span><span class="ar">تصميم اللوحات على KiCad</span></li><li><span class="en">Teaching PCB design</span><span class="ar">تدريس تصميم اللوحات</span></li><li><span class="en">Schematics and NI Multisim</span><span class="ar">المخططات ومحاكاة Multisim</span></li><li><span class="en">LiPo power and charging</span><span class="ar">تغذية وشحن بطاريات LiPo</span></li><li><span class="en">Prototyping and soldering</span><span class="ar">النماذج الأولية واللحام</span></li></ul>
+        <div class="ev"><a class="chip k5" href="#kicad"><i></i>CH1</a><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k3" href="#pwm"><i></i>CH4</a></div>
+      </div>
+      <div class="skill">
+        <h3><span class="en">Software and tools</span><span class="ar">البرمجيات والأدوات</span></h3>
+        <ul><li>JavaScript</li><li>Three.js</li><li>Plotly</li><li>Python</li><li>Tinkercad</li><li><span class="en">3D printing</span><span class="ar">الطباعة ثلاثية الأبعاد</span></li></ul>
+        <div class="ev"><a class="chip k1" href="#anaq"><i></i>CH2</a><a class="chip k2" href="#bldc"><i></i>CH3</a><a class="chip k4" href="#lfr"><i></i>CH5</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 </div>
 </main>
 
@@ -2232,35 +2293,50 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
 <script>
 (function(){
   var root=document.documentElement;
-  /* ---- views (one page per project) ---- */
+  try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+  /* ---- views (one page per item) and section pages ---- */
   var VIEWS={ircloner:['IR Cloner and Analyzer','ناسخ ومحلّل الأشعة تحت الحمراء'],sima:['Sima, NASA Space Apps','سيما، هاكاثون ناسا'],expo:['Projects Exhibition','معرض مشاريع الكلية'],hydronet:['HydroNet','HydroNet'],twinsat:['TwinSat','TwinSat'],ihour:['Innovation Hour','ساعة ابتكار'],ieee:['IEEE Student Branch','فرع IEEE الطلابي'],inno:['Scientific Innovation Club','نادي الابتكار العلمي'],engclub:['IU Engineering Club','النادي الهندسي'],kicad:['PCB Design Workshop','ورشة تصميم اللوحات المطبوعة'],anaq:['ANAQ Digital Twin','التوأم الرقمي لفريق عنق'],bldc:['Brushless DC Motor','محرّك عديم الفرش'],pwm:['Digital PWM Generator','مولّد PWM رقمي'],lfr:['Fast Line Follower Robot','روبوت تتبّع الخط']};
+  var SECS={
+    projects:{n:'01',cat:'project',t:['Projects','المشاريع'],d:['Boards, firmware and machines I designed and built, newest first.','لوحات وبرامج وأجهزة صمّمتها وبنيتها، من الأحدث إلى الأقدم.']},
+    awards:{n:'02',cat:'award',t:['Achievements','الإنجازات'],d:['Competitions and hackathons I took part in, newest first.','المسابقات والهاكاثونات التي شاركت فيها، من الأحدث إلى الأقدم.']},
+    activities:{n:'03',cat:'activity',t:['Activities','الأنشطة'],d:['Student clubs, workshops and university programs, newest first.','الأندية الطلابية والورش وبرامج الجامعة، من الأحدث إلى الأقدم.']},
+    about:{n:'04',t:['About','نبذة'],d:['My studies, how to reach me, and the skills behind the work.','دراستي، وطرق التواصل معي، والمهارات وراء الأعمال.']}
+  };
+  var CAT2TAB={project:'projects',award:'awards',activity:'activities'};
+  var TABMAP={'':'all',top:'all',projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};
+  function bi(a){return '<span class="en">'+a[0]+'</span><span class="ar">'+a[1]+'</span>';}
+  var vcards=[].slice.call(document.querySelectorAll('.vgrid .vcard'));
+  function catOf(id){ var c=document.querySelector('.vgrid .vcard[href="#'+id+'"]'); return c?c.getAttribute('data-cat'):null; }
   function setTitle(){
-    var ar=root.getAttribute('data-lang')==='ar', v=root.getAttribute('data-view'), base=ar?'طلال الجهني':'Talal Aljohani';
-    document.title=(v&&VIEWS[v])?VIEWS[v][ar?1:0]+' · '+base:base;
+    var ar=root.getAttribute('data-lang')==='ar', v=root.getAttribute('data-view'), t=root.getAttribute('data-tab'), base=ar?'طلال الجهني':'Talal Aljohani';
+    var name=(v&&VIEWS[v])?VIEWS[v][ar?1:0]:(!v&&SECS[t]?SECS[t].t[ar?1:0]:'');
+    document.title=name?name+' · '+base:base;
   }
   function jump(fn){ var st=root.style; st.scrollBehavior='auto'; fn(); requestAnimationFrame(function(){ st.scrollBehavior=''; }); }
-  var TABMAP={'':'all',top:'all',projects:'projects',awards:'awards',activities:'activities',about:'about',skills:'about',contact:'about'};
-  var CAT2TAB={project:'projects',award:'awards',activity:'activities'};
+  var sh=document.getElementById('sechead');
   function setTab(t){
     root.setAttribute('data-tab',t);
-    var els=document.querySelectorAll('.tab[data-tab],.side-i[data-tab]');
-    for(var i=0;i<els.length;i++){ var on=els[i].getAttribute('data-tab')===t; els[i].classList.toggle('on',on); if(els[i].classList.contains('tab')) els[i].setAttribute('aria-selected',on?'true':'false'); }
+    [].forEach.call(document.querySelectorAll('.nav a[data-tab]'),function(a){ var on=a.getAttribute('data-tab')===t; a.classList.toggle('on',on); if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    var x=SECS[t]; if(!x) return;
+    sh.setAttribute('data-sec',t);
+    document.getElementById('shN').textContent=x.n;
+    document.getElementById('shT').innerHTML=bi(x.t);
+    document.getElementById('shCur').innerHTML=bi(x.t);
+    document.getElementById('shD').innerHTML=bi(x.d);
   }
-  function tabsTop(){ var tb=document.querySelector('.tabs'), bar=document.querySelector('.bar'); return tb?tb.getBoundingClientRect().top+window.scrollY-(bar?bar.offsetHeight:0):0; }
   function route(hash,fromClick){
     var h=(hash||'').replace(/^#/,'');
     if(VIEWS[h]){
       root.setAttribute('data-view',h);
-      var c=document.querySelector('.vcard[href="#'+h+'"]'); setTab(c?CAT2TAB[c.getAttribute('data-cat')]:'all');
+      setTab(CAT2TAB[catOf(h)]||'all');
       jump(function(){window.scrollTo(0,0);});
       var t=document.getElementById('t-'+h); if(t&&fromClick){t.setAttribute('tabindex','-1');t.focus({preventScroll:true});}
     }else{
-      var was=root.hasAttribute('data-view'); root.removeAttribute('data-view');
+      root.removeAttribute('data-view');
       if(Object.prototype.hasOwnProperty.call(TABMAP,h)){
         var tab=TABMAP[h]; setTab(tab);
-        if(tab==='all'){ if(fromClick||was) jump(function(){window.scrollTo(0,0);}); }
-        else if(tab==='about'&&h!=='about'){ var el=document.getElementById(h); if(el) jump(function(){el.scrollIntoView();}); }
-        else if(fromClick||was){ var y=tabsTop(); if(was||window.scrollY>y) jump(function(){window.scrollTo(0,Math.max(0,y));}); }
+        var el=(tab==='about'&&h!=='about')?document.getElementById(h):null;
+        jump(function(){ if(el) el.scrollIntoView(); else window.scrollTo(0,0); });
       }else{
         var el2=h&&h!=='ar'&&h!=='en'&&document.getElementById(h);
         if(el2) jump(function(){el2.scrollIntoView();});
@@ -2269,26 +2345,38 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
     setTitle();
   }
 
-  /* ---- up next: every other item, continuing from this one ---- */
-  var vcards=[].slice.call(document.querySelectorAll('.vcard'));
-  var order=vcards.map(function(c){return c.getAttribute('href').slice(1);});
-  [].forEach.call(document.querySelectorAll('.upnext'),function(box){
-    var i=order.indexOf(box.getAttribute('data-self'));
-    for(var k=1;k<order.length;k++){ var m=vcards[(i+k)%order.length].cloneNode(true); m.className='mcard'; box.appendChild(m); }
+  /* ---- counts on the home doors ---- */
+  [].forEach.call(document.querySelectorAll('[data-count]'),function(b){
+    b.textContent=document.querySelectorAll('.vgrid .vcard[data-cat="'+b.getAttribute('data-count')+'"]').length;
   });
 
-  /* ---- search ---- */
-  var q=document.getElementById('q'), noRes=document.getElementById('noResult'), bar=document.querySelector('.bar');
-  function runSearch(){
-    var v=q.value.trim().toLowerCase(), any=false;
-    if(v&&(root.hasAttribute('data-view')||root.getAttribute('data-tab')!=='all')){ try{history.pushState(null,'','#top');}catch(e){} route('#top',true); }
-    vcards.forEach(function(c){ var hit=!v||c.textContent.toLowerCase().indexOf(v)>=0; c.hidden=!hit; if(hit&&getComputedStyle(c).display!=='none') any=true; });
-    noRes.hidden=!v||any;
+  /* ---- latest item on the home page ---- */
+  var ARR='<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
+  var lt=document.getElementById('latest');
+  if(lt&&vcards[0]){
+    var c0=vcards[0]; lt.setAttribute('href',c0.getAttribute('href'));
+    var th=c0.querySelector('.thumb').cloneNode(true); var im=th.querySelector('img'); if(im) im.removeAttribute('loading');
+    lt.appendChild(th);
+    var tx=document.createElement('span'); tx.className='lt-t';
+    tx.innerHTML='<b>'+c0.querySelector('.v-title').innerHTML+'</b><small>'+c0.querySelector('.v-meta').innerHTML+'</small>';
+    lt.appendChild(tx); lt.insertAdjacentHTML('beforeend',ARR);
   }
-  q.addEventListener('input',runSearch);
-  document.getElementById('sOpen').addEventListener('click',function(){ bar.classList.add('searching'); q.focus(); });
-  document.getElementById('sClose').addEventListener('click',function(){ bar.classList.remove('searching'); q.value=''; runSearch(); });
-  q.addEventListener('keydown',function(e){ if(e.key==='Escape'){ q.value=''; runSearch(); bar.classList.remove('searching'); q.blur(); } });
+
+  /* ---- item pages: breadcrumb on top, previous / next in the same section below ---- */
+  [].forEach.call(document.querySelectorAll('.watchpage'),function(art){
+    var id=art.id.replace(/^p-/,''), cat=catOf(id), tab=CAT2TAB[cat], x=SECS[tab]; if(!x) return;
+    art.setAttribute('data-sec',tab);
+    var main=art.querySelector('.w-main');
+    var cr=document.createElement('nav'); cr.className='crumb'; cr.setAttribute('aria-label','Breadcrumb');
+    cr.innerHTML='<a href="#top">'+bi(['Home','الرئيسية'])+'</a><span class="sl">/</span><a href="#'+tab+'">'+bi(x.t)+'</a>';
+    main.insertBefore(cr,main.firstChild);
+    var list=vcards.filter(function(c){return c.getAttribute('data-cat')===cat;}), i=-1;
+    for(var k=0;k<list.length;k++) if(list[k].getAttribute('href')==='#'+id) i=k;
+    function link(c,cls,lab){ return '<a class="'+cls+'" href="'+c.getAttribute('href')+'"><small>'+bi(lab)+'</small><b>'+c.querySelector('.v-title').innerHTML+'</b></a>'; }
+    var html=(i>0?link(list[i-1],'prev',['Previous','السابق']):'')+(i>=0&&i<list.length-1?link(list[i+1],'next',['Next','التالي']):'');
+    if(html){ var pg=document.createElement('nav'); pg.className='pager'; pg.setAttribute('aria-label','More in this section'); pg.innerHTML=html; main.appendChild(pg); }
+  });
+
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
     var h=a.getAttribute('href'); if(h.length<2) return;
@@ -2299,13 +2387,19 @@ html[data-lang="ar"] .b-tag .ar{font-family:var(--arabic)}
   window.addEventListener('popstate',function(){route(location.hash,false);});
   window.addEventListener('hashchange',function(){route(location.hash,false);});
 
+  /* ---- light / dark ---- */
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+    var nx=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nx);
+    try{localStorage.setItem('tsa-theme',nx)}catch(e){}
+  });
+
   /* ---- language ---- */
   function applyLang(l){
     root.setAttribute('data-lang',l); root.lang=l; root.dir=(l==='ar')?'rtl':'ltr';
     setTitle();
     var imgs=document.querySelectorAll('img[data-alt-ar]');
     for(var i=0;i<imgs.length;i++){var im=imgs[i]; if(!im.hasAttribute('data-alt-en')) im.setAttribute('data-alt-en',im.alt); im.alt=(l==='ar')?im.getAttribute('data-alt-ar'):im.getAttribute('data-alt-en');}
-    var qi=document.getElementById('q'); if(qi) qi.placeholder=(l==='ar')?'ابحث في الأعمال':'Search my work';
     var ex=document.querySelectorAll('a.ext');for(var j=0;j<ex.length;j++){var sp=ex[j].querySelector('[data-href-ar]');if(!ex[j].hasAttribute('data-href-en'))ex[j].setAttribute('data-href-en',ex[j].href);ex[j].href=(l==='ar'&&sp)?sp.getAttribute('data-href-ar'):ex[j].getAttribute('data-href-en');}
     try{localStorage.setItem('tsa-lang',l)}catch(e){}
   }
